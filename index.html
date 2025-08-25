@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IELTS Classes - Free Learning</title>
+  <style>
+    body { 
+      font-family: 'Helvetica Neue', Arial, sans-serif; 
+      margin: 0; padding: 0; 
+      background: #fff; color: #333; 
+      scroll-behavior: smooth;
+    }
+    header { 
+      background: linear-gradient(135deg, #001f4d, #004080); 
+      color: white; 
+      padding: 80px 20px; 
+      text-align: center; 
+    }
+    header h1 { font-size: 48px; margin-bottom: 10px; }
+    header p { font-size: 20px; opacity: 0.9; }
+
+    nav { 
+      position: sticky; top: 0; 
+      background: white; 
+      border-bottom: 1px solid #ddd; 
+      padding: 15px; 
+      text-align: center;
+      z-index: 1000;
+    }
+    nav a { 
+      margin: 0 20px; 
+      text-decoration: none; 
+      color: #004080; 
+      font-weight: bold; 
+      transition: color 0.3s; 
+    }
+    nav a:hover { color: #ff6600; }
+
+    section { 
+      padding: 80px 20px; 
+      text-align: center;
+      opacity: 0; 
+      transform: translateY(40px); 
+      transition: all 1s ease-out; 
+    }
+    section.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+    section h2 { font-size: 32px; margin-bottom: 20px; }
+    section p { font-size: 18px; margin: 10px auto; max-width: 600px; }
+
+    iframe { 
+      width: 100%; 
+      max-width: 800px; 
+      height: 450px; 
+      border-radius: 12px; 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
+      margin: 20px auto; 
+      display: block;
+    }
+
+    a.pdf-link { 
+      display: inline-block; 
+      margin-top: 15px; 
+      padding: 10px 20px; 
+      background: #004080; 
+      color: white; 
+      border-radius: 8px; 
+      text-decoration: none; 
+      transition: background 0.3s;
+    }
+    a.pdf-link:hover { background: #ff6600; }
+  </style>
+  <script>
+    // Smooth reveal sections on scroll
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('section').forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add('visible');
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>IELTS Classes by [Your Name]</h1>
+    <p>Learn IELTS for Free – Videos + Study Material</p>
+  </header>
+
+  <nav>
+    <a href="#listening">Listening</a>
+    <a href="#reading">Reading</a>
+    <a href="#writing">Writing</a>
+    <a href="#speaking">Speaking</a>
+  </nav>
+
+  <section id="listening">
+    <h2>Listening Lessons</h2>
+    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
+    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Download Listening Notes (PDF)</a>
+  </section>
+
+  <section id="reading">
+    <h2>Reading Lessons</h2>
+    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
+    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Download Reading Practice (PDF)</a>
+  </section>
+
+  <section id="writing">
+    <h2>Writing Lessons</h2>
+    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
+    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Sample Writing Answers (PDF)</a>
+  </section>
+
+  <section id="speaking">
+    <h2>Speaking Lessons</h2>
+    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
+    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Cue Cards (PDF)</a>
+  </section>
+</body>
+</html>
