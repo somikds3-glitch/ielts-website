@@ -4,36 +4,46 @@
   <meta charset="UTF-8">
   <title>IELTS Classes - Free Learning</title>
   <style>
+    /* -----------------------
+       GLOBAL STYLES
+    ----------------------- */
     body { 
-      font-family: 'Helvetica Neue', Arial, sans-serif; 
+      font-family: 'Helvetica Neue', Arial, sans-serif; /* Clean Apple-style font */
       margin: 0; padding: 0; 
       background: #fff; color: #333; 
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; /* Smooth scrolling for nav links */
     }
 
-    /* Hero Header */
+    /* -----------------------
+       HEADER (Hero section)
+    ----------------------- */
     header { 
-      background: url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; 
+      /* Background hero image */
+      background: url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; 
       color: white; 
       padding: 150px 20px; 
       text-align: center; 
       position: relative;
     }
+    /* Dark overlay for readability */
     header::after {
       content: ""; 
       position: absolute; 
       top: 0; left: 0; right: 0; bottom: 0; 
       background: rgba(0,0,0,0.5);
     }
+    /* Keep header text above overlay */
     header h1, header p {
       position: relative; z-index: 1;
     }
     header h1 { font-size: 56px; margin-bottom: 20px; font-weight: bold; }
     header p { font-size: 22px; opacity: 0.9; }
 
-    /* Navigation */
+    /* -----------------------
+       NAVIGATION BAR
+    ----------------------- */
     nav { 
-      position: sticky; top: 0; 
+      position: sticky; top: 0; /* Stays visible on scroll */
       background: white; 
       border-bottom: 1px solid #ddd; 
       padding: 15px; 
@@ -49,76 +59,101 @@
     }
     nav a:hover { color: #ff6600; }
 
-    /* Sections with background images */
+    /* -----------------------
+       SECTIONS
+    ----------------------- */
     section { 
-      padding: 120px 20px; 
+      padding: 100px 40px; 
       text-align: center;
-      opacity: 0; 
-      transform: translateY(40px); 
+      opacity: 0;                 /* Hidden until scroll */
+      transform: translateY(40px); /* Slightly shifted down */
       transition: all 1s ease-out; 
       position: relative;
+    }
+    section.visible { 
+      opacity: 1;                 /* Fade-in effect */
+      transform: translateY(0); 
+    }
+    section h2 { font-size: 36px; margin-bottom: 40px; }
+
+    /* -----------------------
+       VIDEO GRID
+    ----------------------- */
+    .video-grid {
+      display: grid;
+      /* Responsive grid: 3 columns on desktop, fewer on mobile */
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* -----------------------
+       VIDEO CARDS
+    ----------------------- */
+    .video-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Subtle shadow */
+      transition: transform 0.3s;
+    }
+    .video-card:hover { transform: translateY(-5px); } /* Hover lift */
+
+    /* Embedded video styling */
+    .video-card iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+
+    /* -----------------------
+       CARD CONTENT
+    ----------------------- */
+    .video-info {
+      padding: 15px;
+    }
+    .video-info h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #004080;
+    }
+    .video-info a {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 8px 15px;
+      background: #ff6600;
       color: white;
-    }
-    section.visible { opacity: 1; transform: translateY(0); }
-    section h2 { font-size: 36px; margin-bottom: 20px; }
-    section p { font-size: 18px; margin: 10px auto; max-width: 600px; }
-
-    section::after {
-      content: ""; 
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-      background: rgba(0,0,0,0.6); 
-    }
-    section > * { position: relative; z-index: 1; }
-
-    /* Background images for sections */
-    #listening { background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
-    #reading { background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
-    #writing { background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
-    #speaking { background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
-
-    /* Video styling */
-    iframe { 
-      width: 100%; 
-      max-width: 800px; 
-      height: 450px; 
-      border-radius: 12px; 
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3); 
-      margin: 20px auto; 
-      display: block;
-    }
-
-    /* Buttons */
-    a.pdf-link { 
-      display: inline-block; 
-      margin-top: 15px; 
-      padding: 12px 24px; 
-      background: #ff6600; 
-      color: white; 
-      border-radius: 8px; 
-      text-decoration: none; 
-      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
       transition: background 0.3s;
     }
-    a.pdf-link:hover { background: #e65c00; }
+    .video-info a:hover { background: #e65c00; }
   </style>
+
   <script>
-    // Smooth reveal sections on scroll
+    // -----------------------
+    // REVEAL SECTIONS ON SCROLL
+    // -----------------------
     window.addEventListener('scroll', () => {
       document.querySelectorAll('section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
         if (rect.top < window.innerHeight - 100) {
-          sec.classList.add('visible');
+          sec.classList.add('visible'); // Add fade-in class
         }
       });
     });
   </script>
 </head>
 <body>
+  <!-- HEADER / HERO -->
   <header>
     <h1>IELTS Classes by Somik</h1>
     <p>Master IELTS for Free – Videos + Study Material</p>
   </header>
 
+  <!-- NAVIGATION -->
   <nav>
     <a href="#listening">Listening</a>
     <a href="#reading">Reading</a>
@@ -126,28 +161,97 @@
     <a href="#speaking">Speaking</a>
   </nav>
 
+  <!-- LISTENING SECTION -->
   <section id="listening">
     <h2>Listening Lessons</h2>
-    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
-    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Download Listening Notes (PDF)</a>
+    <div class="video-grid">
+      <!-- Video Card 1 -->
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1"></iframe>
+        <div class="video-info">
+          <h3>Listening Basics</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
+        </div>
+      </div>
+      <!-- Video Card 2 -->
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2"></iframe>
+        <div class="video-info">
+          <h3>Advanced Listening</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
+        </div>
+      </div>
+      <!-- Video Card 3 -->
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3"></iframe>
+        <div class="video-info">
+          <h3>Practice Test 1</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK3">Download Notes</a>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- READING SECTION -->
   <section id="reading">
     <h2>Reading Lessons</h2>
-    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
-    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Download Reading Practice (PDF)</a>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4"></iframe>
+        <div class="video-info">
+          <h3>Reading Skimming</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK4">Download Practice</a>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5"></iframe>
+        <div class="video-info">
+          <h3>Reading Scanning</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK5">Download Practice</a>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6"></iframe>
+        <div class="video-info">
+          <h3>True/False/Not Given</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK6">Download Practice</a>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- WRITING SECTION -->
   <section id="writing">
     <h2>Writing Lessons</h2>
-    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
-    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Sample Writing Answers (PDF)</a>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7"></iframe>
+        <div class="video-info">
+          <h3>Task 1 Overview</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK7">Sample Answers</a>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8"></iframe>
+        <div class="video-info">
+          <h3>Task 2 Essays</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9"></iframe>
+        <div class="video-info">
+          <h3>Common Mistakes</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK9">Sample Answers</a>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- SPEAKING SECTION -->
   <section id="speaking">
     <h2>Speaking Lessons</h2>
-    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"></iframe>
-    <a class="pdf-link" href="https://drive.google.com/YOUR_PDF_LINK">Cue Cards (PDF)</a>
-  </section>
-</body>
-</html>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10"></iframe>
+        <div class="
