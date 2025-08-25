@@ -8,14 +8,14 @@
        GLOBAL STYLES
     ----------------------- */
     body { 
-      font-family: 'Roboto', Arial, sans-serif; /* Clean Apple-style font */
+      font-family: 'Helvetica Neue', Arial, sans-serif; 
       margin: 0; padding: 0; 
       background: #fff; color: #333; 
-      scroll-behavior: smooth; /* Smooth scrolling for nav links */
+      scroll-behavior: smooth;
     }
 
     /* -----------------------
-       HEADER (Hero section)
+       HERO HEADER
     ----------------------- */
     header { 
       /* Background hero image */
@@ -25,14 +25,13 @@
       text-align: center; 
       position: relative;
     }
-    /* Dark overlay for readability */
+    /* Dark overlay on hero */
     header::after {
       content: ""; 
       position: absolute; 
       top: 0; left: 0; right: 0; bottom: 0; 
       background: rgba(0,0,0,0.5);
     }
-    /* Keep header text above overlay */
     header h1, header p {
       position: relative; z-index: 1;
     }
@@ -40,10 +39,10 @@
     header p { font-size: 22px; opacity: 0.9; }
 
     /* -----------------------
-       NAVIGATION BAR
+       NAVIGATION
     ----------------------- */
     nav { 
-      position: sticky; top: 0; /* Stays visible on scroll */
+      position: sticky; top: 0; 
       background: white; 
       border-bottom: 1px solid #ddd; 
       padding: 15px; 
@@ -60,28 +59,54 @@
     nav a:hover { color: #ff6600; }
 
     /* -----------------------
-       SECTIONS
+       SECTIONS (shared)
     ----------------------- */
     section { 
       padding: 100px 40px; 
       text-align: center;
       opacity: 0;                 /* Hidden until scroll */
-      transform: translateY(40px); /* Slightly shifted down */
+      transform: translateY(40px); /* Slide-in animation */
       transition: all 1s ease-out; 
       position: relative;
+      color: white;               /* White text over backgrounds */
     }
     section.visible { 
-      opacity: 1;                 /* Fade-in effect */
+      opacity: 1; 
       transform: translateY(0); 
     }
     section h2 { font-size: 36px; margin-bottom: 40px; }
 
+    /* Dark overlay for all sections */
+    section::after {
+      content: ""; 
+      position: absolute; 
+      top: 0; left: 0; right: 0; bottom: 0; 
+      background: rgba(0,0,0,0.6); 
+    }
+    section > * { position: relative; z-index: 1; }
+
     /* -----------------------
-       VIDEO GRID
+       SECTION BACKGROUND IMAGES
+       (Replace these Unsplash URLs if you want)
+    ----------------------- */
+    #listening {
+      background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+    #reading {
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+    #writing {
+      background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+    #speaking {
+      background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+
+    /* -----------------------
+       VIDEO GRID LAYOUT
     ----------------------- */
     .video-grid {
       display: grid;
-      /* Responsive grid: 3 columns on desktop, fewer on mobile */
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
       max-width: 1200px;
@@ -92,27 +117,24 @@
        VIDEO CARDS
     ----------------------- */
     .video-card {
-      background: white;
+      background: rgba(255,255,255,0.9); /* Semi-transparent for readability */
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Subtle shadow */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s;
+      color: black; /* Card text black */
     }
-    .video-card:hover { transform: translateY(-5px); } /* Hover lift */
+    .video-card:hover { transform: translateY(-5px); }
 
-    /* Embedded video styling */
+    /* Embedded video */
     .video-card iframe {
       width: 100%;
       height: 200px;
       border: none;
     }
 
-    /* -----------------------
-       CARD CONTENT
-    ----------------------- */
-    .video-info {
-      padding: 15px;
-    }
+    /* Card info */
+    .video-info { padding: 15px; }
     .video-info h3 {
       margin: 0 0 10px;
       font-size: 18px;
@@ -133,21 +155,22 @@
   </style>
 
   <script>
-    // -----------------------
-    // REVEAL SECTIONS ON SCROLL
-    // -----------------------
+    /* -----------------------
+       SCROLL ANIMATION
+       Reveal sections smoothly
+    ----------------------- */
     window.addEventListener('scroll', () => {
       document.querySelectorAll('section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
         if (rect.top < window.innerHeight - 100) {
-          sec.classList.add('visible'); // Add fade-in class
+          sec.classList.add('visible');
         }
       });
     });
   </script>
 </head>
 <body>
-  <!-- HEADER / HERO -->
+  <!-- HERO HEADER -->
   <header>
     <h1>IELTS Classes by Somik</h1>
     <p>Master IELTS for Free – Videos + Study Material</p>
@@ -161,11 +184,11 @@
     <a href="#speaking">Speaking</a>
   </nav>
 
-  <!-- LISTENING SECTION -->
+  <!-- LISTENING -->
   <section id="listening">
     <h2>Listening Lessons</h2>
     <div class="video-grid">
-      <!-- Video Card 1 -->
+      <!-- Card 1 -->
       <div class="video-card">
         <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1"></iframe>
         <div class="video-info">
@@ -173,7 +196,7 @@
           <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
         </div>
       </div>
-      <!-- Video Card 2 -->
+      <!-- Card 2 -->
       <div class="video-card">
         <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2"></iframe>
         <div class="video-info">
@@ -181,7 +204,7 @@
           <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
         </div>
       </div>
-      <!-- Video Card 3 -->
+      <!-- Card 3 -->
       <div class="video-card">
         <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3"></iframe>
         <div class="video-info">
@@ -192,7 +215,7 @@
     </div>
   </section>
 
-  <!-- READING SECTION -->
+  <!-- READING -->
   <section id="reading">
     <h2>Reading Lessons</h2>
     <div class="video-grid">
@@ -220,7 +243,7 @@
     </div>
   </section>
 
-  <!-- WRITING SECTION -->
+  <!-- WRITING -->
   <section id="writing">
     <h2>Writing Lessons</h2>
     <div class="video-grid">
@@ -239,6 +262,13 @@
         </div>
       </div>
       <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8"></iframe>
+        <div class="video-info">
+          <h3>Task 3 Somik Template</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
+        </div>
+      </div>
+      <div class="video-card">
         <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9"></iframe>
         <div class="video-info">
           <h3>Common Mistakes</h3>
@@ -248,10 +278,32 @@
     </div>
   </section>
 
-  <!-- SPEAKING SECTION -->
+  <!-- SPEAKING -->
   <section id="speaking">
     <h2>Speaking Lessons</h2>
     <div class="video-grid">
       <div class="video-card">
         <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10"></iframe>
-        <div class="
+        <div class="video-info">
+          <h3>Part 1 Q&A</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK10">Cue Cards</a>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11"></iframe>
+        <div class="video-info">
+          <h3>Part 2 Practice</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK11">Cue Cards</a>
+        </div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12"></iframe>
+        <div class="video-info">
+          <h3>Fluency Tips</h3>
+          <a href="https://drive.google.com/YOUR_PDF_LINK12">Cue Cards</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
