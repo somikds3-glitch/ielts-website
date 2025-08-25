@@ -10,15 +10,28 @@
       background: #fff; color: #333; 
       scroll-behavior: smooth;
     }
-    header { 
-      background: linear-gradient(135deg, #001f4d, #004080); 
-      color: white; 
-      padding: 80px 20px; 
-      text-align: center; 
-    }
-    header h1 { font-size: 48px; margin-bottom: 10px; }
-    header p { font-size: 20px; opacity: 0.9; }
 
+    /* Hero Header */
+    header { 
+      background: url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; 
+      color: white; 
+      padding: 150px 20px; 
+      text-align: center; 
+      position: relative;
+    }
+    header::after {
+      content: ""; 
+      position: absolute; 
+      top: 0; left: 0; right: 0; bottom: 0; 
+      background: rgba(0,0,0,0.5);
+    }
+    header h1, header p {
+      position: relative; z-index: 1;
+    }
+    header h1 { font-size: 56px; margin-bottom: 20px; font-weight: bold; }
+    header p { font-size: 22px; opacity: 0.9; }
+
+    /* Navigation */
     nav { 
       position: sticky; top: 0; 
       background: white; 
@@ -36,41 +49,57 @@
     }
     nav a:hover { color: #ff6600; }
 
+    /* Sections with background images */
     section { 
-      padding: 80px 20px; 
+      padding: 120px 20px; 
       text-align: center;
       opacity: 0; 
       transform: translateY(40px); 
       transition: all 1s ease-out; 
+      position: relative;
+      color: white;
     }
-    section.visible { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-    section h2 { font-size: 32px; margin-bottom: 20px; }
+    section.visible { opacity: 1; transform: translateY(0); }
+    section h2 { font-size: 36px; margin-bottom: 20px; }
     section p { font-size: 18px; margin: 10px auto; max-width: 600px; }
 
+    section::after {
+      content: ""; 
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+      background: rgba(0,0,0,0.6); 
+    }
+    section > * { position: relative; z-index: 1; }
+
+    /* Background images for sections */
+    #listening { background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
+    #reading { background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
+    #writing { background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
+    #speaking { background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
+
+    /* Video styling */
     iframe { 
       width: 100%; 
       max-width: 800px; 
       height: 450px; 
       border-radius: 12px; 
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3); 
       margin: 20px auto; 
       display: block;
     }
 
+    /* Buttons */
     a.pdf-link { 
       display: inline-block; 
       margin-top: 15px; 
-      padding: 10px 20px; 
-      background: #004080; 
+      padding: 12px 24px; 
+      background: #ff6600; 
       color: white; 
       border-radius: 8px; 
       text-decoration: none; 
+      font-weight: bold;
       transition: background 0.3s;
     }
-    a.pdf-link:hover { background: #ff6600; }
+    a.pdf-link:hover { background: #e65c00; }
   </style>
   <script>
     // Smooth reveal sections on scroll
@@ -87,7 +116,7 @@
 <body>
   <header>
     <h1>IELTS Classes by Somik</h1>
-    <p>Learn IELTS for Free – Videos + Study Material</p>
+    <p>Master IELTS for Free – Videos + Study Material</p>
   </header>
 
   <nav>
