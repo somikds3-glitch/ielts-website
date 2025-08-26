@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>IELTS Classes - Free Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
@@ -9,118 +9,158 @@
     * { box-sizing: border-box; }
 
     /* -----------------------
-       GLOBAL
+       GLOBAL / SINGLE-VIEW
     ----------------------- */
-    body{
+    html, body { height: 100%; }
+    body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
                    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-      margin:0; padding:0;
-      background:#fff; color:#333;
-      scroll-behavior:smooth;
+      margin: 0; padding: 0;
+      background: #fff; color: #111;
+      scroll-behavior: smooth;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Lock page scroll in single-view mode */
+    body.no-scroll {
+      overflow: hidden;
+      position: fixed;
+      inset: 0;
+      width: 100%;
     }
 
-    /* -----------------------
-       NAVIGATION (with underline hover)
-    ----------------------- */
-    nav{
-      position:sticky; top:0;
-      background:#fff;
-      border-bottom:1px solid #ddd;
-      padding:15px; text-align:center;
-      z-index:1000;
-    }
-    nav a{
-      margin:0 20px;
-      text-decoration:none;
-      color:#004080;
-      font-weight:600;
-      letter-spacing:.2px;
-      padding:6px 12px;
-      position:relative;
-      transition:color .3s;
-    }
-    nav a::after{
-      content:"";
-      position:absolute; left:0; bottom:0;
-      width:0%; height:2px; background:#000;
-      transition:width .3s ease-in-out;
-    }
-    nav a:hover{ color:#000; }
-    nav a:hover::after{ width:100%; }
+    /* Only show the active page */
+    header#home, section { display: none; }
+    header#home.active, section.active { display: block; }
 
     /* -----------------------
-       HERO (gradient overlay + parallax + cloud reveal)
+       HERO (Home)
     ----------------------- */
-    header{
-      text-align:center;
-      padding:150px 20px;
-      color:#fff;
-      position:relative;
+    header#home {
+      min-height: 100vh;
+      text-align: center;
+      padding: 120px 20px;
+      color: #fff;
+      position: relative;
       background-image:
-        linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,.9)),
-        url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1500&q=80');
-      background-position:center center, center center;
-      background-repeat:no-repeat, no-repeat;
-      background-size:cover, cover;
-      background-attachment:fixed, fixed; /* parallax-like */
+        linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,.8)),
+        url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1600&q=80');
+      background-position: center center, center center;
+      background-repeat: no-repeat, no-repeat;
+      background-size: cover, cover;
+      background-attachment: fixed, fixed;
     }
-    @media (max-width: 768px){
-      header{ background-attachment:scroll, scroll; }
-    }
-
-    /* one-time cloud reveal on hero text */
-    header h1, header p{
-      opacity:0; transform:translateY(40px); filter:blur(20px);
-    }
-    .hero-visible{ animation:cloudFade 1s cubic-bezier(.22,1,.36,1) forwards; }
-    header h1{ font-size:56px; margin-bottom:20px; font-weight:700; letter-spacing:-.2px; text-shadow:0 2px 6px rgba(0,0,0,.35);}
-    header p{ font-size:22px; opacity:.95; text-shadow:0 2px 6px rgba(0,0,0,.35);}
+    @media (max-width: 768px){ header#home{ background-attachment: scroll, scroll; } }
+    header#home h1{ font-size: 54px; margin: 0 0 14px; letter-spacing: -.2px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+    header#home p{ font-size: 18px; line-height: 1.7; max-width: 900px; margin: 0 auto; opacity: .95; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
 
     /* -----------------------
-       SECTIONS (cloud reveal once + continuous fade)
+       PAGE SECTIONS
     ----------------------- */
     section{
-      padding:100px 40px;
-      text-align:center;
-      position:relative;
-      color:#fff;
-      /* continuous fade baseline */
-      will-change:opacity;
-      transition:opacity 240ms linear;
-      opacity:.25;
+      min-height: 100vh;
+      padding: 60px 24px 80px;
+      text-align: center;
+      color: #fff;
+      position: relative;
     }
-    /* one-time cloud seed/reveal */
-    .reveal-seed{ opacity:0; transform:translateY(40px); filter:blur(20px); }
-    .revealed{ animation:cloudFade 1s cubic-bezier(.22,1,.36,1) forwards; }
+    section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
-    section h2{ font-size:36px; margin-bottom:40px; }
-
-    /* unified dark overlay for readability */
-    section::after{
-      content:"";
-      position:absolute; inset:0;
-      background:rgba(0,0,0,.6);
+    /* Backgrounds (dark overlay to avoid “blur/low contrast” look) */
+    section::before{
+      content:""; position:absolute; inset:0; z-index:0;
+      background: rgba(0,0,0,.45);
     }
-    section > *{ position:relative; z-index:1; }
+    #course{
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+    #connect{
+      background: url('https://images.unsplash.com/photo-1520891375918-8f9f8a5da9ab?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+    #repo{
+      background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    section h2{ font-size: 36px; margin: 0 0 14px; }
+    section p.lead { max-width: 900px; margin: 0 auto 22px; font-size: 18px; }
 
     /* -----------------------
-       SECTION BACKGROUNDS (unchanged)
+       HAMBURGER + SIDE PANEL
     ----------------------- */
-    #listening{
-      background:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    .hamburger {
+      position: fixed;
+      top: 14px; right: 14px;
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      background: rgba(0,0,0,0.55);
+      color:#fff; border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      z-index: 1100;
+      cursor: pointer;
+      transition: transform .2s ease;
+      backdrop-filter: blur(6px);
     }
-    #reading{
-      background:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    .hamburger:hover { transform: translateY(-1px); }
+    .hamburger .lines{ width: 22px; height: 16px; position: relative; }
+    .hamburger .lines::before,
+    .hamburger .lines::after,
+    .hamburger .lines span{
+      content:""; position:absolute; left:0; right:0; height:2px; background:#fff; border-radius: 2px;
     }
-    #writing{
-      background:url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    .hamburger .lines::before{ top:0; }
+    .hamburger .lines::after{ bottom:0; }
+    .hamburger .lines span{ top: calc(50% - 1px); }
+
+    .scrim {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+      z-index: 1000;
     }
-    #speaking{
-      background:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    .scrim.show { opacity: 1; pointer-events: auto; }
+
+    .side-panel {
+      position: fixed; top:0; right:0;
+      height: 100%; width: 320px; max-width: 85vw;
+      background: rgba(0,0,0,0.60);
+      border-left: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      backdrop-filter: blur(12px) saturate(120%);
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      z-index: 1101;
+      display: flex; flex-direction: column; padding: 16px;
+    }
+    .side-panel.open { transform: translateX(0); }
+
+    .panel-header{ display:flex; align-items:center; justify-content:space-between; }
+    .panel-title{ font-weight: 800; letter-spacing: .2px; }
+    .panel-close{
+      background: transparent; color:#fff;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 10px; padding: 6px 10px; cursor: pointer;
+    }
+    .panel-links{ display: grid; gap: 10px; margin-top: 12px; }
+    .panel-links a, .panel-links button{
+      display: block; text-align: left;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer;
+    }
+    .panel-links a:hover, .panel-links button:hover{
+      background: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.55);
     }
 
     /* -----------------------
-       VIDEO GRID & CARDS (unchanged look)
+       VIDEO GRID & CARDS
     ----------------------- */
     .video-grid{
       display:grid;
@@ -145,230 +185,411 @@
     .video-info a:hover{ background:#e65c00; }
 
     /* -----------------------
-       CLOUD EFFECT KEYFRAMES
+       FORMS
     ----------------------- */
-    @keyframes cloudFade{
-      0%{ opacity:0; filter:blur(20px); transform:translateY(60px); }
-      100%{ opacity:1; filter:blur(0); transform:translateY(0); }
+    .form {
+      max-width: 560px; margin: 0 auto; text-align: left;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 16px; padding: 18px;
+      color: #fff;
     }
+    .form label { display:block; margin: 10px 0 6px; font-weight: 700; }
+    .form input, .form textarea {
+      width: 100%; padding: 10px 12px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.9); color:#111;
+    }
+    .form textarea { min-height: 110px; resize: vertical; }
+    .btn {
+      display:inline-block; padding: 10px 16px; border-radius: 10px;
+      border: 1px solid #fff; color:#111; background:#fff;
+      font-weight: 800; cursor:pointer; margin-top: 12px;
+    }
+    .btn.dark { background:#111; color:#fff; border-color:#111; }
+    .notice { margin-top: 10px; font-size: 14px; }
 
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce){
-      header h1, header p, .reveal-seed, .revealed{
-        animation:none !important; transform:none !important; filter:none !important; opacity:1 !important;
-      }
-      section{ transition:none !important; opacity:1 !important; }
-    }
+    /* Tiny helper */
+    .muted { opacity:.85; font-size: 14px; }
   </style>
-
-  <noscript>
-    <style>
-      /* keep content visible if JS is off */
-      header h1, header p { opacity:1 !important; transform:none !important; filter:none !important; }
-      section { opacity:1 !important; }
-    </style>
-  </noscript>
 </head>
-<body>
-  <!-- HERO -->
-  <header>
+
+<body class="no-scroll">
+  <!-- HAMBURGER -->
+  <button class="hamburger" id="hamburger"
+    aria-label="Open menu" aria-haspopup="true"
+    aria-controls="side-panel" aria-expanded="false">
+    <div class="lines"><span></span></div>
+  </button>
+
+  <!-- SCRIM + SIDE PANEL -->
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <aside class="side-panel" id="side-panel" aria-hidden="true" aria-labelledby="panel-title" role="dialog">
+    <div class="panel-header">
+      <div id="panel-title" class="panel-title">Menu</div>
+      <button class="panel-close" id="panel-close" aria-label="Close menu">✕</button>
+    </div>
+    <nav class="panel-links">
+      <a href="#home"   data-panel-nav>Home</a>
+      <a href="#course" data-panel-nav>Course content</a>
+      <a href="#connect"data-panel-nav>Connect with me</a>
+      <a href="#repo"   data-panel-nav>Repository</a>
+    </nav>
+  </aside>
+
+  <!-- HOME / HERO -->
+  <header id="home" class="active">
     <h1>IELTS Classes by Somik</h1>
-    <p>Master IELTS for Free – Videos + Study Material</p>
+    <p>
+      This is a free learning hub for IELTS aspirants. <br/>
+      Learn the essentials, practice with curated resources, and track your progress.
+    </p>
   </header>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#listening">Listening</a>
-    <a href="#reading">Reading</a>
-    <a href="#writing">Writing</a>
-    <a href="#speaking">Speaking</a>
-  </nav>
+  <!-- COURSE -->
+  <section id="course">
+    <div class="inner">
+      <h2>Course Content</h2>
+      <p class="lead">Start with Listening, then move to Reading, Writing, and Speaking. Each block includes videos and notes.</p>
 
-  <!-- LISTENING -->
-  <section id="listening" class="reveal-seed">
-    <h2>Listening Lessons</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Listening Basics</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
+      <!-- LISTENING -->
+      <div style="margin-top:34px;">
+        <h3>Listening Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Listening Basics</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Advanced Listening</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Practice Test 1</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK3">Download Notes</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Advanced Listening</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
+
+      <!-- READING -->
+      <div style="margin-top:46px;">
+        <h3>Reading Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Skimming Techniques</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK4">Download Practice</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Scanning Strategies</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK5">Download Practice</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>True/False/Not Given</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK6">Download Practice</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Practice Test 1</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK3">Download Notes</a>
+
+      <!-- WRITING -->
+      <div style="margin-top:46px;">
+        <h3>Writing Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Task 1 Overview</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK7">Sample Answers</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Task 2 Essays</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Common Mistakes</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK9">Sample Answers</a>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- SPEAKING -->
+      <div style="margin-top:46px;">
+        <h3>Speaking Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Part 1 Q&A</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK10">Cue Cards</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Part 2 Practice</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK11">Cue Cards</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Fluency Tips</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK12">Cue Cards</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- READING -->
-  <section id="reading" class="reveal-seed">
-    <h2>Reading Lessons</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Reading Skimming</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK4">Download Practice</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Reading Scanning</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK5">Download Practice</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>True/False/Not Given</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK6">Download Practice</a>
-        </div>
-      </div>
+  <!-- CONNECT WITH ME -->
+  <section id="connect">
+    <div class="inner">
+      <h2>Connect with me</h2>
+      <p class="lead">Have questions or want repository access? Send me a message below.</p>
+
+      <form class="form" id="contact-form" action="https://formspree.io/f/xovnqpnk" method="POST">
+        <label for="c-name">Your name</label>
+        <input id="c-name" name="name" required />
+
+        <label for="c-phone">Phone number</label>
+        <input id="c-phone" name="phone" type="tel" required />
+
+        <label for="c-email">Email</label>
+        <input id="c-email" name="email" type="email" required />
+
+        <label for="c-msg">Your message (why you’re accessing the site)</label>
+        <textarea id="c-msg" name="message" required></textarea>
+
+        <!-- Optional subject for Formspree emails -->
+        <input type="hidden" name="_subject" value="New message from IELTS site" />
+        <!-- Optional redirect after success; we handle inline feedback via JS, so not needed -->
+        <!-- <input type="hidden" name="_next" value="https://your-site/thank-you.html" /> -->
+
+        <button class="btn dark" type="submit">Submit</button>
+        <div class="notice" id="contact-status" aria-live="polite"></div>
+        <p class="muted">This form emails <strong>somikds3@gmail.com</strong>.</p>
+      </form>
     </div>
   </section>
 
-  <!-- WRITING -->
-  <section id="writing" class="reveal-seed">
-    <h2>Writing Lessons</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Task 1 Overview</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK7">Sample Answers</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Task 2 Essays</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Task 3 Somik Template</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Common Mistakes</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK9">Sample Answers</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- REPOSITORY (CODE-GATED) -->
+  <section id="repo">
+    <div class="inner">
+      <h2>Repository</h2>
+      <p class="lead">Enter the access code to unlock downloads.</p>
 
-  <!-- SPEAKING -->
-  <section id="speaking" class="reveal-seed">
-    <h2>Speaking Lessons</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Part 1 Q&A</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK10">Cue Cards</a>
-        </div>
+      <!-- Gate -->
+      <div id="repo-gate">
+        <form class="form" id="repo-code-form" autocomplete="off">
+          <label for="repo-code">Access code</label>
+          <input id="repo-code" name="code" required />
+          <button class="btn dark" type="submit">Unlock</button>
+          <div class="notice" id="repo-note"></div>
+        </form>
       </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Part 2 Practice</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK11">Cue Cards</a>
-        </div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12" allowfullscreen></iframe>
-        <div class="video-info">
-          <h3>Fluency Tips</h3>
-          <a href="https://drive.google.com/YOUR_PDF_LINK12">Cue Cards</a>
-        </div>
+
+      <!-- Unlocked content -->
+      <div id="repo-content" style="display:none;">
+        <p class="lead">Access granted ✔ You can add your files/links here.</p>
+        <p><a class="btn" href="/files/notes1.pdf">Download Notes 1</a></p>
+
+        <!-- Owner-only: appears only if ownerMode === true -->
+        <button id="lock-repo" class="btn" style="display:none;">Lock repository</button>
+        <p class="muted" id="owner-hint" style="display:none;">Owner mode is ON. Add <code>?owner=1</code> once to this URL to enable it on your device.</p>
       </div>
     </div>
   </section>
 
   <script>
-    /* -----------------------
-       1) Hero: one-time cloud reveal
-    ----------------------- */
-    document.addEventListener('DOMContentLoaded', () => {
-      const h1 = document.querySelector('header h1');
-      const p  = document.querySelector('header p');
-      if (h1) setTimeout(() => h1.classList.add('hero-visible'), 80);
-      if (p)  setTimeout(() => p.classList.add('hero-visible'), 180);
+    /* =======================
+       OWNER MODE (Option A)
+       - Visit once with ?owner=1 to enable owner mode on your device.
+       - Persists via localStorage.
+    ======================= */
+    const ownerMode =
+      /[?&]owner=1\b/.test(location.search) ||
+      localStorage.getItem('ownerMode') === 'true';
+
+    if (ownerMode) localStorage.setItem('ownerMode', 'true');
+
+    /* =======================
+       REPO ACCESS CODE
+       - CHANGE THIS to your secret code.
+       - Comparison is case-sensitive by default.
+    ======================= */
+    const ACCESS_CODE = "IELTS-ACCESS-2025"; // <--- change me
+
+    /* =======================
+       SINGLE-VIEW ROUTER
+    ======================= */
+    const SECTION_IDS = ["home", "course", "connect", "repo"];
+    const bodyEl = document.body;
+
+    function showOnly(id){
+      SECTION_IDS.forEach(secId => {
+        const el = document.getElementById(secId);
+        if (!el) return;
+        el.classList.remove("active");
+      });
+      const target = document.getElementById(id);
+      if (target) target.classList.add("active");
+
+      bodyEl.classList.add("no-scroll");
+      history.replaceState(null, "", `#${id}`);
+    }
+
+    // Respect initial hash
+    window.addEventListener('load', ()=>{
+      const id = (location.hash || "#home").replace("#","");
+      showOnly(SECTION_IDS.includes(id) ? id : "home");
     });
 
-    /* -----------------------
-       2) Sections: cloud reveal once + continuous fade
-    ----------------------- */
-    (function(){
-      const sections = Array.from(document.querySelectorAll('section'));
-      if (!sections.length) return;
+    // Intercept side-panel links
+    document.querySelectorAll('[data-panel-nav]').forEach(link=>{
+      link.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const href = link.getAttribute('href') || "";
+        const id = href.replace("#","");
+        if (!id) return;
+        showOnly(id);
+        closePanel();
+      });
+    });
 
-      // Seed cloud state
-      sections.forEach(sec => sec.classList.add('reveal-seed'));
+    /* =======================
+       PANEL OPEN/CLOSE
+    ======================= */
+    const hamburger = document.getElementById('hamburger');
+    const panel     = document.getElementById('side-panel');
+    const scrim     = document.getElementById('scrim');
+    const panelClose= document.getElementById('panel-close');
 
-      // One-time cloud reveal when entering viewport
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting){
-            entry.target.classList.add('revealed');
-            entry.target.classList.remove('reveal-seed');
-            io.unobserve(entry.target);
-          }
+    function openPanel(){
+      panel.classList.add('open');
+      scrim.classList.add('show');
+      panel.setAttribute('aria-hidden','false');
+      scrim.setAttribute('aria-hidden','false');
+      hamburger.setAttribute('aria-expanded','true');
+    }
+    function closePanel(){
+      panel.classList.remove('open');
+      scrim.classList.remove('show');
+      panel.setAttribute('aria-hidden','true');
+      scrim.setAttribute('aria-hidden','true');
+      hamburger.setAttribute('aria-expanded','false');
+    }
+    hamburger.addEventListener('click', openPanel);
+    panelClose.addEventListener('click', closePanel);
+    scrim.addEventListener('click', closePanel);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closePanel(); });
+
+    /* =======================
+       REPOSITORY GATE (with persistence)
+    ======================= */
+    const repoGate   = document.getElementById('repo-gate');
+    const repoForm   = document.getElementById('repo-code-form');
+    const repoNote   = document.getElementById('repo-note');
+    const repoContent= document.getElementById('repo-content');
+    const lockBtn    = document.getElementById('lock-repo');
+    const ownerHint  = document.getElementById('owner-hint');
+
+    function isRepoUnlocked(){ return localStorage.getItem('repoUnlocked') === '1'; }
+
+    function renderRepoUI(){
+      const unlocked = isRepoUnlocked();
+
+      repoGate.style.display    = unlocked ? 'none' : '';
+      repoContent.style.display = unlocked ? '' : 'none';
+
+      // Owner-only lock button visibility
+      lockBtn.style.display   = (unlocked && ownerMode) ? '' : 'none';
+      ownerHint.style.display = ownerMode ? '' : 'none';
+    }
+
+    // Initial render (on load and also when navigating to #repo)
+    window.addEventListener('load', renderRepoUI);
+
+    repoForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const code = (document.getElementById('repo-code').value || '').trim();
+      if (code === ACCESS_CODE){
+        localStorage.setItem('repoUnlocked', '1');
+        repoNote.textContent = 'Access granted ✔';
+        renderRepoUI();
+      } else {
+        repoNote.textContent = 'Incorrect code. Please try again.';
+      }
+    });
+
+    // Owner can re-lock
+    lockBtn.addEventListener('click', ()=>{
+      localStorage.removeItem('repoUnlocked');
+      renderRepoUI();
+    });
+
+    // When user clicks "Repository" in the panel, just show the repo section;
+    // the gate will display if still locked.
+    document.querySelectorAll('a[href="#repo"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        showOnly('repo');
+      });
+    });
+
+    /* =======================
+       CONTACT FORM (Formspree)
+       - Progressive enhancement: AJAX submit for inline feedback.
+    ======================= */
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-status');
+
+    contactForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      contactStatus.textContent = 'Sending…';
+
+      const formData = new FormData(contactForm);
+      try{
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
         });
-      }, { root:null, rootMargin:'0px 0px -80px 0px', threshold:0.15 });
-
-      sections.forEach(sec => io.observe(sec));
-
-      // Continuous fade mapping to viewport center
-      let ticking = false;
-      const clamp = (v,min,max)=>Math.max(min, Math.min(max,v));
-      const lerp  = (a,b,t)=>a + (b-a)*t;
-
-      function update(){
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const centerY = vh/2;
-
-        for (const el of sections){
-          const rect = el.getBoundingClientRect();
-          const elCenter = rect.top + rect.height/2;
-          const dist = Math.abs(elCenter - centerY);
-          const norm = clamp(dist/(vh*0.6), 0, 1);
-          const opacity = lerp(1.0, 0.25, norm);
-          el.style.opacity = opacity.toFixed(3);
+        if (res.ok){
+          contactStatus.textContent = 'Thanks! Your message has been sent.';
+          contactForm.reset();
+        } else {
+          contactStatus.textContent = 'Hmm, something went wrong. Please try again.';
         }
-        ticking = false;
+      } catch(err){
+        contactStatus.textContent = 'Network error. Please try again.';
       }
-
-      function onScroll(){
-        if (!ticking){
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive:true });
-      window.addEventListener('resize', update, { passive:true });
-      window.addEventListener('load', update, { passive:true });
-      document.addEventListener('DOMContentLoaded', update, { passive:true });
-    })();
+    });
   </script>
 </body>
 </html>
