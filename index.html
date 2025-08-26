@@ -3,180 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <title>IELTS Classes - Free Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* -----------------------
-       GLOBAL STYLES
-    ----------------------- */
-    body { 
-      font-family: 'Helvetica Neue', Arial, sans-serif; 
-      margin: 0; padding: 0; 
-      background: #fff; color: #333; 
-      scroll-behavior: smooth;
-    }
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
 
     /* -----------------------
-       HERO HEADER
+       GLOBAL
     ----------------------- */
-    header { 
-      /* Background hero image */
-      background: url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; 
-      color: white; 
-      padding: 150px 20px; 
-      text-align: center; 
-      position: relative;
-    }
-    /* Dark overlay on hero */
-    header::after {
-      content: ""; 
-      position: absolute; 
-      top: 0; left: 0; right: 0; bottom: 0; 
-      background: rgba(0,0,0,0.5);
-    }
-    header h1, header p {
-      position: relative; z-index: 1;
-    }
-    header h1 { font-size: 56px; margin-bottom: 20px; font-weight: bold; }
-    header p { font-size: 22px; opacity: 0.9; }
-
-    /* -----------------------
-       NAVIGATION
-    ----------------------- */
-    nav { 
-      position: sticky; top: 0; 
-      background: white; 
-      border-bottom: 1px solid #ddd; 
-      padding: 15px; 
-      text-align: center;
-      z-index: 1000;
-    }
-    nav a { 
-      margin: 0 20px; 
-      text-decoration: none; 
-      color: #004080; 
-      font-weight: bold; 
-      transition: color 0.3s; 
-    }
-    nav a:hover { color: #ff6600; }
-
-    /* -----------------------
-       SECTIONS (shared)
-    ----------------------- */
-    section { 
-      padding: 100px 40px; 
-      text-align: center;
-      opacity: 0;                 /* Hidden until scroll */
-      transform: translateY(40px); /* Slide-in animation */
-      transition: all 1s ease-out; 
-      position: relative;
-      color: white;               /* White text over backgrounds */
-    }
-    section.visible { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-    section h2 { font-size: 36px; margin-bottom: 40px; }
-
-    /* Dark overlay for all sections */
-    section::after {
-      content: ""; 
-      position: absolute; 
-      top: 0; left: 0; right: 0; bottom: 0; 
-      background: rgba(0,0,0,0.6); 
-    }
-    section > * { position: relative; z-index: 1; }
-
-    /* -----------------------
-       SECTION BACKGROUND IMAGES
-       (Replace these Unsplash URLs if you want)
-    ----------------------- */
-    #listening {
-      background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-    }
-    #reading {
-      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-    }
-    #writing {
-      background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-    }
-    #speaking {
-      background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      margin:0; padding:0;
+      background:#fff; color:#333;
+      scroll-behavior:smooth;
     }
 
     /* -----------------------
-       VIDEO GRID LAYOUT
+       NAVIGATION (with underline hover)
     ----------------------- */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
+    nav{
+      position:sticky; top:0;
+      background:#fff;
+      border-bottom:1px solid #ddd;
+      padding:15px; text-align:center;
+      z-index:1000;
+    }
+    nav a{
+      margin:0 20px;
+      text-decoration:none;
+      color:#004080;
+      font-weight:600;
+      letter-spacing:.2px;
+      padding:6px 12px;
+      position:relative;
+      transition:color .3s;
+    }
+    nav a::after{
+      content:"";
+      position:absolute; left:0; bottom:0;
+      width:0%; height:2px; background:#000;
+      transition:width .3s ease-in-out;
+    }
+    nav a:hover{ color:#000; }
+    nav a:hover::after{ width:100%; }
+
+    /* -----------------------
+       HERO (gradient overlay + parallax + cloud reveal)
+    ----------------------- */
+    header{
+      text-align:center;
+      padding:150px 20px;
+      color:#fff;
+      position:relative;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,.9)),
+        url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1500&q=80');
+      background-position:center center, center center;
+      background-repeat:no-repeat, no-repeat;
+      background-size:cover, cover;
+      background-attachment:fixed, fixed; /* parallax-like */
+    }
+    @media (max-width: 768px){
+      header{ background-attachment:scroll, scroll; }
+    }
+
+    /* one-time cloud reveal on hero text */
+    header h1, header p{
+      opacity:0; transform:translateY(40px); filter:blur(20px);
+    }
+    .hero-visible{ animation:cloudFade 1s cubic-bezier(.22,1,.36,1) forwards; }
+    header h1{ font-size:56px; margin-bottom:20px; font-weight:700; letter-spacing:-.2px; text-shadow:0 2px 6px rgba(0,0,0,.35);}
+    header p{ font-size:22px; opacity:.95; text-shadow:0 2px 6px rgba(0,0,0,.35);}
+
+    /* -----------------------
+       SECTIONS (cloud reveal once + continuous fade)
+    ----------------------- */
+    section{
+      padding:100px 40px;
+      text-align:center;
+      position:relative;
+      color:#fff;
+      /* continuous fade baseline */
+      will-change:opacity;
+      transition:opacity 240ms linear;
+      opacity:.25;
+    }
+    /* one-time cloud seed/reveal */
+    .reveal-seed{ opacity:0; transform:translateY(40px); filter:blur(20px); }
+    .revealed{ animation:cloudFade 1s cubic-bezier(.22,1,.36,1) forwards; }
+
+    section h2{ font-size:36px; margin-bottom:40px; }
+
+    /* unified dark overlay for readability */
+    section::after{
+      content:"";
+      position:absolute; inset:0;
+      background:rgba(0,0,0,.6);
+    }
+    section > *{ position:relative; z-index:1; }
+
+    /* -----------------------
+       SECTION BACKGROUNDS (unchanged)
+    ----------------------- */
+    #listening{
+      background:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+    #reading{
+      background:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+    #writing{
+      background:url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+    }
+    #speaking{
+      background:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
     }
 
     /* -----------------------
-       VIDEO CARDS
+       VIDEO GRID & CARDS (unchanged look)
     ----------------------- */
-    .video-card {
-      background: rgba(255,255,255,0.9); /* Semi-transparent for readability */
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
-      color: black; /* Card text black */
+    .video-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:30px; max-width:1200px; margin:0 auto;
     }
-    .video-card:hover { transform: translateY(-5px); }
+    .video-card{
+      background:rgba(255,255,255,.9);
+      border-radius:12px; overflow:hidden;
+      box-shadow:0 8px 20px rgba(0,0,0,.3);
+      transition:transform .3s; color:#000;
+    }
+    .video-card:hover{ transform:translateY(-5px); }
+    .video-card iframe{ width:100%; height:200px; border:none; }
+    .video-info{ padding:15px; }
+    .video-info h3{ margin:0 0 10px; font-size:18px; color:#004080; }
+    .video-info a{
+      display:inline-block; margin-top:5px; padding:8px 15px;
+      background:#ff6600; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;
+      transition:background .3s;
+    }
+    .video-info a:hover{ background:#e65c00; }
 
-    /* Embedded video */
-    .video-card iframe {
-      width: 100%;
-      height: 200px;
-      border: none;
+    /* -----------------------
+       CLOUD EFFECT KEYFRAMES
+    ----------------------- */
+    @keyframes cloudFade{
+      0%{ opacity:0; filter:blur(20px); transform:translateY(60px); }
+      100%{ opacity:1; filter:blur(0); transform:translateY(0); }
     }
 
-    /* Card info */
-    .video-info { padding: 15px; }
-    .video-info h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #004080;
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce){
+      header h1, header p, .reveal-seed, .revealed{
+        animation:none !important; transform:none !important; filter:none !important; opacity:1 !important;
+      }
+      section{ transition:none !important; opacity:1 !important; }
     }
-    .video-info a {
-      display: inline-block;
-      margin-top: 5px;
-      padding: 8px 15px;
-      background: #ff6600;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: background 0.3s;
-    }
-    .video-info a:hover { background: #e65c00; }
   </style>
 
-  <script>
-    /* -----------------------
-       SCROLL ANIMATION
-       Reveal sections smoothly
-    ----------------------- */
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('section').forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          sec.classList.add('visible');
-        }
-      });
-    });
-  </script>
+  <noscript>
+    <style>
+      /* keep content visible if JS is off */
+      header h1, header p { opacity:1 !important; transform:none !important; filter:none !important; }
+      section { opacity:1 !important; }
+    </style>
+  </noscript>
 </head>
 <body>
-  <!-- HERO HEADER -->
+  <!-- HERO -->
   <header>
     <h1>IELTS Classes by Somik</h1>
     <p>Master IELTS for Free – Videos + Study Material</p>
   </header>
 
-  <!-- NAVIGATION -->
+  <!-- NAV -->
   <nav>
     <a href="#listening">Listening</a>
     <a href="#reading">Reading</a>
@@ -185,28 +185,25 @@
   </nav>
 
   <!-- LISTENING -->
-  <section id="listening">
+  <section id="listening" class="reveal-seed">
     <h2>Listening Lessons</h2>
     <div class="video-grid">
-      <!-- Card 1 -->
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Listening Basics</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
         </div>
       </div>
-      <!-- Card 2 -->
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Advanced Listening</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
         </div>
       </div>
-      <!-- Card 3 -->
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Practice Test 1</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK3">Download Notes</a>
@@ -216,25 +213,25 @@
   </section>
 
   <!-- READING -->
-  <section id="reading">
+  <section id="reading" class="reveal-seed">
     <h2>Reading Lessons</h2>
     <div class="video-grid">
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Reading Skimming</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK4">Download Practice</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Reading Scanning</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK5">Download Practice</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" allowfullscreen></iframe>
         <div class="video-info">
           <h3>True/False/Not Given</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK6">Download Practice</a>
@@ -244,32 +241,32 @@
   </section>
 
   <!-- WRITING -->
-  <section id="writing">
+  <section id="writing" class="reveal-seed">
     <h2>Writing Lessons</h2>
     <div class="video-grid">
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Task 1 Overview</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK7">Sample Answers</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Task 2 Essays</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Task 3 Somik Template</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Common Mistakes</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK9">Sample Answers</a>
@@ -279,25 +276,25 @@
   </section>
 
   <!-- SPEAKING -->
-  <section id="speaking">
+  <section id="speaking" class="reveal-seed">
     <h2>Speaking Lessons</h2>
     <div class="video-grid">
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Part 1 Q&A</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK10">Cue Cards</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Part 2 Practice</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK11">Cue Cards</a>
         </div>
       </div>
       <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12"></iframe>
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12" allowfullscreen></iframe>
         <div class="video-info">
           <h3>Fluency Tips</h3>
           <a href="https://drive.google.com/YOUR_PDF_LINK12">Cue Cards</a>
@@ -305,5 +302,73 @@
       </div>
     </div>
   </section>
+
+  <script>
+    /* -----------------------
+       1) Hero: one-time cloud reveal
+    ----------------------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const h1 = document.querySelector('header h1');
+      const p  = document.querySelector('header p');
+      if (h1) setTimeout(() => h1.classList.add('hero-visible'), 80);
+      if (p)  setTimeout(() => p.classList.add('hero-visible'), 180);
+    });
+
+    /* -----------------------
+       2) Sections: cloud reveal once + continuous fade
+    ----------------------- */
+    (function(){
+      const sections = Array.from(document.querySelectorAll('section'));
+      if (!sections.length) return;
+
+      // Seed cloud state
+      sections.forEach(sec => sec.classList.add('reveal-seed'));
+
+      // One-time cloud reveal when entering viewport
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting){
+            entry.target.classList.add('revealed');
+            entry.target.classList.remove('reveal-seed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { root:null, rootMargin:'0px 0px -80px 0px', threshold:0.15 });
+
+      sections.forEach(sec => io.observe(sec));
+
+      // Continuous fade mapping to viewport center
+      let ticking = false;
+      const clamp = (v,min,max)=>Math.max(min, Math.min(max,v));
+      const lerp  = (a,b,t)=>a + (b-a)*t;
+
+      function update(){
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const centerY = vh/2;
+
+        for (const el of sections){
+          const rect = el.getBoundingClientRect();
+          const elCenter = rect.top + rect.height/2;
+          const dist = Math.abs(elCenter - centerY);
+          const norm = clamp(dist/(vh*0.6), 0, 1);
+          const opacity = lerp(1.0, 0.25, norm);
+          el.style.opacity = opacity.toFixed(3);
+        }
+        ticking = false;
+      }
+
+      function onScroll(){
+        if (!ticking){
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive:true });
+      window.addEventListener('resize', update, { passive:true });
+      window.addEventListener('load', update, { passive:true });
+      document.addEventListener('DOMContentLoaded', update, { passive:true });
+    })();
+  </script>
 </body>
 </html>
