@@ -35,24 +35,135 @@
 
     /* -----------------------
        HERO (Home) — fixed view
+       (Apple-like glass panels; 4 rectangles + 1 circle)
     ----------------------- */
     header#home {
       min-height: 100vh;
-      text-align: center;
-      padding: 120px 20px;
-      color: #fff;
       position: relative;
+      padding: 96px 24px 36px;
+      color: #fff;
       background-image:
-        linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,.8)),
+        linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,.75)),
         url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1600&q=80');
       background-position: center center, center center;
       background-repeat: no-repeat, no-repeat;
       background-size: cover, cover;
       background-attachment: fixed, fixed;
     }
-    @media (max-width: 768px){ header#home{ background-attachment: scroll, scroll; } }
-    header#home h1{ font-size: 54px; margin: 0 0 14px; letter-spacing: -.2px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
-    header#home p{ font-size: 18px; line-height: 1.7; max-width: 900px; margin: 0 auto; opacity: .95; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+    @media (max-width: 768px){
+      header#home{ background-attachment: scroll, scroll; }
+    }
+
+    /* Top site title (separate from panels) */
+    .home-wrap { max-width: 1160px; margin: 0 auto; }
+    .site-title {
+      text-align: center;
+      margin: 0 0 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: clamp(32px, 5vw, 56px);
+      text-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .site-sub {
+      text-align: center;
+      margin: 0 auto 18px;
+      max-width: 900px;
+      font-size: clamp(14px, 1.9vw, 18px);
+      opacity: .95;
+      text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    }
+
+    /* Grid that holds 4 rectangles + 1 circle (no page scroll) */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-rows: auto auto auto;   /* left column stacks 3 rects */
+      grid-column-gap: 22px;
+      grid-row-gap: 18px;
+      align-items: start;
+      margin-top: 14px;
+      /* Force the whole composition to fit in view on most laptops */
+      max-height: calc(100vh - 200px);
+    }
+
+    /* Glass cards (rectangles) */
+    .glass {
+      position: relative;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 16px;
+      padding: 16px 18px;
+      color: #fff;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      box-shadow: 0 10px 26px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+    .glass h3 {
+      margin: 0 0 8px;
+      font-size: clamp(16px, 2vw, 22px);
+      letter-spacing: .2px;
+    }
+    .glass p {
+      margin: 0;
+      font-size: clamp(13px, 1.6vw, 16px);
+      line-height: 1.5;
+      opacity: .95;
+    }
+
+    /* Left column (3 rectangles) */
+    .left-col {
+      display: grid;
+      grid-template-rows: 1fr 1fr 0.8fr;
+      grid-row-gap: 18px;
+      min-height: 0; /* for Firefox to avoid overflow */
+    }
+    .card { min-height: 120px; display: grid; align-content: center; }
+
+    /* Right column: circle portrait + rectangle below */
+    .right-col { display: grid; grid-template-rows: 1fr auto; grid-row-gap: 18px; }
+    .portrait-wrap {
+      display: grid; place-items: center;
+      min-height: 0;
+    }
+    .portrait {
+      width: clamp(140px, 26vw, 240px);
+      height: clamp(140px, 26vw, 240px);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.45);
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      /* Make background behind img sharp; only circle edge has glass ring */
+      background: rgba(0,0,0,0.18);
+      backdrop-filter: none;
+    }
+    .portrait img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      filter: none; /* keep the photo sharp */
+    }
+    .pill {
+      min-height: 86px;
+      display: grid; align-content: center;
+      text-align: left;
+    }
+
+    /* Keep everything visible on narrower laptops */
+    @media (max-width: 1100px) {
+      .home-grid { max-height: calc(100vh - 220px); }
+      .left-col { grid-template-rows: 1fr 1fr 0.9fr; }
+    }
+
+    /* Very small widths (you said mobile isn’t priority; still avoid chaos) */
+    @media (max-width: 720px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        max-height: calc(100vh - 220px);
+      }
+      .right-col { grid-template-rows: auto auto; }
+      .portrait { margin: 0 auto; }
+    }
 
     /* -----------------------
        PAGE SECTIONS
@@ -88,7 +199,7 @@
        allow scrolling *inside* the section if content is tall */
     body.no-scroll #connect .inner {
       max-height: calc(100vh - 120px);
-      overflow: auto;              /* only appears if content needs it */
+      overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
 
@@ -247,11 +358,42 @@
 
   <!-- HOME / HERO (non-scroll) -->
   <header id="home" class="active">
-    <h1>IELTS Classes by Somik</h1>
-    <p>
-      This is a free learning hub for IELTS aspirants. <br/>
-      Learn the essentials, practice with curated resources, and track your progress.
-    </p>
+    <div class="home-wrap">
+      <h1 class="site-title">IELTS Classes by Somik</h1>
+      <p class="site-sub">Free learning hub for IELTS aspirants. These panels are placeholders you can edit later.</p>
+
+      <div class="home-grid">
+        <!-- LEFT: three rectangles -->
+        <div class="left-col">
+          <div class="glass card">
+            <h3>About the author</h3>
+            <p><strong>Somik Das</strong> — Placeholder bio text about the author. Replace with your story, teaching style, and mission.</p>
+          </div>
+          <div class="glass card">
+            <h3>About the website</h3>
+            <p>Placeholder copy describing what learners get here: videos, notes, practice sets, and tips for IELTS success.</p>
+          </div>
+          <div class="glass card">
+            <h3>Author credentials</h3>
+            <p>Placeholder credentials: years of coaching, student results, certifications, notable achievements, etc.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: circle + one rectangle -->
+        <div class="right-col">
+          <div class="portrait-wrap">
+            <div class="portrait">
+              <!-- Placeholder image; replace with your own -->
+              <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=600&q=80" alt="Author portrait placeholder">
+            </div>
+          </div>
+          <div class="glass pill">
+            <h3>From the author</h3>
+            <p>“Short one-liner or welcome note. Placeholder text—update with your message to students.”</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <!-- COURSE (scrollable) -->
@@ -584,9 +726,8 @@
     });
 
     /* =======================
-       SIDE-PANEL NAV (FIX FOR iOS)
+       SIDE-PANEL NAV (iOS fix)
        Close panel first, then swap section on next frame.
-       (Prevents Home + target from appearing stacked.)
     ======================= */
     document.querySelectorAll('[data-panel-nav]').forEach(link=>{
       link.addEventListener('click', (e)=>{
