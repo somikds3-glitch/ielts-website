@@ -192,6 +192,30 @@
       background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
     }
 
+    /*remove this once repo is made active*/
+    #repo .coming-soon{
+      position: absolute;
+      inset: 0;
+      z-index: 5; /* above .inner (which has z-index:1) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    
+    #repo .coming-soon .box{
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+
     section h2{ font-size: 36px; margin: 0 0 14px; }
     section p.lead { max-width: 900px; margin: 0 auto 22px; font-size: 18px; }
 
