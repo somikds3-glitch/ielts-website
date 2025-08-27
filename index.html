@@ -34,25 +34,66 @@
     header#home.active, section.active { display: block; }
 
     /* -----------------------
-       HERO (Home) — fixed view
-       (Apple-like glass panels; 4 rectangles + 1 circle)
-    ----------------------- */
-    header#home {
+   HERO (Home) — Apple-ish professional hero
+   (content stays sharp above layered background)
+----------------------- */
+    header#home{
       min-height: 100vh;
       position: relative;
       padding: 96px 24px 36px;
       color: #fff;
-      background-image:
-        linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,.75)),
-        url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1600&q=80');
-      background-position: center center, center center;
-      background-repeat: no-repeat, no-repeat;
-      background-size: cover, cover;
-      background-attachment: fixed, fixed;
+      background: #0b0c0f;     /* dark base */
+      overflow: hidden;         /* hide pseudo-element edges */
     }
+    
+    /* Put the background on ::before so we can stack gradients + photo cleanly */
+    header#home::before{
+      content:"";
+      position:absolute; inset:0; z-index:0;
+    
+      /* Option A — CSS-only “Apple-ish” abstract background (default) */
+      background:
+        radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 45%),
+        radial-gradient(140% 160% at 100% 100%, rgba(88,164,255,0.16) 0%, rgba(255,255,255,0) 55%),
+        radial-gradient(110% 130% at 100% 0%, rgba(255,92,92,0.12) 0%, rgba(255,255,255,0) 50%),
+        linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.68) 100%);
+    
+      /* If you prefer a real image (Option B), comment the block above and
+         uncomment the block below. See “Option B” note further down. */
+      /* background-image:
+          linear-gradient(to right, rgba(0,0,0,.38), rgba(0,0,0,.72)),
+          image-set(
+            url('https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1600&q=80') 1x,
+            url('https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=2400&q=80') 2x
+          );
+         background-size: cover;
+         background-position: center center;
+         background-repeat: no-repeat; */
+    
+      /* Subtle richness */
+      filter: saturate(115%) contrast(105%);
+      background-attachment: fixed; /* gentle parallax on desktop */
+      pointer-events:none;
+    }
+    
+    /* Extra soft vignette + sheen layer */
+    header#home::after{
+      content:"";
+      position:absolute; inset:0; z-index:0;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,0.05), rgba(255,255,255,0) 60%),
+        radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.35), rgba(0,0,0,0) 55%);
+      pointer-events:none;
+    }
+    
+    /* Ensure your content sits ABOVE the background layers */
+    .home-wrap{ max-width:1160px; margin:0 auto; position:relative; z-index:1; }
+    
     @media (max-width: 768px){
-      header#home{ background-attachment: scroll, scroll; }
+      /* iOS/Android dislike fixed backgrounds; make it scroll there */
+      header#home::before{ background-attachment: scroll; }
     }
+
 
     /* Top site title (separate from panels) */
     .home-wrap { max-width: 1160px; margin: 0 auto; }
