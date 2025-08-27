@@ -35,10 +35,11 @@
 
     /* -----------------------
        HERO (Home) — fixed view
-       (Home cosmetics/layout only)
     ----------------------- */
     header#home {
       min-height: 100vh;
+      text-align: center;
+      padding: 120px 20px;
       color: #fff;
       position: relative;
       background-image:
@@ -48,121 +49,13 @@
       background-repeat: no-repeat, no-repeat;
       background-size: cover, cover;
       background-attachment: fixed, fixed;
-      display: grid;
-      place-items: center;
-      padding: 24px;
     }
     @media (max-width: 768px){ header#home{ background-attachment: scroll, scroll; } }
-
-    /* Home layout */
-    .home-wrap {
-      width: 100%;
-      max-width: 1100px;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 18px;
-    }
-    .home-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.22);
-      backdrop-filter: blur(10px) saturate(120%);
-    }
-    .home-title {
-      font-weight: 800;
-      letter-spacing: -0.3px;
-      font-size: clamp(28px, 3.4vw, 40px);
-      margin: 0;
-    }
-
-    .home-main {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
-      gap: 18px;
-      min-height: 0;
-    }
-
-    /* Left side: 4 cards (2x2) */
-    .home-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: 1fr;
-      gap: 18px;
-      min-height: 0;
-    }
-    .home-card {
-      border-radius: 18px;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.28);
-      backdrop-filter: blur(12px) saturate(130%);
-      padding: 16px;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      min-height: 0;
-    }
-    .home-card h3 {
-      margin: 0 0 8px;
-      font-size: clamp(16px, 1.8vw, 20px);
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-    .home-card p {
-      margin: 0;
-      font-size: clamp(13px, 1.5vw, 15px);
-      line-height: 1.55;
-      opacity: 0.95;
-    }
-
-    /* Right side: circular image + small glass note */
-    .host-wrap {
-      display: grid;
-      grid-template-rows: 1fr auto;
-      gap: 18px;
-      align-items: center;
-      justify-items: center;
-      min-height: 0;
-    }
-    .host-photo {
-      width: min(360px, 90%);
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.35);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0) 40%),
-        url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=840&q=80') center/cover no-repeat;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      backdrop-filter: blur(6px);
-    }
-    .host-note {
-      width: 100%;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.26);
-      backdrop-filter: blur(10px) saturate(120%);
-      padding: 12px 16px;
-      font-size: 14px;
-      line-height: 1.5;
-      text-align: left;
-    }
-    .host-note strong { font-weight: 800; }
-
-    @media (max-width: 820px) {
-      .home-main { grid-template-columns: 1fr; }
-      .home-cards { grid-template-columns: 1fr 1fr; }
-      .host-wrap { grid-template-rows: auto auto; }
-    }
-    @media (max-width: 600px) {
-      .home-cards { grid-template-columns: 1fr; }
-      .host-photo { width: 70%; }
-    }
+    header#home h1{ font-size: 54px; margin: 0 0 14px; letter-spacing: -.2px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+    header#home p{ font-size: 18px; line-height: 1.7; max-width: 900px; margin: 0 auto; opacity: .95; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
 
     /* -----------------------
-       PAGE SECTIONS (unchanged)
+       PAGE SECTIONS
     ----------------------- */
     section{
       min-height: 100vh;
@@ -173,7 +66,7 @@
     }
     section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
-    /* Backgrounds (dark overlay) */
+    /* Backgrounds (dark overlay to avoid low contrast) */
     section::before{
       content:""; position:absolute; inset:0; z-index:0;
       background: rgba(0,0,0,.45);
@@ -191,15 +84,16 @@
     section h2{ font-size: 36px; margin: 0 0 14px; }
     section p.lead { max-width: 900px; margin: 0 auto 22px; font-size: 18px; }
 
-    /* Connect scroll when page is locked */
+    /* Make CONNECT usable when body is locked:
+       allow scrolling *inside* the section if content is tall */
     body.no-scroll #connect .inner {
       max-height: calc(100vh - 120px);
-      overflow: auto;
+      overflow: auto;              /* only appears if content needs it */
       -webkit-overflow-scrolling: touch;
     }
 
     /* -----------------------
-       HAMBURGER + SIDE PANEL (unchanged)
+       HAMBURGER + SIDE PANEL
     ----------------------- */
     .hamburger {
       position: fixed;
@@ -274,7 +168,7 @@
     }
 
     /* -----------------------
-       VIDEO GRID & CARDS (unchanged)
+       VIDEO GRID & CARDS
     ----------------------- */
     .video-grid{
       display:grid;
@@ -299,7 +193,7 @@
     .video-info a:hover{ background:#e65c00; }
 
     /* -----------------------
-       FORMS (unchanged)
+       FORMS
     ----------------------- */
     .form {
       max-width: 560px; margin: 0 auto; text-align: left;
@@ -346,47 +240,18 @@
     <nav class="panel-links">
       <a href="#home"   data-panel-nav>Home</a>
       <a href="#course" data-panel-nav>Course content</a>
-      <!-- FIXED: added a space before data-panel-nav -->
-      <a href="#connect" data-panel-nav>Connect with me</a>
+      <a href="#connect"data-panel-nav>Connect with me</a>
       <a href="#repo"   data-panel-nav>Repository</a>
     </nav>
   </aside>
 
   <!-- HOME / HERO (non-scroll) -->
   <header id="home" class="active">
-    <div class="home-wrap">
-      <div class="home-top">
-        <h1 class="home-title">IELTS Classes by Somik</h1>
-      </div>
-
-      <div class="home-main">
-        <div class="home-cards">
-          <article class="home-card">
-            <h3>About the author</h3>
-            <p><strong>Somik Das</strong> — Placeholder bio text goes here. You can edit this description later to include background, teaching style, and achievements. (Placeholder.)</p>
-          </article>
-          <article class="home-card">
-            <h3>About the website</h3>
-            <p>This site is a free IELTS learning hub with structured lessons and curated resources. Replace this placeholder with your real overview and value proposition.</p>
-          </article>
-          <article class="home-card">
-            <h3>Author credentials</h3>
-            <p>Placeholder credentials: years of experience, student success stats, certifications, notable publications. Update this with actual details later. (Placeholder.)</p>
-          </article>
-          <article class="home-card">
-            <h3>Get started</h3>
-            <p>Begin with Listening, then Reading, Writing, and Speaking. Follow along with notes and practice sets. (All text here is a placeholder you can customize.)</p>
-          </article>
-        </div>
-
-        <div class="host-wrap">
-          <div class="host-photo" aria-label="Photo of Somik Das"></div>
-          <div class="host-note">
-            <strong>From Somik:</strong> “Short personal note or motto. This is a placeholder line you can replace with a one-liner to welcome learners.”
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1>IELTS Classes by Somik</h1>
+    <p>
+      This is a free learning hub for IELTS aspirants. <br/>
+      Learn the essentials, practice with curated resources, and track your progress.
+    </p>
   </header>
 
   <!-- COURSE (scrollable) -->
@@ -569,20 +434,26 @@
   <script>
     /* =======================
        OWNER MODE (Option A)
-       (unchanged)
+       - Visit once with ?owner=1 to enable owner mode on your device.
+       - Persists via localStorage.
     ======================= */
     const ownerMode =
       /[?&]owner=1\b/.test(location.search) ||
       localStorage.getItem('ownerMode') === 'true';
+
     if (ownerMode) localStorage.setItem('ownerMode', 'true');
 
     /* =======================
-       REPO ACCESS CODE (unchanged)
+       REPO ACCESS CODE
+       - CHANGE THIS to your secret code.
+       - Comparison is case-sensitive by default.
     ======================= */
     const ACCESS_CODE = "IELTS-ACCESS-2025"; // <--- change me
 
     /* =======================
-       SINGLE-VIEW ROUTER (unchanged)
+       SINGLE-VIEW ROUTER
+       - Home + Connect => non-scroll page
+       - Course + Repo  => scrollable page
     ======================= */
     const SECTION_IDS = ["home", "course", "connect", "repo"];
     const bodyEl = document.body;
@@ -596,6 +467,7 @@
       const target = document.getElementById(id);
       if (target) target.classList.add("active");
 
+      // Lock page scroll for Home and Connect; unlock for Course and Repo
       if (id === "home" || id === "connect") {
         bodyEl.classList.add("no-scroll");
       } else {
@@ -604,6 +476,7 @@
 
       history.replaceState(null, "", `#${id}`);
 
+      // If we navigated to repo, re-evaluate lock state (handles expiry)
       if (id === "repo") renderRepoUI();
     }
 
@@ -614,7 +487,7 @@
     });
 
     /* =======================
-       PANEL OPEN/CLOSE (unchanged)
+       PANEL OPEN/CLOSE
     ======================= */
     const hamburger = document.getElementById('hamburger');
     const panel     = document.getElementById('side-panel');
@@ -641,30 +514,9 @@
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closePanel(); });
 
     /* =======================
-       SIDE-PANEL NAV (robust)
-       CHANGE: event delegation so nav always works
-    ======================= */
-    panel.addEventListener('click', (e) => {
-      const link = e.target.closest('a[data-panel-nav]');
-      if (!link) return;
-      e.preventDefault();
-      const id = (link.getAttribute('href') || '').replace('#','');
-      if (!id) return;
-      showOnly(id);
-      closePanel();
-    });
-
-    /* (Optional legacy helper kept; harmless duplication)
-       Clicking any in-document link to #repo shows it */
-    document.querySelectorAll('a[href="#repo"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        showOnly('repo');
-      });
-    });
-
-    /* =======================
-       REPOSITORY GATE (unchanged)
+       REPOSITORY GATE
+       - Auto-lock on tab close (new session)
+       - Lock after 3 hours
     ======================= */
     const THREE_HOURS_MS = 3 * 60 * 60 * 1000;
 
@@ -698,13 +550,15 @@
       repoGate.style.display    = unlocked ? 'none' : '';
       repoContent.style.display = unlocked ? '' : 'none';
 
+      // Owner-only lock button visibility
       lockBtn.style.display   = (unlocked && ownerMode) ? '' : 'none';
       ownerHint.style.display = ownerMode ? '' : 'none';
     }
 
+    // New session = tab just opened => force lock
     window.addEventListener('load', ()=>{
       if (!sessionStorage.getItem('sessionActive')) {
-        clearRepoUnlock();
+        clearRepoUnlock();                 // lock at the start of a new tab session
         sessionStorage.setItem('sessionActive', '1');
       }
       renderRepoUI();
@@ -723,13 +577,38 @@
       }
     });
 
+    // Owner can re-lock anytime
     lockBtn.addEventListener('click', ()=>{
       clearRepoUnlock();
       renderRepoUI();
     });
 
     /* =======================
-       CONTACT FORM (unchanged)
+       SIDE-PANEL NAV (FIX FOR iOS)
+       Close panel first, then swap section on next frame.
+       (Prevents Home + target from appearing stacked.)
+    ======================= */
+    document.querySelectorAll('[data-panel-nav]').forEach(link=>{
+      link.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = (link.getAttribute('href') || "").slice(1);
+        closePanel();
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=> showOnly(id)); });
+      });
+    });
+
+    // (Keep explicit repo click behavior consistent with the same fix)
+    document.querySelectorAll('a[href="#repo"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        closePanel();
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=> showOnly('repo')); });
+      });
+    });
+
+    /* =======================
+       CONTACT FORM (Formspree)
+       - Progressive enhancement: AJAX submit for inline feedback.
     ======================= */
     const contactForm = document.getElementById('contact-form');
     const contactStatus = document.getElementById('contact-status');
