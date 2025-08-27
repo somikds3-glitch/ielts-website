@@ -38,13 +38,17 @@
    (content stays sharp above layered background)
 ----------------------- */
     header#home{
-      min-height: 100vh;
-      position: relative;
-      padding: 96px 24px 36px;
-      color: #fff;
-      background: #0b0c0f;     /* dark base */
-      overflow: hidden;         /* hide pseudo-element edges */
-    }
+        height: 100vh;            /* fixed viewport height to create an internal scroller */
+        position: relative;
+        padding: 96px 24px 36px;
+        color: #fff;
+        background: #0b0c0f;      /* dark base */
+        overflow-x: hidden;       /* keep edges clean */
+        overflow-y: auto;         /* allow scroll inside Home */
+        overscroll-behavior: contain;     /* don't pull the next section */
+        -webkit-overflow-scrolling: touch;/* smooth scroll on iOS */
+      }
+
     
     header#home::before{
       content:"";
