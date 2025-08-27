@@ -34,7 +34,7 @@
     header#home.active, section.active { display: block; }
 
     /* -----------------------
-       HERO (Home)
+       HERO (Home) — fixed view
     ----------------------- */
     header#home {
       min-height: 100vh;
@@ -66,7 +66,7 @@
     }
     section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
-    /* Backgrounds (dark overlay to avoid “blur/low contrast” look) */
+    /* Backgrounds (dark overlay to avoid low contrast) */
     section::before{
       content:""; position:absolute; inset:0; z-index:0;
       background: rgba(0,0,0,.45);
@@ -83,6 +83,14 @@
 
     section h2{ font-size: 36px; margin: 0 0 14px; }
     section p.lead { max-width: 900px; margin: 0 auto 22px; font-size: 18px; }
+
+    /* Make CONNECT usable when body is locked:
+       allow scrolling *inside* the section if content is tall */
+    body.no-scroll #connect .inner {
+      max-height: calc(100vh - 120px);
+      overflow: auto;              /* only appears if content needs it */
+      -webkit-overflow-scrolling: touch;
+    }
 
     /* -----------------------
        HAMBURGER + SIDE PANEL
@@ -237,7 +245,7 @@
     </nav>
   </aside>
 
-  <!-- HOME / HERO -->
+  <!-- HOME / HERO (non-scroll) -->
   <header id="home" class="active">
     <h1>IELTS Classes by Somik</h1>
     <p>
@@ -246,7 +254,7 @@
     </p>
   </header>
 
-  <!-- COURSE -->
+  <!-- COURSE (scrollable) -->
   <section id="course">
     <div class="inner">
       <h2>Course Content</h2>
@@ -367,7 +375,7 @@
     </div>
   </section>
 
-  <!-- CONNECT WITH ME -->
+  <!-- CONNECT WITH ME (non-scroll page; inner can scroll if needed) -->
   <section id="connect">
     <div class="inner">
       <h2>Connect with me</h2>
@@ -386,10 +394,7 @@
         <label for="c-msg">Your message (why you’re accessing the site)</label>
         <textarea id="c-msg" name="message" required></textarea>
 
-        <!-- Optional subject for Formspree emails -->
         <input type="hidden" name="_subject" value="New message from IELTS site" />
-        <!-- Optional redirect after success; we handle inline feedback via JS, so not needed -->
-        <!-- <input type="hidden" name="_next" value="https://your-site/thank-you.html" /> -->
 
         <button class="btn dark" type="submit">Submit</button>
         <div class="notice" id="contact-status" aria-live="polite"></div>
@@ -398,7 +403,7 @@
     </div>
   </section>
 
-  <!-- REPOSITORY (CODE-GATED) -->
+  <!-- REPOSITORY (CODE-GATED, scrollable) -->
   <section id="repo">
     <div class="inner">
       <h2>Repository</h2>
@@ -447,6 +452,8 @@
 
     /* =======================
        SINGLE-VIEW ROUTER
+       - Home + Connect => non-scroll page
+       - Course + Repo  => scrollable page
     ======================= */
     const SECTION_IDS = ["home", "course", "connect", "repo"];
     const bodyEl = document.body;
@@ -460,8 +467,17 @@
       const target = document.getElementById(id);
       if (target) target.classList.add("active");
 
-      bodyEl.classList.add("no-scroll");
+      // Lock page scroll for Home and Connect; unlock for Course and Repo
+      if (id === "home" || id === "connect") {
+        bodyEl.classList.add("no-scroll");
+      } else {
+        bodyEl.classList.remove("no-scroll");
+      }
+
       history.replaceState(null, "", `#${id}`);
+
+      // If we navigated to repo, re-evaluate lock state (handles expiry)
+      if (id === "repo") renderRepoUI();
     }
 
     // Respect initial hash
@@ -510,20 +526,39 @@
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closePanel(); });
 
     /* =======================
-       REPOSITORY GATE (with persistence)
+       REPOSITORY GATE
+       - Auto-lock on tab close (new session)
+       - Lock after 3 hours
     ======================= */
-    const repoGate   = document.getElementById('repo-gate');
-    const repoForm   = document.getElementById('repo-code-form');
-    const repoNote   = document.getElementById('repo-note');
-    const repoContent= document.getElementById('repo-content');
-    const lockBtn    = document.getElementById('lock-repo');
-    const ownerHint  = document.getElementById('owner-hint');
+    const THREE_HOURS_MS = 3 * 60 * 60 * 1000;
 
-    function isRepoUnlocked(){ return localStorage.getItem('repoUnlocked') === '1'; }
+    const repoGate    = document.getElementById('repo-gate');
+    const repoForm    = document.getElementById('repo-code-form');
+    const repoNote    = document.getElementById('repo-note');
+    const repoContent = document.getElementById('repo-content');
+    const lockBtn     = document.getElementById('lock-repo');
+    const ownerHint   = document.getElementById('owner-hint');
+
+    function clearRepoUnlock(){
+      localStorage.removeItem('repoUnlocked');
+      localStorage.removeItem('repoUnlockedAt');
+    }
+
+    function isRepoUnlocked(){
+      const flag = localStorage.getItem('repoUnlocked') === '1';
+      const at   = parseInt(localStorage.getItem('repoUnlockedAt') || '0', 10);
+      if (!flag || !at) return false;
+
+      const age = Date.now() - at;
+      if (age > THREE_HOURS_MS){
+        clearRepoUnlock();
+        return false;
+      }
+      return true;
+    }
 
     function renderRepoUI(){
       const unlocked = isRepoUnlocked();
-
       repoGate.style.display    = unlocked ? 'none' : '';
       repoContent.style.display = unlocked ? '' : 'none';
 
@@ -532,14 +567,21 @@
       ownerHint.style.display = ownerMode ? '' : 'none';
     }
 
-    // Initial render (on load and also when navigating to #repo)
-    window.addEventListener('load', renderRepoUI);
+    // New session = tab just opened => force lock
+    window.addEventListener('load', ()=>{
+      if (!sessionStorage.getItem('sessionActive')) {
+        clearRepoUnlock();                 // lock at the start of a new tab session
+        sessionStorage.setItem('sessionActive', '1');
+      }
+      renderRepoUI();
+    });
 
     repoForm.addEventListener('submit', (e)=>{
       e.preventDefault();
       const code = (document.getElementById('repo-code').value || '').trim();
       if (code === ACCESS_CODE){
         localStorage.setItem('repoUnlocked', '1');
+        localStorage.setItem('repoUnlockedAt', String(Date.now()));
         repoNote.textContent = 'Access granted ✔';
         renderRepoUI();
       } else {
@@ -547,14 +589,13 @@
       }
     });
 
-    // Owner can re-lock
+    // Owner can re-lock anytime
     lockBtn.addEventListener('click', ()=>{
-      localStorage.removeItem('repoUnlocked');
+      clearRepoUnlock();
       renderRepoUI();
     });
 
-    // When user clicks "Repository" in the panel, just show the repo section;
-    // the gate will display if still locked.
+    // Clicking "Repository" in the panel shows it; gate renders as needed
     document.querySelectorAll('a[href="#repo"]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         e.preventDefault();
