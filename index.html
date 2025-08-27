@@ -554,30 +554,94 @@
   <!-- CONNECT WITH ME (non-scroll page; inner can scroll if needed) -->
   <section id="connect">
     <div class="inner">
-      <h2>Connect with me</h2>
-      <p class="lead">Have questions or want repository access? Send me a message below.</p>
-
-      <form class="form" id="contact-form" action="https://formspree.io/f/xovnqpnk" method="POST">
-        <label for="c-name">Your name</label>
-        <input id="c-name" name="name" required />
-
-        <label for="c-phone">Phone number</label>
-        <input id="c-phone" name="phone" type="tel" required />
-
-        <label for="c-email">Email</label>
-        <input id="c-email" name="email" type="email" required />
-
-        <label for="c-msg">Your message (why you’re accessing the site)</label>
-        <textarea id="c-msg" name="message" required></textarea>
-
-        <input type="hidden" name="_subject" value="New message from IELTS site" />
-
-        <button class="btn dark" type="submit">Submit</button>
-        <div class="notice" id="contact-status" aria-live="polite"></div>
-        <p class="muted">This form emails <strong>somikds3@gmail.com</strong>.</p>
-      </form>
+      <div class="connect-layout">
+        
+        <!-- LEFT: New contact card -->
+        <aside class="contact-card" aria-labelledby="contact-card-title">
+          <h3 id="contact-card-title">Direct contact</h3>
+  
+          <!-- Phone -->
+          <div class="item">
+            <!-- phone icon -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.03-.24c1.12.37 2.33.57 3.56.57a1 1 0 011 1v3.5a1 1 0 01-.9 1 19 19 0 01-8.1-2.3 18.85 18.85 0 01-6.56-6.56A19 19 0 013 5.9a1 1 0 011-0.9H7.5a1 1 0 011 1c0 1.23.2 2.44.57 3.56a1 1 0 01-.24 1.03l-2.2 2.2z"/>
+            </svg>
+            <div>
+              <div class="label">Phone</div>
+              <!-- TODO: replace with your real number -->
+              <a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a>
+            </div>
+          </div>
+  
+          <!-- Email -->
+          <div class="item">
+            <!-- email icon -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.236l-8 5.333L4 8.236V6l8 5.333L20 6v2.236z"/>
+            </svg>
+            <div>
+              <div class="label">Email</div>
+              <!-- Use your existing email -->
+              <a href="mailto:somikds3@gmail.com">somikds3@gmail.com</a>
+            </div>
+          </div>
+  
+          <!-- Social -->
+          <div class="item" style="flex-direction:column;">
+            <div class="label">Social</div>
+            <div class="socials" aria-label="Social profiles">
+              <!-- Instagram -->
+              <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7zM18 6.4a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/>
+                </svg>
+              </a>
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/YOUR_HANDLE" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 8.98h3.96V21H3V8.98zM9.5 8.98H13v1.63h.05a3.85 3.85 0 013.47-1.91c3.71 0 4.39 2.44 4.39 5.61V21h-3.95v-5.36c0-1.28-.03-2.92-1.78-2.92-1.78 0-2.05 1.39-2.05 2.83V21H9.5V8.98z"/>
+                </svg>
+              </a>
+              <!-- X (Twitter) -->
+              <a href="https://twitter.com/YOUR_HANDLE" target="_blank" rel="noopener" aria-label="X (formerly Twitter)">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M3 3h3.9l5.2 7 5.9-7H22l-7.7 9.1L22 21h-3.9l-5.6-7.6L6 21H2l8-9.5L3 3z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </aside>
+  
+        <!-- RIGHT: your original content (unchanged) -->
+        <div class="connect-main">
+          <h2>Connect with me</h2>
+          <p class="lead">Have questions or want repository access? Send me a message below.</p>
+  
+          <form class="form" id="contact-form" action="https://formspree.io/f/xovnqpnk" method="POST">
+            <label for="c-name">Your name</label>
+            <input id="c-name" name="name" required />
+  
+            <label for="c-phone">Phone number</label>
+            <input id="c-phone" name="phone" type="tel" required />
+  
+            <label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" required />
+  
+            <label for="c-msg">Your message (why you’re accessing the site)</label>
+            <textarea id="c-msg" name="message" required></textarea>
+  
+            <input type="hidden" name="_subject" value="New message from IELTS site" />
+  
+            <button class="btn dark" type="submit">Submit</button>
+            <div class="notice" id="contact-status" aria-live="polite"></div>
+            <p class="muted">This form emails <strong>somikds3@gmail.com</strong>.</p>
+          </form>
+        </div>
+  
+      </div>
     </div>
   </section>
+
 
   <!-- REPOSITORY (CODE-GATED, scrollable) -->
   <section id="repo">
