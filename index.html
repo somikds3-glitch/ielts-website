@@ -581,6 +581,41 @@
 
   <!-- REPOSITORY (CODE-GATED, scrollable) -->
   <section id="repo">
+
+  /*when repo is made ative delete from here*/
+  <!-- REPOSITORY (CODE-GATED, scrollable) -->
+  <section id="repo">
+    <div class="coming-soon" role="status" aria-live="polite">
+      <div class="box">Repository (coming soon, stay tuned)</div>
+    </div>
+  
+    <div class="inner">
+      <h2>Repository</h2>
+      <p class="lead">Enter the access code to unlock downloads.</p>
+  
+      <!-- Gate -->
+      <div id="repo-gate">
+        <form class="form" id="repo-code-form" autocomplete="off">
+          <label for="repo-code">Access code</label>
+          <input id="repo-code" name="code" required />
+          <button class="btn dark" type="submit">Unlock</button>
+          <div class="notice" id="repo-note"></div>
+        </form>
+      </div>
+  
+      <!-- Unlocked content -->
+      <div id="repo-content" style="display:none;">
+        <p class="lead">Access granted ✔ You can add your files/links here.</p>
+        <p><a class="btn" href="/files/notes1.pdf">Download Notes 1</a></p>
+  
+        <!-- Owner-only -->
+        <button id="lock-repo" class="btn" style="display:none;">Lock repository</button>
+        <p class="muted" id="owner-hint" style="display:none;">Owner mode is ON. Add <code>?owner=1</code> once to this URL to enable it on your device.</p>
+      </div>
+    </div>
+  </section>
+    /*delete till here*/
+
     <div class="inner">
       <h2>Repository</h2>
       <p class="lead">Enter the access code to unlock downloads.</p>
