@@ -35,24 +35,122 @@
 
     /* -----------------------
        HERO (Home) — fixed view
+       UPDATED (Home only): abstract gradient + soft glows, crisp outside boxes
     ----------------------- */
     header#home {
       min-height: 100vh;
       text-align: center;
-      padding: 120px 20px;
+      padding: 120px 20px 80px;
       color: #fff;
       position: relative;
+
+      /* NEW (Home only): layered gradients for premium look */
       background-image:
-        linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,.8)),
-        url('https://images.unsplash.com/photo-1584697964154-4e63e26a1fe7?auto=format&fit=crop&w=1600&q=80');
-      background-position: center center, center center;
-      background-repeat: no-repeat, no-repeat;
-      background-size: cover, cover;
-      background-attachment: fixed, fixed;
+        radial-gradient(900px 520px at 75% 18%, rgba(14,165,233,0.22), rgba(14,165,233,0) 60%),
+        radial-gradient(900px 520px at 20% 40%, rgba(139,92,246,0.22), rgba(139,92,246,0) 62%),
+        radial-gradient(800px 500px at 60% 80%, rgba(236,72,153,0.18), rgba(236,72,153,0) 65%),
+        linear-gradient(135deg, #0b1220 0%, #0f172a 38%, #0b1020 70%, #020617 100%);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
     }
-    @media (max-width: 768px){ header#home{ background-attachment: scroll, scroll; } }
-    header#home h1{ font-size: 54px; margin: 0 0 14px; letter-spacing: -.2px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
-    header#home p{ font-size: 18px; line-height: 1.7; max-width: 900px; margin: 0 auto; opacity: .95; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
+    /* Subtle vignette overlay for readability, keeps bg crisp outside cards */
+    header#home::before{
+      content:"";
+      position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(1200px 600px at 50% 10%, rgba(0,0,0,.18), transparent 60%),
+        linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,0) 32%);
+      z-index:0;
+    }
+    @media (max-width: 768px){ header#home{ background-attachment: scroll; } }
+
+    /* Apple-like typography adjustments (Home only) */
+    header#home h1{
+      position: relative; z-index:1;
+      font-size: clamp(40px, 6vw, 56px);
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      text-shadow: 0 2px 6px rgba(0,0,0,.28);
+    }
+    header#home p{
+      position: relative; z-index:1;
+      font-size: 18px; line-height: 1.7;
+      max-width: 900px; margin: 0 auto 18px;
+      opacity: .95; text-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+
+    /* ===== Home layout (unchanged structure, tuned visuals) ===== */
+    header#home .home-wrap {
+      position: relative; z-index:1;
+      max-width: 1100px;
+      margin: 28px auto 0;
+      text-align: left;
+      padding: 0 6px;
+    }
+    header#home .home-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    header#home .home-col-left { display: grid; gap: 16px; }
+
+    /* UPDATED (Home only): slightly stronger frosted look */
+    header#home .home-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 16px;
+      padding: 18px 20px;
+      backdrop-filter: blur(16px) saturate(125%);
+      -webkit-backdrop-filter: blur(16px) saturate(125%);
+      box-shadow: 0 8px 28px rgba(0,0,0,.28);
+    }
+    header#home .home-card h3 {
+      margin: 0 0 8px; font-size: 18px; letter-spacing: .2px; font-weight: 700;
+    }
+    header#home .home-card p {
+      margin: 0; opacity: .96; line-height: 1.65;
+    }
+
+    header#home .home-col-right {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+    }
+    header#home .host-photo {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      object-fit: cover; object-position: center;
+      border: 3px solid rgba(255,255,255,0.8);            /* slightly brighter ring */
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      background: rgba(255,255,255,.15);
+      backdrop-filter: blur(4px) saturate(120%);
+      -webkit-backdrop-filter: blur(4px) saturate(120%);
+    }
+    header#home .host-note {
+      background: rgba(255,255,255,0.10);                 /* a touch more contrast */
+      border: 1px solid rgba(255,255,255,0.34);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      text-align: center;
+      max-width: 320px;
+      backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
+      box-shadow: 0 6px 18px rgba(0,0,0,.22);
+    }
+
+    @media (max-width: 900px){
+      header#home .home-grid {
+        grid-template-columns: 1fr;
+      }
+      header#home .home-col-right { justify-items: start; }
+      header#home .host-photo { width: 200px; height: 200px; }
+    }
+    /* ===== END Home visuals ===== */
 
     /* -----------------------
        PAGE SECTIONS
@@ -88,7 +186,7 @@
        allow scrolling *inside* the section if content is tall */
     body.no-scroll #connect .inner {
       max-height: calc(100vh - 120px);
-      overflow: auto;              /* only appears if content needs it */
+      overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
 
@@ -252,6 +350,31 @@
       This is a free learning hub for IELTS aspirants. <br/>
       Learn the essentials, practice with curated resources, and track your progress.
     </p>
+
+    <!-- Apple-like split layout -->
+    <div class="home-wrap">
+      <div class="home-grid">
+        <!-- Left: two frosted cards -->
+        <div class="home-col-left">
+          <div class="home-card">
+            <h3>About the site</h3>
+            <p>Short, punchy line about what this website offers. Replace this with your copy.</p>
+          </div>
+          <div class="home-card">
+            <h3>How to use</h3>
+            <p>Step-by-step overview or highlights of the course. Replace with your content.</p>
+          </div>
+        </div>
+
+        <!-- Right: circular image + small note -->
+        <div class="home-col-right">
+          <img class="host-photo" alt="Host portrait"
+               src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&q=80" />
+          <div class="host-note">A short one-liner, credentials, or motto from the host. Replace this text.</div>
+        </div>
+      </div>
+    </div>
+    <!-- /layout -->
   </header>
 
   <!-- COURSE (scrollable) -->
