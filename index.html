@@ -64,31 +64,16 @@
     }
     @media (max-width: 768px){
       header#home::before{ background-attachment: scroll; }
-
-    
-      /* Subtle richness */
-      filter: saturate(115%) contrast(105%);
-      background-attachment: fixed; /* gentle parallax on desktop */
-      pointer-events:none;
     }
-    
-    header#home::before{
+    header#home::after{
       content:"";
       position:absolute; inset:0; z-index:0;
-      background-image:
-        linear-gradient(to right, rgba(0,0,0,.58), rgba(0,0,0,.58)),
-        image-set(
-          url('https://unsplash.com/photos/HH4WBGNyltc/download?force=true&w=1600') 1x,
-          url('https://unsplash.com/photos/HH4WBGNyltc/download?force=true&w=2400') 2x
-        );
-      background-size: cover, cover;
-      background-position: center top, center top; /* anchor to top for both layers */
-      background-repeat: no-repeat, no-repeat;
-      filter: brightness(0.88) contrast(1.06) saturate(1.05);
-      background-attachment: fixed;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,0.05), rgba(255,255,255,0) 60%),
+        radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.35), rgba(0,0,0,0) 55%);
       pointer-events:none;
     }
-    
+
     
     /* Ensure your content sits ABOVE the background layers */
     .home-wrap{ max-width:1160px; margin:0 auto; position:relative; z-index:1; }
