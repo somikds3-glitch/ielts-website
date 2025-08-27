@@ -228,7 +228,14 @@
       background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
     }
     #connect{
-      background: url('https://images.unsplash.com/photo-1520891375918-8f9f8a5da9ab?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      background-image:
+        image-set(
+          url('https://unsplash.com/photos/oyXis2kALVg/download?force=true&w=1600') 1x,
+          url('https://unsplash.com/photos/oyXis2kALVg/download?force=true&w=2400') 2x
+        );
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     #repo{
       background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
