@@ -278,6 +278,15 @@
       border-color: rgba(255,255,255,0.55);
     }
 
+    /*DELETE THIS BLOCK WHEN PANEL BUTTON IS TO BE MADE ACTIVE*/
+    .panel-links .disabled{
+    opacity: .45;
+    filter: grayscale(.3);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+
     /* -----------------------
        VIDEO GRID & CARDS
     ----------------------- */
@@ -352,7 +361,8 @@
       <a href="#home"   data-panel-nav>Home</a>
       <a href="#course" data-panel-nav>Course content</a>
       <a href="#connect"data-panel-nav>Connect with me</a>
-      <a href="#repo"   data-panel-nav>Repository</a>
+      <!-- <button type="button" class="disabled" aria-disabled="true">Repository (coming soon)</button> -->
+      <button type="button" class="disabled" aria-disabled="true">Repository (coming soon)</button>
     </nav>
   </aside>
 
