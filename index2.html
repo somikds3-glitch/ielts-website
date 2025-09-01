@@ -771,18 +771,41 @@
       renderRepoUI();
     });
 
-    repoForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const code = (document.getElementById('repo-code').value || '').trim();
-      if (code === ACCESS_CODE){
-        localStorage.setItem('repoUnlocked', '1');
-        localStorage.setItem('repoUnlockedAt', String(Date.now()));
-        repoNote.textContent = 'Access granted ✔';
-        renderRepoUI();
-      } else {
-        repoNote.textContent = 'Incorrect code. Please try again.';
-      }
+    repoForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  repoNote.textContent = 'Checking…';
+
+  const email = (document.getElementById('repo-email').value || '').trim().toLowerCase();
+  const code  = (document.getElementById('repo-code').value || '').trim();
+
+  try {
+    // 👇 Use the RAW CSV link
+    const res = await fetch("https://raw.githubusercontent.com/somikds3-glitch/ielts-website/main/access.csv");
+    if (!res.ok) throw new Error("CSV not found");
+    const text = await res.text();
+
+    // Parse CSV: skip header row
+    const rows = text.trim().split("\n").slice(1);
+    const found = rows.some(row => {
+      const [csvEmail, csvCode] = row.split(",").map(v => v.trim());
+      return csvEmail.toLowerCase() === email && csvCode === code;
     });
+
+    if (found) {
+      localStorage.setItem('repoUnlocked', '1');
+      localStorage.setItem('repoUnlockedAt', String(Date.now()));
+      repoNote.textContent = 'Access granted ✔';
+      renderRepoUI();
+    } else {
+      repoNote.textContent = 'Incorrect email or code. Please try again.';
+    }
+
+  } catch (err) {
+    repoNote.textContent = 'Error checking access. Please try again later.';
+    console.error(err);
+  }
+});
+
 
     // Owner can re-lock anytime
     if (document.getElementById('lock-repo')) {
