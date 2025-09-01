@@ -622,14 +622,19 @@
       <p class="lead">Enter the access code to unlock downloads. Visit the 'Connect with me' section to get your access code.</p>
 
       <!-- Gate -->
-      <div id="repo-gate">
-        <form class="form" id="repo-code-form" autocomplete="off">
-          <label for="repo-code">Access code</label>
-          <input id="repo-code" name="code" required />
-          <button class="btn dark" type="submit">Unlock</button>
-          <div class="notice" id="repo-note"></div>
-        </form>
-      </div>
+<div id="repo-gate">
+  <form class="form" id="repo-code-form" autocomplete="off">
+    <label for="repo-email">Email</label>
+    <input id="repo-email" name="email" type="email" required />
+
+    <label for="repo-code">Access code</label>
+    <input id="repo-code" name="code" required />
+
+    <button class="btn dark" type="submit">Unlock</button>
+    <div class="notice" id="repo-note"></div>
+  </form>
+</div>
+
 
       <!-- Unlocked content -->
       <div id="repo-content" style="display:none;">
