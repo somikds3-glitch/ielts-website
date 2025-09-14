@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IELTS Classes - Free Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+
+    /* -----------------------
+       GLOBAL / SINGLE-VIEW
+    ----------------------- */
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      margin: 0; padding: 0;
+      background: #fff; color: #111;
+      scroll-behavior: smooth;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Lock page scroll in single-view mode */
+    body.no-scroll {
+      overflow: hidden;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+    }
+
+    /* Only show the active page */
+    header#home, section { display: none; }
+    header#home.active, section.active { display: block; }
+
+    /* -----------------------
+   HERO (Home) — Apple-ish professional hero
+   (content stays sharp above layered background)
+----------------------- */
+    header#home{
+        height: 100vh;            /* fixed viewport height to create an internal scroller */
+        position: relative;
+        padding: 96px 24px 36px;
+        color: #fff;
+        background: #0b0c0f;      /* dark base */
+        overflow-x: hidden;       /* keep edges clean */
+        overflow-y: auto;         /* allow scroll inside Home */
+        overscroll-behavior: contain;     /* don't pull the next section */
+        -webkit-overflow-scrolling: touch;/* smooth scroll on iOS */
+      }
+
+    
+    header#home::before{
+      content:"";
+      position:absolute; inset:0; z-index:0;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,.58), rgba(0,0,0,.58)),
+        image-set(
+          url('https://unsplash.com/photos/HH4WBGNyltc/download?force=true&w=1600') 1x,
+          url('https://unsplash.com/photos/HH4WBGNyltc/download?force=true&w=2400') 2x
+        );
+      background-size: cover, cover;
+      background-position: center center, center center;
+      background-repeat: no-repeat, no-repeat;
+      filter: brightness(0.88) contrast(1.06) saturate(1.05);
+      background-attachment: fixed;
+      pointer-events:none;
+    }
+    @media (max-width: 768px){
+      header#home::before{ background-attachment: scroll; }
+    }
+    header#home::after{
+      content:"";
+      position:absolute; inset:0; z-index:0;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,0.05), rgba(255,255,255,0) 60%),
+        radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,0.35), rgba(0,0,0,0) 55%);
+      pointer-events:none;
+    }
+
+    
+    /* Ensure your content sits ABOVE the background layers */
+    .home-wrap{ max-width:1160px; margin:0 auto; position:relative; z-index:1; }
+    
+    @media (max-width: 768px){
+      /* iOS/Android dislike fixed backgrounds; make it scroll there */
+      header#home::before{ background-attachment: scroll; }
+    }
+
+
+    /* Top site title (separate from panels) */
+    .home-wrap { max-width: 1160px; margin: 0 auto; }
+    .site-title {
+      text-align: center;
+      margin: 0 0 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: clamp(32px, 5vw, 56px);
+      text-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .site-sub {
+      text-align: center;
+      margin: 0 auto 18px;
+      max-width: 900px;
+      font-size: clamp(14px, 1.9vw, 18px);
+      opacity: .95;
+      text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    }
+
+    /* Grid that holds 4 rectangles + 1 circle (no page scroll) */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-rows: auto auto auto;   /* left column stacks 3 rects */
+      grid-column-gap: 22px;
+      grid-row-gap: 18px;
+      align-items: start;
+      margin-top: 14px;
+      /* Force the whole composition to fit in view on most laptops */
+      max-height: calc(100vh - 200px);
+    }
+
+    /* Glass cards (rectangles) */
+    .glass {
+      position: relative;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 16px;
+      padding: 16px 18px;
+      color: #fff;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      box-shadow: 0 10px 26px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+    .glass h3 {
+      margin: 0 0 8px;
+      font-size: clamp(16px, 2vw, 22px);
+      letter-spacing: .2px;
+    }
+    .glass p {
+      margin: 0;
+      font-size: clamp(13px, 1.6vw, 16px);
+      line-height: 1.5;
+      opacity: .95;
+    }
+
+    /* Left column (3 rectangles) */
+    .left-col {
+      display: grid;
+      grid-template-rows: 1fr 1fr 0.8fr;
+      grid-row-gap: 18px;
+      min-height: 0; /* for Firefox to avoid overflow */
+    }
+    .card { min-height: 120px; display: grid; align-content: center; }
+
+    /* Right column: circle portrait + rectangle below */
+    .right-col { display: grid; grid-template-rows: 1fr auto; grid-row-gap: 18px; }
+    .portrait-wrap {
+      display: grid; place-items: center;
+      min-height: 0;
+    }
+    .portrait {
+      width: clamp(140px, 26vw, 240px);
+      height: clamp(140px, 26vw, 240px);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.45);
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      /* Make background behind img sharp; only circle edge has glass ring */
+      background: rgba(0,0,0,0.18);
+      backdrop-filter: none;
+    }
+    .portrait img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      filter: none; /* keep the photo sharp */
+    }
+    .pill {
+      min-height: 86px;
+      display: grid; align-content: center;
+      text-align: left;
+    }
+
+    /* Keep everything visible on narrower laptops */
+    @media (max-width: 1100px) {
+      .home-grid { max-height: calc(100vh - 220px); }
+      .left-col { grid-template-rows: 1fr 1fr 0.9fr; }
+    }
+
+    /* Very small widths (you said mobile isn’t priority; still avoid chaos) */
+    @media (max-width: 720px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        max-height: calc(100vh - 220px);
+      }
+      .right-col { grid-template-rows: auto auto; }
+      .portrait { margin: 0 auto; }
+    }
+
+    /* -----------------------
+       PAGE SECTIONS
+    ----------------------- */
+    section{
+      min-height: 100vh;
+      padding: 60px 24px 80px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+    section .inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* Backgrounds (dark overlay to avoid low contrast) */
+    section::before{
+      content:""; position:absolute; inset:0; z-index:0;
+      background: rgba(0,0,0,.45);
+    }
+    #course{
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+    #connect{
+      background-image:
+        image-set(
+          url('https://unsplash.com/photos/oyXis2kALVg/download?force=true&w=1600') 1x,
+          url('https://unsplash.com/photos/oyXis2kALVg/download?force=true&w=2400') 2x
+        );
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    #repo{
+      background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    /*remove this once repo is made active*/
+    #repo .coming-soon{
+      position: absolute;
+      inset: 0;
+      z-index: 5; /* above .inner (which has z-index:1) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    
+    #repo .coming-soon .box{
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+
+    section h2{ font-size: 36px; margin: 0 0 14px; }
+    section p.lead { max-width: 900px; margin: 0 auto 22px; font-size: 18px; }
+
+    /* Make CONNECT usable when body is locked:
+       allow scrolling *inside* the section if content is tall */
+    body.no-scroll #connect .inner {
+      max-height: calc(100vh - 120px);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* -----------------------
+       HAMBURGER + SIDE PANEL
+    ----------------------- */
+    .hamburger {
+      position: fixed;
+      top: 14px; right: 14px;
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      background: rgba(0,0,0,0.55);
+      color:#fff; border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      z-index: 1100;
+      cursor: pointer;
+      transition: transform .2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .hamburger:hover { transform: translateY(-1px); }
+    .hamburger .lines{ width: 22px; height: 16px; position: relative; }
+    .hamburger .lines::before,
+    .hamburger .lines::after,
+    .hamburger .lines span{
+      content:""; position:absolute; left:0; right:0; height:2px; background:#fff; border-radius: 2px;
+    }
+    .hamburger .lines::before{ top:0; }
+    .hamburger .lines::after{ bottom:0; }
+    .hamburger .lines span{ top: calc(50% - 1px); }
+
+    .scrim {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+      z-index: 1000;
+    }
+    .scrim.show { opacity: 1; pointer-events: auto; }
+
+    .side-panel {
+      position: fixed; top:0; right:0;
+      height: 100%; width: 320px; max-width: 85vw;
+      background: rgba(0,0,0,0.60);
+      border-left: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      backdrop-filter: blur(12px) saturate(120%);
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      z-index: 1101;
+      display: flex; flex-direction: column; padding: 16px;
+    }
+    .side-panel.open { transform: translateX(0); }
+
+    .panel-header{ display:flex; align-items:center; justify-content:space-between; }
+    .panel-title{ font-weight: 800; letter-spacing: .2px; }
+    .panel-close{
+      background: transparent; color:#fff;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 10px; padding: 6px 10px; cursor: pointer;
+    }
+    .panel-links{ display: grid; gap: 10px; margin-top: 12px; }
+    .panel-links a, .panel-links button{
+      display: block; text-align: left;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer;
+    }
+    .panel-links a:hover, .panel-links button:hover{
+      background: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.55);
+    }
+
+    /*DELETE THIS BLOCK WHEN PANEL BUTTON IS TO BE MADE ACTIVE*/
+    .panel-links .disabled{
+    opacity: .45;
+    filter: grayscale(.3);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+
+    /* -----------------------
+       VIDEO GRID & CARDS
+    ----------------------- */
+    .video-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:30px; max-width:1200px; margin:0 auto;
+    }
+    .video-card{
+      background:rgba(255,255,255,.9);
+      border-radius:12px; overflow:hidden;
+      box-shadow:0 8px 20px rgba(0,0,0,.3);
+      transition:transform .3s; color:#000;
+    }
+    .video-card:hover{ transform:translateY(-5px); }
+    .video-card iframe{ width:100%; height:200px; border:none; }
+    .video-info{ padding:15px; }
+    .video-info h3{ margin:0 0 10px; font-size:18px; color:#004080; }
+    .video-info a{
+      display:inline-block; margin-top:5px; padding:8px 15px;
+      background:#ff6600; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;
+      transition:background .3s;
+    }
+    .video-info a:hover{ background:#e65c00; }
+
+    /* -----------------------
+       FORMS
+    ----------------------- */
+
+
+    /* CONNECT: two-column layout with a left contact card */
+    .connect-layout{
+      display:grid;
+      grid-template-columns:minmax(240px,320px) 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .connect-layout{ grid-template-columns:1fr; }
+    }
+    
+    /* Contact card styling to match the glass look */
+    .contact-card{
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 16px;
+      padding: 16px;
+      color:#fff;
+    }
+    .contact-card h3{
+      margin:0 0 10px;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+    .contact-card .item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 0;
+      border-bottom:1px dashed rgba(255,255,255,0.25);
+    }
+    .contact-card .item:last-child{ border-bottom:none; }
+    .contact-card .label{ font-weight:700; margin-bottom:2px; }
+    
+    .contact-card a{
+      color:#fff;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+    
+    /* Social icon row */
+    .socials{
+      display:flex;
+      gap:10px;
+      margin-top:6px;
+    }
+    .socials a{
+      display:grid;
+      place-items:center;
+      width:36px; height:36px;
+      border-radius:10px;
+      background: rgba(255,255,255,0.18);
+      border:1px solid rgba(255,255,255,0.35);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .socials a:hover{
+      background: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.55);
+    }
+    
+    /* Tiny svg helper */
+    .icon{ width:20px; height:20px; flex:0 0 20px; }
+
+    .form {
+      max-width: 560px; margin: 0 auto; text-align: left;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 16px; padding: 18px;
+      color: #fff;
+    }
+    .form label { display:block; margin: 10px 0 6px; font-weight: 700; }
+    .form input, .form textarea {
+      width: 100%; padding: 10px 12px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.9); color:#111;
+    }
+    .form textarea { min-height: 110px; resize: vertical; }
+    .btn {
+      display:inline-block; padding: 10px 16px; border-radius: 10px;
+      border: 1px solid #fff; color:#111; background:#fff;
+      font-weight: 800; cursor:pointer; margin-top: 12px;
+    }
+    .btn.dark { background:#111; color:#fff; border-color:#111; }
+    .notice { margin-top: 10px; font-size: 14px; }
+
+    /* Tiny helper */
+    .muted { opacity:.85; font-size: 14px; }
+  </style>
+</head>
+
+<body class="no-scroll">
+  <!-- HAMBURGER -->
+  <button class="hamburger" id="hamburger"
+    aria-label="Open menu" aria-haspopup="true"
+    aria-controls="side-panel" aria-expanded="false">
+    <div class="lines"><span></span></div>
+  </button>
+
+  <!-- SCRIM + SIDE PANEL -->
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <aside class="side-panel" id="side-panel" aria-hidden="true" aria-labelledby="panel-title" role="dialog">
+    <div class="panel-header">
+      <div id="panel-title" class="panel-title">Menu</div>
+      <button class="panel-close" id="panel-close" aria-label="Close menu">✕</button>
+    </div>
+    <nav class="panel-links">
+      <a href="#home"   data-panel-nav>Home</a>
+      <a href="#course" data-panel-nav>Course content</a>
+      <a href="#connect"data-panel-nav>Connect with me</a>
+      <!-- <button type="button" class="disabled" aria-disabled="true">Repository (coming soon)</button> -->
+      <button type="button" class="disabled" aria-disabled="true">Repository (coming soon)</button>
+    </nav>
+  </aside>
+
+  <!-- HOME / HERO (non-scroll) -->
+  <header id="home" class="active">
+    <div class="home-wrap">
+      <h1 class="site-title">IELTS Classes by Somik</h1>
+      <p class="site-sub">Free learning hub for IELTS aspirants. These panels are placeholders you can edit later.</p>
+
+      <div class="home-grid">
+        <!-- LEFT: three rectangles -->
+        <div class="left-col">
+          <div class="glass card">
+            <h3>About the author</h3>
+            <p><strong>Somik Das</strong> — Placeholder bio text about the author. Replace with your story, teaching style, and mission.</p>
+          </div>
+          <div class="glass card">
+            <h3>About the website</h3>
+            <p>Placeholder copy describing what learners get here: videos, notes, practice sets, and tips for IELTS success.</p>
+          </div>
+          <div class="glass card">
+            <h3>Author credentials</h3>
+            <p>Placeholder credentials: years of coaching, student results, certifications, notable achievements, etc.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: circle + one rectangle -->
+        <div class="right-col">
+          <div class="portrait-wrap">
+            <div class="portrait">
+              <!-- Placeholder image; replace with your own -->
+              <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=600&q=80" alt="Author portrait placeholder">
+            </div>
+          </div>
+          <div class="glass pill">
+            <h3>From the author</h3>
+            <p>“Short one-liner or welcome note. Placeholder text—update with your message to students.”</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- COURSE (scrollable) -->
+  <section id="course">
+    <div class="inner">
+      <h2>Course Content</h2>
+      <p class="lead">So I dont know what to do with this page, I would need the wireframe honestly. Till then let me add a placeholder here. Start with Listening, then move to Reading, Writing, and Speaking. Each block includes videos and notes.</p>
+
+      <!-- LISTENING -->
+      <div style="margin-top:34px;">
+        <h3>Listening Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Listening Basics</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Advanced Listening</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Practice Test 1</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK3">Download Notes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- READING -->
+      <div style="margin-top:46px;">
+        <h3>Reading Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Skimming Techniques</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK4">Download Practice</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Scanning Strategies</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK5">Download Practice</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>True/False/Not Given</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK6">Download Practice</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WRITING -->
+      <div style="margin-top:46px;">
+        <h3>Writing Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Task 1 Overview</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK7">Sample Answers</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Task 2 Essays</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Common Mistakes</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK9">Sample Answers</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPEAKING -->
+      <div style="margin-top:46px;">
+        <h3>Speaking Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Part 1 Q&A</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK10">Cue Cards</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Part 2 Practice</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK11">Cue Cards</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Fluency Tips</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK12">Cue Cards</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONNECT WITH ME (non-scroll page; inner can scroll if needed) -->
+  <section id="connect">
+    <div class="inner">
+      <div class="connect-layout">
+        
+        <!-- LEFT: New contact card -->
+        <aside class="contact-card" aria-labelledby="contact-card-title">
+          <h3 id="contact-card-title">Direct contact</h3>
+  
+          <!-- Phone -->
+          <div class="item">
+            <!-- phone icon -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.03-.24c1.12.37 2.33.57 3.56.57a1 1 0 011 1v3.5a1 1 0 01-.9 1 19 19 0 01-8.1-2.3 18.85 18.85 0 01-6.56-6.56A19 19 0 013 5.9a1 1 0 011-0.9H7.5a1 1 0 011 1c0 1.23.2 2.44.57 3.56a1 1 0 01-.24 1.03l-2.2 2.2z"/>
+            </svg>
+            <div>
+              <div class="label">Phone</div>
+              <!-- TODO: replace with your real number -->
+              <a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a>
+            </div>
+          </div>
+  
+          <!-- Email -->
+          <div class="item">
+            <!-- email icon -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.236l-8 5.333L4 8.236V6l8 5.333L20 6v2.236z"/>
+            </svg>
+            <div>
+              <div class="label">Email</div>
+              <!-- Use your existing email -->
+              <a href="mailto:somikds3@gmail.com">somikds3@gmail.com</a>
+            </div>
+          </div>
+  
+          <!-- Social -->
+          <div class="item" style="flex-direction:column;">
+            <div class="label">Social</div>
+            <div class="socials" aria-label="Social profiles">
+              <!-- Instagram -->
+              <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7zM18 6.4a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/>
+                </svg>
+              </a>
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/YOUR_HANDLE" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 8.98h3.96V21H3V8.98zM9.5 8.98H13v1.63h.05a3.85 3.85 0 013.47-1.91c3.71 0 4.39 2.44 4.39 5.61V21h-3.95v-5.36c0-1.28-.03-2.92-1.78-2.92-1.78 0-2.05 1.39-2.05 2.83V21H9.5V8.98z"/>
+                </svg>
+              </a>
+              <!-- X (Twitter) -->
+              <a href="https://twitter.com/YOUR_HANDLE" target="_blank" rel="noopener" aria-label="X (formerly Twitter)">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M3 3h3.9l5.2 7 5.9-7H22l-7.7 9.1L22 21h-3.9l-5.6-7.6L6 21H2l8-9.5L3 3z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </aside>
+  
+        <!-- RIGHT: your original content (unchanged) -->
+        <div class="connect-main">
+          <h2>Connect with me</h2>
+          <p class="lead">Have questions or want repository access? Send me a message below.</p>
+  
+          <form class="form" id="contact-form" action="https://formspree.io/f/xovnqpnk" method="POST">
+            <label for="c-name">Your name</label>
+            <input id="c-name" name="name" required />
+  
+            <label for="c-phone">Phone number</label>
+            <input id="c-phone" name="phone" type="tel" required />
+  
+            <label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" required />
+  
+            <label for="c-msg">Your message (why you’re accessing the site)</label>
+            <textarea id="c-msg" name="message" required></textarea>
+  
+            <input type="hidden" name="_subject" value="New message from IELTS site" />
+  
+            <button class="btn dark" type="submit">Submit</button>
+            <div class="notice" id="contact-status" aria-live="polite"></div>
+            <p class="muted">This form emails <strong>somikds3@gmail.com</strong>.</p>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+
+  <!-- REPOSITORY (CODE-GATED, scrollable) -->
+  <section id="repo">
+
+  /*when repo is made ative delete from here*/
+  <!-- REPOSITORY (CODE-GATED, scrollable) -->
+  <section id="repo">
+    <div class="coming-soon" role="status" aria-live="polite">
+      <div class="box">Repository (coming soon, stay tuned)</div>
+    </div>
+  
+    <div class="inner">
+      <h2>Repository</h2>
+      <p class="lead">Enter the access code to unlock downloads.</p>
+  
+      <!-- Gate -->
+      <div id="repo-gate">
+        <form class="form" id="repo-code-form" autocomplete="off">
+          <label for="repo-code">Access code</label>
+          <input id="repo-code" name="code" required />
+          <button class="btn dark" type="submit">Unlock</button>
+          <div class="notice" id="repo-note"></div>
+        </form>
+      </div>
+  
+      <!-- Unlocked content -->
+      <div id="repo-content" style="display:none;">
+        <p class="lead">Access granted ✔ You can add your files/links here.</p>
+        <p><a class="btn" href="/files/notes1.pdf">Download Notes 1</a></p>
+  
+        <!-- Owner-only -->
+        <button id="lock-repo" class="btn" style="display:none;">Lock repository</button>
+        <p class="muted" id="owner-hint" style="display:none;">Owner mode is ON. Add <code>?owner=1</code> once to this URL to enable it on your device.</p>
+      </div>
+    </div>
+  </section>
+    /*delete till here*/
+
+    <div class="inner">
+      <h2>Repository</h2>
+      <p class="lead">Enter the access code to unlock downloads. Visit the 'Connect with me' section, to get your access code.</p>
+
+      <!-- Gate -->
+      <div id="repo-gate">
+        <form class="form" id="repo-code-form" autocomplete="off">
+          <label for="repo-code">Access code</label>
+          <input id="repo-code" name="code" required />
+          <button class="btn dark" type="submit">Unlock</button>
+          <div class="notice" id="repo-note"></div>
+        </form>
+      </div>
+
+      <!-- Unlocked content -->
+      <div id="repo-content" style="display:none;">
+        <p class="lead">Access granted ✔ You can add your files/links here.</p>
+        <p><a class="btn" href="/files/notes1.pdf">Download Notes 1</a></p>
+
+        <!-- Owner-only: appears only if ownerMode === true -->
+        <button id="lock-repo" class="btn" style="display:none;">Lock repository</button>
+        <p class="muted" id="owner-hint" style="display:none;">Owner mode is ON. Add <code>?owner=1</code> once to this URL to enable it on your device.</p>
+      </div>
+    </div>
+    <div class="coming-soon">
+      <div class="box">
+        Repository (coming soon, stay tuned)
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* =======================
+       OWNER MODE (Option A)
+       - Visit once with ?owner=1 to enable owner mode on your device.
+       - Persists via localStorage.
+    ======================= */
+    const ownerMode =
+      /[?&]owner=1\b/.test(location.search) ||
+      localStorage.getItem('ownerMode') === 'true';
+
+    if (ownerMode) localStorage.setItem('ownerMode', 'true');
+
+    /* =======================
+       REPO ACCESS CODE
+       - CHANGE THIS to your secret code.
+       - Comparison is case-sensitive by default.
+    ======================= */
+    const ACCESS_CODE = "IELTS-ACCESS-2025"; // <--- change me
+
+    /* =======================
+       SINGLE-VIEW ROUTER
+       - Home + Connect => non-scroll page
+       - Course + Repo  => scrollable page
+    ======================= */
+    const SECTION_IDS = ["home", "course", "connect", "repo"];
+    const bodyEl = document.body;
+
+    function showOnly(id){
+      SECTION_IDS.forEach(secId => {
+        const el = document.getElementById(secId);
+        if (!el) return;
+        el.classList.remove("active");
+      });
+      const target = document.getElementById(id);
+      if (target) target.classList.add("active");
+
+      // Lock page scroll for Home and Connect; unlock for Course and Repo
+      if (id === "home" || id === "connect") {
+        bodyEl.classList.add("no-scroll");
+      } else {
+        bodyEl.classList.remove("no-scroll");
+      }
+
+      history.replaceState(null, "", `#${id}`);
+
+      // If we navigated to repo, re-evaluate lock state (handles expiry)
+      if (id === "repo") renderRepoUI();
+    }
+
+    // Respect initial hash
+    window.addEventListener('load', ()=>{
+      const id = (location.hash || "#home").replace("#","");
+      showOnly(SECTION_IDS.includes(id) ? id : "home");
+    });
+
+    /* =======================
+       PANEL OPEN/CLOSE
+    ======================= */
+    const hamburger = document.getElementById('hamburger');
+    const panel     = document.getElementById('side-panel');
+    const scrim     = document.getElementById('scrim');
+    const panelClose= document.getElementById('panel-close');
+
+    function openPanel(){
+      panel.classList.add('open');
+      scrim.classList.add('show');
+      panel.setAttribute('aria-hidden','false');
+      scrim.setAttribute('aria-hidden','false');
+      hamburger.setAttribute('aria-expanded','true');
+    }
+    function closePanel(){
+      panel.classList.remove('open');
+      scrim.classList.remove('show');
+      panel.setAttribute('aria-hidden','true');
+      scrim.setAttribute('aria-hidden','true');
+      hamburger.setAttribute('aria-expanded','false');
+    }
+    hamburger.addEventListener('click', openPanel);
+    panelClose.addEventListener('click', closePanel);
+    scrim.addEventListener('click', closePanel);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closePanel(); });
+
+    /* =======================
+       REPOSITORY GATE
+       - Auto-lock on tab close (new session)
+       - Lock after 3 hours
+    ======================= */
+    const THREE_HOURS_MS = 3 * 60 * 60 * 1000;
+
+    const repoGate    = document.getElementById('repo-gate');
+    const repoForm    = document.getElementById('repo-code-form');
+    const repoNote    = document.getElementById('repo-note');
+    const repoContent = document.getElementById('repo-content');
+    const lockBtn     = document.getElementById('lock-repo');
+    const ownerHint   = document.getElementById('owner-hint');
+
+    function clearRepoUnlock(){
+      localStorage.removeItem('repoUnlocked');
+      localStorage.removeItem('repoUnlockedAt');
+    }
+
+    function isRepoUnlocked(){
+      const flag = localStorage.getItem('repoUnlocked') === '1';
+      const at   = parseInt(localStorage.getItem('repoUnlockedAt') || '0', 10);
+      if (!flag || !at) return false;
+
+      const age = Date.now() - at;
+      if (age > THREE_HOURS_MS){
+        clearRepoUnlock();
+        return false;
+      }
+      return true;
+    }
+
+    function renderRepoUI(){
+      const unlocked = isRepoUnlocked();
+      repoGate.style.display    = unlocked ? 'none' : '';
+      repoContent.style.display = unlocked ? '' : 'none';
+
+      // Owner-only lock button visibility
+      lockBtn.style.display   = (unlocked && ownerMode) ? '' : 'none';
+      ownerHint.style.display = ownerMode ? '' : 'none';
+    }
+
+    // New session = tab just opened => force lock
+    window.addEventListener('load', ()=>{
+      if (!sessionStorage.getItem('sessionActive')) {
+        clearRepoUnlock();                 // lock at the start of a new tab session
+        sessionStorage.setItem('sessionActive', '1');
+      }
+      renderRepoUI();
+    });
+
+    repoForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const code = (document.getElementById('repo-code').value || '').trim();
+      if (code === ACCESS_CODE){
+        localStorage.setItem('repoUnlocked', '1');
+        localStorage.setItem('repoUnlockedAt', String(Date.now()));
+        repoNote.textContent = 'Access granted ✔';
+        renderRepoUI();
+      } else {
+        repoNote.textContent = 'Incorrect code. Please try again.';
+      }
+    });
+
+    // Owner can re-lock anytime
+    lockBtn.addEventListener('click', ()=>{
+      clearRepoUnlock();
+      renderRepoUI();
+    });
+
+    /* =======================
+       SIDE-PANEL NAV (iOS fix)
+       Close panel first, then swap section on next frame.
+    ======================= */
+    document.querySelectorAll('[data-panel-nav]').forEach(link=>{
+      link.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = (link.getAttribute('href') || "").slice(1);
+        closePanel();
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=> showOnly(id)); });
+      });
+    });
+
+    // (Keep explicit repo click behavior consistent with the same fix)
+    document.querySelectorAll('a[href="#repo"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        closePanel();
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=> showOnly('repo')); });
+      });
+    });
+
+    /* =======================
+       CONTACT FORM (Formspree)
+       - Progressive enhancement: AJAX submit for inline feedback.
+    ======================= */
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-status');
+
+    contactForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      contactStatus.textContent = 'Sending…';
+
+      const formData = new FormData(contactForm);
+      try{
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        if (res.ok){
+          contactStatus.textContent = 'Thanks! Your message has been sent.';
+          contactForm.reset();
+        } else {
+          contactStatus.textContent = 'Hmm, something went wrong. Please try again.';
+        }
+      } catch(err){
+        contactStatus.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
