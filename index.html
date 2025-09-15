@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8" />
   <title>BandForge IELTS — Free IELTS Preparation Hub</title>
@@ -12,12 +11,7 @@
     /* -----------------------
        GLOBAL / SINGLE-VIEW
     ----------------------- */
-    /*
-       The default height of html/body was 100%, which prevented the page
-       from scrolling when content exceeded one viewport. Replace this with
-       a minimum height so the document can grow naturally.
-     */
-    html, body { min-height: 100%; height: auto; }
+    html, body { height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
                    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
@@ -44,14 +38,13 @@
        — fixed viewport with an internal scroller
     ----------------------- */
     header#home{
-      /* Let the home section grow naturally, ensuring full-page scroll */
-      height: auto;
+      height: 100vh;
       position: relative;
       padding: 0; /* we'll handle padding per block */
       color: #0b0c0f;
       background: #0b0c0f;      /* base for layered media */
       overflow-x: hidden;
-      overflow-y: visible;
+      overflow-y: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
       scroll-padding-top: 80px;
@@ -210,11 +203,19 @@
       height:42px; display:grid; place-items:center; color:#9cc2ff; font-weight:800; font-size:12px;
     }
 
-    /* testimonials / about placeholder */
+    /* testimonials */
     .testimonials{
       background:#fff; color:#111; padding: 24px 16px 40px; border-top:1px solid #eee;
     }
     .t-wrap{ max-width: 1160px; margin: 0 auto; }
+    .t-grid{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    }
+    @media (max-width: 920px){ .t-grid{ grid-template-columns: 1fr; } }
+    .t{
+      background:#f7f7fa; border:1px solid #e9e9ee; border-radius:14px; padding:14px;
+    }
+    .t strong{ display:block; margin-top:8px; font-size: 13px; color:#333; }
 
     /* Announcement Crawler (toggle by adding .show on .crawler) */
     .crawler{
@@ -281,24 +282,183 @@
       border-radius: 14px; padding: 14px 18px; color: #fff;
       font-weight: 800; letter-spacing: .2px;
     }
+
+    section h2{ font-size: 36px; margin: 0 0 14px; }
+    section p.lead { max-width: 900px; margin: 0 auto 22px; font-size: 18px; }
+
+    /* Connect section scroll handling when body locked */
+    body.no-scroll #connect .inner {
+      max-height: calc(100vh - 120px);
+      overflow: auto; -webkit-overflow-scrolling: touch;
+    }
+
+    /* -----------------------
+       HAMBURGER + SIDE PANEL (unchanged)
+    ----------------------- */
+    .hamburger {
+      position: fixed; top: 14px; right: 14px;
+      width: 44px; height: 44px; display: grid; place-items: center;
+      background: rgba(0,0,0,0.55); color:#fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px; z-index: 1100; cursor: pointer;
+      transition: transform .2s ease; backdrop-filter: blur(6px);
+    }
+    .hamburger:hover { transform: translateY(-1px); }
+    .hamburger .lines{ width: 22px; height: 16px; position: relative; }
+    .hamburger .lines::before,
+    .hamburger .lines::after,
+    .hamburger .lines span{
+      content:""; position:absolute; left:0; right:0; height:2px; background:#fff; border-radius: 2px;
+    }
+    .hamburger .lines::before{ top:0; }
+    .hamburger .lines::after{ bottom:0; }
+    .hamburger .lines span{ top: calc(50% - 1px); }
+
+    .scrim {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+      opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 1000;
+    }
+    .scrim.show { opacity: 1; pointer-events: auto; }
+
+    .side-panel {
+      position: fixed; top:0; right:0; height: 100%; width: 320px; max-width: 85vw;
+      background: rgba(0,0,0,0.60);
+      border-left: 1px solid rgba(255,255,255,0.25);
+      color: #fff; backdrop-filter: blur(12px) saturate(120%);
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      z-index: 1101; display: flex; flex-direction: column; padding: 16px;
+    }
+    .side-panel.open { transform: translateX(0); }
+
+    .panel-header{ display:flex; align-items:center; justify-content:space-between; }
+    .panel-title{ font-weight: 800; letter-spacing: .2px; }
+    .panel-close{
+      background: transparent; color:#fff;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 10px; padding: 6px 10px; cursor: pointer;
+    }
+    .panel-links{ display: grid; gap: 10px; margin-top: 12px; }
+    .panel-links a, .panel-links button{
+      display: block; text-align: left; padding: 12px 14px;
+      background: rgba(255,255,255,0.18); color: #fff;
+      border: 1px solid rgba(255,255,255,0.35); border-radius: 12px; font-weight: 700;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer;
+    }
+    .panel-links a:hover, .panel-links button:hover{
+      background: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.55);
+    }
+    .panel-links .disabled{
+      opacity: .45; filter: grayscale(.3); cursor: not-allowed; pointer-events: none;
+    }
+
+    /* -----------------------
+       VIDEO GRID & CARDS (unchanged)
+    ----------------------- */
+    .video-grid{
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:30px; max-width:1200px; margin:0 auto;
+    }
+    .video-card{
+      background:rgba(255,255,255,.9); border-radius:12px; overflow:hidden;
+      box-shadow:0 8px 20px rgba(0,0,0,.3);
+      transition:transform .3s; color:#000;
+    }
+    .video-card:hover{ transform:translateY(-5px); }
+    .video-card iframe{ width:100%; height:200px; border:none; }
+    .video-info{ padding:15px; }
+    .video-info h3{ margin:0 0 10px; font-size:18px; color:#004080; }
+    .video-info a{
+      display:inline-block; margin-top:5px; padding:8px 15px;
+      background:#ff6600; color:#fff; border-radius:6px; text-decoration:none; font-size:14px;
+      transition:background .3s;
+    }
+    .video-info a:hover{ background:#e65c00; }
+
+    /* -----------------------
+       FORMS (unchanged)
+    ----------------------- */
+    .connect-layout{
+      display:grid; grid-template-columns:minmax(240px,320px) 1fr; gap:24px; align-items:start;
+    }
+    @media (max-width: 900px){ .connect-layout{ grid-template-columns:1fr; } }
+
+    .contact-card{
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 16px; padding: 16px; color:#fff;
+    }
+    .contact-card h3{ margin:0 0 10px; font-size: 20px; letter-spacing:.2px; }
+    .contact-card .item{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 0; border-bottom:1px dashed rgba(255,255,255,0.25);
+    }
+    .contact-card .item:last-child{ border-bottom:none; }
+    .contact-card .label{ font-weight:700; margin-bottom:2px; }
+    .contact-card a{
+      color:#fff; text-decoration:underline; text-underline-offset:2px;
+    }
+
+    .socials{ display:flex; gap:10px; margin-top:6px; }
+    .socials a{
+      display:grid; place-items:center; width:36px; height:36px; border-radius:10px;
+      background: rgba(255,255,255,0.18);
+      border:1px solid rgba(255,255,255,0.35);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .socials a:hover{ background: rgba(255,255,255,0.26); transform: translateY(-1px); border-color: rgba(255,255,255,0.55); }
+    .icon{ width:20px; height:20px; flex:0 0 20px; }
+
+    .form {
+      max-width: 560px; margin: 0 auto; text-align: left;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 16px; padding: 18px; color: #fff;
+    }
+    .form label { display:block; margin: 10px 0 6px; font-weight: 700; }
+    .form input, .form textarea {
+      width: 100%; padding: 10px 12px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.9); color:#111;
+    }
+    .form textarea { min-height: 110px; resize: vertical; }
+    .btn.dark { background:#111; color:#fff; border-color:#111; }
+    .notice { margin-top: 10px; font-size: 14px; }
+    .muted { opacity:.85; font-size: 14px; }
   </style>
 </head>
-<body>
-  <!-- Side panel -->
-  <div id="side-panel" aria-hidden="true">
-    <button class="panel-close" id="panel-close" aria-label="Close menu">✕</button>
+
+<body class="no-scroll">
+  <!-- HAMBURGER -->
+  <button class="hamburger" id="hamburger"
+    aria-label="Open menu" aria-haspopup="true"
+    aria-controls="side-panel" aria-expanded="false">
+    <div class="lines"><span></span></div>
+  </button>
+
+  <!-- SCRIM + SIDE PANEL -->
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <aside class="side-panel" id="side-panel" aria-hidden="true" aria-labelledby="panel-title" role="dialog">
+    <div class="panel-header">
+      <div id="panel-title" class="panel-title">Menu</div>
+      <button class="panel-close" id="panel-close" aria-label="Close menu">✕</button>
+    </div>
     <nav class="panel-links">
       <a href="#home"   data-panel-nav>Home</a>
-      <a href="#course" data-panel-nav>Blogs</a>
+      <a href="#course" data-panel-nav>Course content</a>
       <a href="#connect"data-panel-nav>Connect with me</a>
       <button type="button" class="disabled" aria-disabled="true">Repository (coming soon)</button>
     </nav>
-  </div>
-  <div id="scrim" aria-hidden="true"></div>
+  </aside>
 
-  <!-- Header / Hero -->
+  <!-- ======================
+       HOME / HERO (NEW)
+       ====================== -->
   <header id="home" class="active">
-    <!-- announcement bar (hidden by default) -->
+    <!-- Toggle crawler by adding class 'show' to .crawler -->
     <div class="crawler" id="home-crawler">
       <div class="home-wrap">
         <div class="crawl-track" aria-live="polite">
@@ -316,8 +476,8 @@
         <div class="brandbar" aria-label="Brand">
           <div class="brand">BandForge IELTS <small>Free learning hub for IELTS aspirants</small></div>
           <div class="cta-row" role="group" aria-label="Quick actions">
-            <a class="btn ghost" href="#course" data-panel-nav>Browse Lessons</a>
-            <a class="btn ghost" href="#connect" data-panel-nav>Get Access Code</a>
+            <a class="btn ghost" href="#course">Browse Lessons</a>
+            <a class="btn ghost" href="#connect">Get Access Code</a>
           </div>
         </div>
 
@@ -326,8 +486,8 @@
             <h1>Ace your IELTS with structured lessons, mock tests, and expert tips.</h1>
             <p class="lead">Your all-in-one prep: Listening, Reading, Writing, and Speaking — organised like the big providers, but free.</p>
             <div class="cta-row">
-              <a class="btn primary" href="#course" data-panel-nav>Start learning</a>
-              <a class="btn ghost" href="#course" data-panel-nav>Take a practice test</a>
+              <a class="btn primary" href="#course">Start learning</a>
+              <a class="btn ghost" href="#course">Take a practice test</a>
             </div>
 
             <div class="benefits" aria-label="Key benefits">
@@ -361,7 +521,7 @@
               <h2>Preparation Hub</h2>
               <p class="prep-sub">Jump straight to the skill you want to improve. Each area includes short videos, downloadable notes and practice.</p>
               <div class="prep-grid" role="list">
-                <a class="tile" role="listitem" href="#course" aria-label="Listening" data-panel-nav>
+                <a class="tile" role="listitem" href="#course" aria-label="Listening">
                   <div class="tile-media" style="background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1200&q=80');"></div>
                   <div class="tile-body">
                     <h3>Listening</h3>
@@ -369,7 +529,7 @@
                     <span class="tile-cta">Explore Listening →</span>
                   </div>
                 </a>
-                <a class="tile" role="listitem" href="#course" aria-label="Reading" data-panel-nav>
+                <a class="tile" role="listitem" href="#course" aria-label="Reading">
                   <div class="tile-media" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80');"></div>
                   <div class="tile-body">
                     <h3>Reading</h3>
@@ -377,7 +537,7 @@
                     <span class="tile-cta">Explore Reading →</span>
                   </div>
                 </a>
-                <a class="tile" role="listitem" href="#course" aria-label="Writing" data-panel-nav>
+                <a class="tile" role="listitem" href="#course" aria-label="Writing">
                   <div class="tile-media" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80');"></div>
                   <div class="tile-body">
                     <h3>Writing</h3>
@@ -385,7 +545,7 @@
                     <span class="tile-cta">Explore Writing →</span>
                   </div>
                 </a>
-                <a class="tile" role="listitem" href="#course" aria-label="Speaking" data-panel-nav>
+                <a class="tile" role="listitem" href="#course" aria-label="Speaking">
                   <div class="tile-media" style="background-image:url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=1200&q=80');"></div>
                   <div class="tile-body">
                     <h3>Speaking</h3>
@@ -415,26 +575,147 @@
       </div>
     </div>
 
-    <!-- about section placeholder -->
+    <!-- testimonials -->
     <div class="testimonials">
       <div class="t-wrap">
-        <h2>About BandForge IELTS</h2>
-        <p class="prep-sub">We're just getting started! Check back soon for learner success stories and updates.</p>
+        <h2>What learners say</h2>
+        <p class="prep-sub">Quick wins, clearer strategies, higher confidence.</p>
+        <div class="t-grid" role="list">
+          <div class="t" role="listitem">
+            “Clear, no-fluff notes. The Listening map questions finally clicked.”
+            <strong>— Riya, Band 7.5</strong>
+          </div>
+          <div class="t" role="listitem">
+            “Loved the Writing Task 2 samples. I stopped over-complicating my structure.”
+            <strong>— Arjun, Band 7</strong>
+          </div>
+          <div class="t" role="listitem">
+            “Reading timing drills were a game changer. The hub keeps me on track.”
+            <strong>— Farah, Band 7.5</strong>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- ======================
-       COURSE (blogs)
+       COURSE (UNCHANGED)
        ====================== -->
   <section id="course">
     <div class="inner">
-      <h2>Blogs</h2>
-      <p class="lead">Explore our latest blogs for tips, strategies, and insights on IELTS preparation.</p>
+      <h2>Course Content</h2>
+      <p class="lead">So I dont know what to do with this page, I would need the wireframe honestly. Till then let me add a placeholder here. Start with Listening, then move to Reading, Writing, and Speaking. Each block includes videos and notes.</p>
 
-      <!-- Blog placeholder -->
+      <!-- LISTENING -->
       <div style="margin-top:34px;">
-        <p>Blog posts will be added here soon. Stay tuned!</p>
+        <h3>Listening Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Listening Basics</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK1">Download Notes</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Advanced Listening</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK2">Download Notes</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Practice Test 1</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK3">Download Notes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- READING -->
+      <div style="margin-top:46px;">
+        <h3>Reading Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Skimming Techniques</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK4">Download Practice</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Scanning Strategies</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK5">Download Practice</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>True/False/Not Given</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK6">Download Practice</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WRITING -->
+      <div style="margin-top:46px;">
+        <h3>Writing Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Task 1 Overview</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK7">Sample Answers</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID8" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Task 2 Essays</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK8">Sample Answers</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID9" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Common Mistakes</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK9">Sample Answers</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPEAKING -->
+      <div style="margin-top:46px;">
+        <h3>Speaking Lessons</h3>
+        <div class="video-grid">
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID10" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Part 1 Q&A</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK10">Cue Cards</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID11" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Part 2 Practice</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK11">Cue Cards</a>
+            </div>
+          </div>
+          <div class="video-card">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID12" allowfullscreen></iframe>
+            <div class="video-info">
+              <h3>Fluency Tips</h3>
+              <a href="https://drive.google.com/YOUR_PDF_LINK12">Cue Cards</a>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -450,7 +731,7 @@
         <!-- LEFT: New contact card -->
         <aside class="contact-card" aria-labelledby="contact-card-title">
           <h3 id="contact-card-title">Direct contact</h3>
-
+  
           <!-- Phone -->
           <div class="item">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -461,7 +742,7 @@
               <a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a>
             </div>
           </div>
-
+  
           <!-- Email -->
           <div class="item">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -472,7 +753,7 @@
               <a href="mailto:somikds3@gmail.com">somikds3@gmail.com</a>
             </div>
           </div>
-
+  
           <!-- Social -->
           <div class="item" style="flex-direction:column;">
             <div class="label">Social</div>
@@ -495,46 +776,75 @@
             </div>
           </div>
         </aside>
-
+  
         <!-- RIGHT -->
         <div class="connect-main">
           <h2>Connect with me</h2>
           <p class="lead">Have questions or want repository access? Send me a message below.</p>
-
+  
           <form class="form" id="contact-form" action="https://formspree.io/f/xovnqpnk" method="POST">
             <label for="c-name">Your name</label>
             <input id="c-name" name="name" required />
-
+  
             <label for="c-phone">Phone number</label>
             <input id="c-phone" name="phone" type="tel" required />
-
-            <label for "c-email">Email</label>
+  
+            <label for="c-email">Email</label>
             <input id="c-email" name="email" type="email" required />
-
-            <label for "c-msg">Your message (why you’re accessing the site)</label>
+  
+            <label for="c-msg">Your message (why you’re accessing the site)</label>
             <textarea id="c-msg" name="message" required></textarea>
-
+  
             <input type="hidden" name="_subject" value="New message from IELTS site" />
-
+  
             <button class="btn dark" type="submit">Submit</button>
             <div class="notice" id="contact-status" aria-live="polite"></div>
             <p class="muted">This form emails <strong>somikds3@gmail.com</strong>.</p>
           </form>
         </div>
-
+  
       </div>
     </div>
   </section>
 
   <!-- ======================
-       REPOSITORY (CODE-GATED, scrollable)
+       REPOSITORY (UNCHANGED)
        ====================== -->
   <section id="repo">
-    <div class="coming-soon">
-      <div class="box">
-        Repository (coming soon, stay tuned)
+
+  /*when repo is made ative delete from here*/
+  <!-- REPOSITORY (CODE-GATED, scrollable) -->
+  <section id="repo">
+    <div class="coming-soon" role="status" aria-live="polite">
+      <div class="box">Repository (coming soon, stay tuned)</div>
+    </div>
+  
+    <div class="inner">
+      <h2>Repository</h2>
+      <p class="lead">Enter the access code to unlock downloads.</p>
+  
+      <!-- Gate -->
+      <div id="repo-gate">
+        <form class="form" id="repo-code-form" autocomplete="off">
+          <label for="repo-code">Access code</label>
+          <input id="repo-code" name="code" required />
+          <button class="btn dark" type="submit">Unlock</button>
+          <div class="notice" id="repo-note"></div>
+        </form>
+      </div>
+  
+      <!-- Unlocked content -->
+      <div id="repo-content" style="display:none;">
+        <p class="lead">Access granted ✔ You can add your files/links here.</p>
+        <p><a class="btn" href="/files/notes1.pdf">Download Notes 1</a></p>
+  
+        <!-- Owner-only -->
+        <button id="lock-repo" class="btn" style="display:none;">Lock repository</button>
+        <p class="muted" id="owner-hint" style="display:none;">Owner mode is ON. Add <code>?owner=1</code> once to this URL to enable it on your device.</p>
       </div>
     </div>
+  </section>
+    /*delete till here*/
 
     <div class="inner">
       <h2>Repository</h2>
@@ -558,6 +868,11 @@
         <!-- Owner-only: appears only if ownerMode === true -->
         <button id="lock-repo" class="btn" style="display:none;">Lock repository</button>
         <p class="muted" id="owner-hint" style="display:none;">Owner mode is ON. Add <code>?owner=1</code> once to this URL to enable it on your device.</p>
+      </div>
+    </div>
+    <div class="coming-soon">
+      <div class="box">
+        Repository (coming soon, stay tuned)
       </div>
     </div>
   </section>
@@ -598,8 +913,12 @@
       const target = document.getElementById(id);
       if (target) target.classList.add("active");
 
-      // Always allow page scrolling
-      bodyEl.classList.remove("no-scroll");
+      // Lock page scroll for Home and Connect; unlock for Course and Repo
+      if (id === "home" || id === "connect") {
+        bodyEl.classList.add("no-scroll");
+      } else {
+        bodyEl.classList.remove("no-scroll");
+      }
 
       history.replaceState(null, "", `#${id}`);
 
@@ -689,6 +1008,9 @@
         sessionStorage.setItem('sessionActive', '1');
       }
       renderRepoUI();
+
+      // OPTIONAL: turn on home announcement crawler
+      // document.getElementById('home-crawler').classList.add('show');
     });
 
     repoForm.addEventListener('submit', (e)=>{
