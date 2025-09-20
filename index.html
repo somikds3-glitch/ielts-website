@@ -75,12 +75,13 @@
     @media (max-width: 920px){ .logos{ grid-template-columns: repeat(3, 1fr); } }
     .logo{ background:#12141c; border:1px solid rgba(255,255,255,.12); border-radius:10px; height:42px; display:grid; place-items:center; color:#9cc2ff; font-weight:800; font-size:12px; }
 
-    .testimonials{ background:#fff; color:#111; padding:24px 16px 40px; border-top:1px solid #eee; }
-    .t-wrap{ max-width:1160px; margin:0 auto; }
-    .t-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
-    @media (max-width:920px){ .t-grid{ grid-template-columns:1fr; } }
-    .t{ background:#f7f7fa; border:1px solid #e9e9ee; border-radius:14px; padding:14px; }
-    .t strong{ display:block; margin-top:8px; font-size:13px; color:#333; }
+    /* Tips section (formerly testimonials) */
+    .tips{ background:#fff; color:#111; padding:24px 16px 40px; border-top:1px solid #eee; }
+    .tips-wrap{ max-width:1160px; margin:0 auto; }
+    .tips-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+    @media (max-width: 920px){ .tips-grid{ grid-template-columns:1fr; } }
+    .tip{ background:#f7f7fa; border:1px solid #e9e9ee; border-radius:14px; padding:14px; }
+    .tip strong{ display:block; margin-bottom:6px; color:#333; font-size:14px; }
 
     .crawler{ display:none; position: sticky; top:0; z-index:3; background:#111827; color:#fff; border-bottom:1px solid rgba(255,255,255,.1); padding:8px 0; }
     .crawler.show{ display:block; }
@@ -89,18 +90,24 @@
     .crawl-inner span{ margin-right:24px; opacity:.95; }
     @keyframes crawl{ 0%{ transform:translateX(0);} 100%{ transform:translateX(-100%);} }
 
-    /* BLOG */
-    #blog{ min-height:100vh; padding:60px 24px 80px; text-align:center; color:#111; background:#fff; position:relative; }
+    /* BLOG (now with background image mama.jpeg) */
+    #blog{
+      min-height:100vh; padding:60px 24px 80px; text-align:center; color:#fff; position:relative;
+      background: url('mama.jpeg') center/cover no-repeat fixed;
+    }
+    #blog::before{
+      content:""; position:absolute; inset:0; background: rgba(0,0,0,.45); z-index:0;
+    }
     #blog .inner{ max-width:1100px; margin:0 auto; position:relative; z-index:1; }
     #blog h2{ font-size:36px; margin:0 0 14px; }
     #blog p.lead{ max-width:900px; margin:0 auto 22px; font-size:18px; opacity:.95; }
     .blog-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px; margin-top:10px; }
-    .blog-card{ background:#fafafa; border:1px solid #e6e6ea; border-radius:12px; overflow:hidden; text-align:left; display:grid; align-content:start; }
+    .blog-card{ background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.35); border-radius:12px; overflow:hidden; text-align:left; display:grid; align-content:start; backdrop-filter: blur(6px); }
     .blog-card img{ width:100%; height:160px; object-fit:cover; }
-    .blog-card .body{ padding:14px; }
+    .blog-card .body{ padding:14px; color:#fff; }
     .blog-card h3{ margin:0 0 8px; font-size:18px; }
-    .blog-card p{ margin:0 0 12px; font-size:14px; opacity:.92; }
-    .blog-card a{ font-weight:700; font-size:14px; color:#004080; text-decoration:underline; text-underline-offset:3px; }
+    .blog-card p{ margin:0 0 12px; font-size:14px; opacity:.95; }
+    .blog-card a{ font-weight:700; font-size:14px; color:#ffb86b; text-decoration:underline; text-underline-offset:3px; }
 
     /* CONNECT */
     #connect{
@@ -208,7 +215,6 @@
       <div class="home-wrap">
         <div class="brandbar" aria-label="Brand">
           <div class="brand">Ivy Academy <small>Premier English & IELTS Training</small></div>
-          <!-- Removed duplicate brandbar buttons -->
         </div>
 
         <div class="hero-grid">
@@ -248,25 +254,36 @@
       </div>
     </div>
 
-    <div class="proof" aria-label="Trusted resources">
-      <div class="proof-inner">
-        <h4>Resources that students value</h4>
-        <div class="logos" role="list">
-          <div class="logo" role="listitem">Practice</div><div class="logo" role="listitem">Tips</div>
-          <div class="logo" role="listitem">Notes</div><div class="logo" role="listitem">Checklists</div>
-          <div class="logo" role="listitem">Samples</div><div class="logo" role="listitem">Mocks</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="testimonials">
-      <div class="t-wrap">
-        <h2>What learners say</h2>
-        <p class="prep-sub">Quick wins, clearer strategies, higher confidence.</p>
-        <div class="t-grid" role="list">
-          <div class="t" role="listitem">“Clear, no-fluff notes. The Listening map questions finally clicked.” <strong>— Riya, Band 7.5</strong></div>
-          <div class="t" role="listitem">“Loved the Writing Task 2 samples. I stopped over-complicating my structure.” <strong>— Arjun, Band 7</strong></div>
-          <div class="t" role="listitem">“Reading timing drills were a game changer. The hub keeps me on track.” <strong>— Farah, Band 7.5</strong></div>
+    <!-- Tips & Tricks (replaces testimonials) -->
+    <div class="tips">
+      <div class="tips-wrap">
+        <h2>IELTS Tips & Tricks</h2>
+        <p class="prep-sub">Quick, proven moves you can put to work today.</p>
+        <div class="tips-grid" role="list">
+          <div class="tip" role="listitem">
+            <strong>Listening: map Qs</strong>
+            Use compass words (north/south/east/west) and landmarks; track the speaker’s direction with your finger.
+          </div>
+          <div class="tip" role="listitem">
+            <strong>Reading: T/F/NG</strong>
+            “Not Given” = missing info. Don’t infer. If a detail isn’t explicitly supported, it’s NG—not false.
+          </div>
+          <div class="tip" role="listitem">
+            <strong>Reading: timing</strong>
+            18–20 mins per passage. Skim titles, topic sentences, and last lines before questions.
+          </div>
+          <div class="tip" role="listitem">
+            <strong>Writing Task 2</strong>
+            Plan 4–5 minutes. Thesis with stance + 2 clear body points; each paragraph = one idea.
+          </div>
+          <div class="tip" role="listitem">
+            <strong>Writing Task 1 (Acad.)</strong>
+            Overview first: major trends/highs/lows. Group data; avoid listing every micro-change.
+          </div>
+          <div class="tip" role="listitem">
+            <strong>Speaking Part 2</strong>
+            Structure: intro line → 2–3 subpoints → mini wrap. Use signposts: “Firstly… Next… Finally…”.
+          </div>
         </div>
       </div>
     </div>
@@ -357,8 +374,7 @@
     window.addEventListener('load', ()=>{
       const id = (location.hash || "#home").slice(1);
       showOnly(SECTION_IDS.includes(id) ? id : "home");
-      // document.getElementById('home-crawler').classList.add('show'); // optional
-      loadBloggerFeed(); // kick off blogs fetch
+      loadBloggerFeed(); // blogs fetch
     });
 
     window.addEventListener('hashchange', () => {
@@ -393,14 +409,10 @@
       });
     });
 
-    /* -------- Blogger feed (english-rhythm.blogspot.com) --------
-       Uses JSONP: ?alt=json-in-script&callback=renderBloggerPosts
-       Docs: https://blogname.blogspot.com/feeds/posts/default?alt=json-in-script&callback=cb
-    */
+    /* Blogger feed (english-rhythm.blogspot.com) via JSONP */
     function loadBloggerFeed(max=9){
       const statusEl = document.getElementById('blog-status');
       statusEl.textContent = 'Loading posts...';
-      // Create a unique callback name to avoid collisions
       const cbName = 'renderBloggerPosts_' + Math.random().toString(36).slice(2);
       window[cbName] = function(json){
         try{
@@ -409,7 +421,6 @@
         }catch(err){
           statusEl.textContent = 'Could not render posts.';
         }finally{
-          // cleanup global
           delete window[cbName];
           script.remove();
         }
@@ -447,7 +458,7 @@
         const href = linkObj ? linkObj.href : '#';
         const content = entry.content?.$t || entry.summary?.$t || '';
         const img = firstImageSrc(content);
-        const text = stripHTML(content).trim().slice(0, 160) + (content.length > 160 ? '…' : '');
+        const text = stripHTML(content).trim().slice(0, 160) + (stripHTML(content).length > 160 ? '…' : '');
 
         const card = document.createElement('article');
         card.className = 'blog-card';
