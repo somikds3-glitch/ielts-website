@@ -75,13 +75,32 @@
     @media (max-width: 920px){ .logos{ grid-template-columns: repeat(3, 1fr); } }
     .logo{ background:#12141c; border:1px solid rgba(255,255,255,.12); border-radius:10px; height:42px; display:grid; place-items:center; color:#9cc2ff; font-weight:800; font-size:12px; }
 
-    /* Tips section (formerly testimonials) */
+    /* Tips section */
     .tips{ background:#fff; color:#111; padding:24px 16px 40px; border-top:1px solid #eee; }
     .tips-wrap{ max-width:1160px; margin:0 auto; }
     .tips-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
     @media (max-width: 920px){ .tips-grid{ grid-template-columns:1fr; } }
     .tip{ background:#f7f7fa; border:1px solid #e9e9ee; border-radius:14px; padding:14px; }
     .tip strong{ display:block; margin-bottom:6px; color:#333; font-size:14px; }
+
+    /* Programs (new, tightly aligned with hero promise) */
+    .programs{ background:#fff; color:#111; padding: 0 16px 46px; }
+    .programs-inner{ max-width:1160px; margin:0 auto; }
+    .p-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+    @media (max-width: 920px){ .p-grid{ grid-template-columns:1fr; } }
+    .pg{ border:1px solid #eee; border-radius:14px; padding:16px; background:#fafafa; }
+    .pg h3{ margin:0 0 6px; font-size:18px; }
+    .pg ul{ margin:8px 0 0 18px; padding:0; }
+    .pg li{ margin:6px 0; font-size:14px; }
+
+    /* Outcome stats (infographic-style cards) */
+    .outcomes{ background:#0b0c0f; color:#fff; padding: 26px 16px 34px; border-top:1px solid rgba(255,255,255,.08); }
+    .out-inner{ max-width:1160px; margin:0 auto; text-align:center; }
+    .out-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:10px; }
+    @media (max-width: 920px){ .out-grid{ grid-template-columns: repeat(2, 1fr); } }
+    .out{ background:#12141c; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:16px; }
+    .out .big{ font-size:28px; font-weight:900; letter-spacing:-.02em; }
+    .out .small{ font-size:12px; opacity:.9; margin-top:4px; }
 
     .crawler{ display:none; position: sticky; top:0; z-index:3; background:#111827; color:#fff; border-bottom:1px solid rgba(255,255,255,.1); padding:8px 0; }
     .crawler.show{ display:block; }
@@ -90,14 +109,12 @@
     .crawl-inner span{ margin-right:24px; opacity:.95; }
     @keyframes crawl{ 0%{ transform:translateX(0);} 100%{ transform:translateX(-100%);} }
 
-    /* BLOG (now with background image mama.jpeg) */
+    /* BLOG (background mama.jpeg) */
     #blog{
       min-height:100vh; padding:60px 24px 80px; text-align:center; color:#fff; position:relative;
       background: url('mama.jpeg') center/cover no-repeat fixed;
     }
-    #blog::before{
-      content:""; position:absolute; inset:0; background: rgba(0,0,0,.45); z-index:0;
-    }
+    #blog::before{ content:""; position:absolute; inset:0; background: rgba(0,0,0,.45); z-index:0; }
     #blog .inner{ max-width:1100px; margin:0 auto; position:relative; z-index:1; }
     #blog h2{ font-size:36px; margin:0 0 14px; }
     #blog p.lead{ max-width:900px; margin:0 auto 22px; font-size:18px; opacity:.95; }
@@ -108,6 +125,14 @@
     .blog-card h3{ margin:0 0 8px; font-size:18px; }
     .blog-card p{ margin:0 0 12px; font-size:14px; opacity:.95; }
     .blog-card a{ font-weight:700; font-size:14px; color:#ffb86b; text-decoration:underline; text-underline-offset:3px; }
+
+    /* Blog featured rows */
+    .featured{ margin-top:26px; text-align:left; }
+    .featured h3{ margin:0 0 10px; }
+    .feat-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+    @media (max-width: 920px){ .feat-grid{ grid-template-columns:1fr; } }
+    .feat{ background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.35); border-radius:12px; padding:14px; }
+    .feat a{ color:#ffb86b; text-decoration:underline; text-underline-offset:3px; }
 
     /* CONNECT */
     #connect{
@@ -221,8 +246,8 @@
           <div class="hero-copy">
             <h1>Ivy Academy</h1>
             <p class="lead">Where English opens doors to the world. As a premier centre for ELT and IELTS preparation, we help you speak with confidence, write with clarity, and achieve the band scores that unlock study, work, and life abroad.</p>
-            <p class="lead">With an expert trainer, proven strategies, and a results-driven approach, we’re the trusted choice for ambitious learners.</p>
-            <p class="lead"><strong>Fluency. Confidence. Success. That’s the Ivy promise.</strong></p>
+            <p class="lead">With an expert trainer, proven strategies, and a results-driven approach, we are the trusted choice for ambitious learners.</p>
+            <p class="lead"><strong>Fluency. Confidence. Success. That is the Ivy promise.</strong></p>
             <div class="cta-row">
               <a class="btn primary" href="#blog" data-panel-nav>Read Blogs</a>
               <a class="btn ghost" href="#connect" data-panel-nav>Connect with us</a>
@@ -247,55 +272,131 @@
           <div class="hero-cards">
             <div class="prep">
               <h2>About Ivy Academy</h2>
-              <p class="prep-sub">English is more than a subject—it’s a passport to global opportunities. Ivy Academy guides learners with structured methods, deliberate practice, and the right mindset to succeed abroad.</p>
+              <p class="prep-sub">English is more than a subject—it is a passport to global opportunities. Ivy Academy guides learners with structured methods, deliberate practice, and the right mindset to succeed abroad.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Tips & Tricks (replaces testimonials) -->
+    <!-- Tips & Tricks -->
     <div class="tips">
       <div class="tips-wrap">
         <h2>IELTS Tips & Tricks</h2>
         <p class="prep-sub">Quick, proven moves you can put to work today.</p>
         <div class="tips-grid" role="list">
           <div class="tip" role="listitem">
-            <strong>Listening: map Qs</strong>
+            <strong>Listening: map questions</strong>
             Use compass words (north/south/east/west) and landmarks; track the speaker’s direction with your finger.
           </div>
           <div class="tip" role="listitem">
-            <strong>Reading: T/F/NG</strong>
-            “Not Given” = missing info. Don’t infer. If a detail isn’t explicitly supported, it’s NG—not false.
+            <strong>Reading: True/False/Not Given</strong>
+            Not Given means missing info. Do not infer. If a detail is not explicitly supported, it is NG.
           </div>
           <div class="tip" role="listitem">
             <strong>Reading: timing</strong>
-            18–20 mins per passage. Skim titles, topic sentences, and last lines before questions.
+            Around 18–20 minutes per passage. Skim titles and topic sentences before diving into questions.
           </div>
           <div class="tip" role="listitem">
             <strong>Writing Task 2</strong>
-            Plan 4–5 minutes. Thesis with stance + 2 clear body points; each paragraph = one idea.
+            Plan for 4–5 minutes. Clear stance in the thesis + two focused body paragraphs.
           </div>
           <div class="tip" role="listitem">
-            <strong>Writing Task 1 (Acad.)</strong>
-            Overview first: major trends/highs/lows. Group data; avoid listing every micro-change.
+            <strong>Writing Task 1 (Academic)</strong>
+            Overview first: major trends and extremes. Group data rather than listing every tiny change.
           </div>
           <div class="tip" role="listitem">
             <strong>Speaking Part 2</strong>
-            Structure: intro line → 2–3 subpoints → mini wrap. Use signposts: “Firstly… Next… Finally…”.
+            Template: opening line → 2–3 subpoints → short wrap. Use signposts like “Firstly, Next, Finally”.
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Programs (aligned with the landing promise) -->
+    <section class="programs" aria-label="Programs">
+      <div class="programs-inner">
+        <h2>Structured Programs</h2>
+        <div class="p-grid">
+          <div class="pg">
+            <h3>IELTS Foundation</h3>
+            <p>Build core skills for learners starting out.</p>
+            <ul>
+              <li>Grammar and vocabulary for clarity</li>
+              <li>Listening micro-drills</li>
+              <li>Reading scan/skim routines</li>
+              <li>Speaking confidence builders</li>
+            </ul>
+          </div>
+          <div class="pg">
+            <h3>Band 7 Roadmap</h3>
+            <p>Systems for high-scoring performance under time pressure.</p>
+            <ul>
+              <li>Time-boxed mock tests</li>
+              <li>Writing Task 2 planning in 5 steps</li>
+              <li>Band descriptors decoded</li>
+              <li>Error logging and review cycles</li>
+            </ul>
+          </div>
+          <div class="pg">
+            <h3>Advanced Writing Lab</h3>
+            <p>Precision, cohesion, and task achievement on tough prompts.</p>
+            <ul>
+              <li>Thesis and idea development</li>
+              <li>Coherence devices that read natural</li>
+              <li>High-value vocabulary without fluff</li>
+              <li>Model analysis and re-writes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes / Infographic-style stats -->
+    <section class="outcomes" aria-label="Outcomes">
+      <div class="out-inner">
+        <h2>Outcomes at a Glance</h2>
+        <div class="out-grid">
+          <div class="out"><div class="big">90%+</div><div class="small">report higher confidence in Speaking within 4 weeks</div></div>
+          <div class="out"><div class="big">2x</div><div class="small">faster Reading section timing with drills</div></div>
+          <div class="out"><div class="big">7+</div><div class="small">targeted as default score for committed learners</div></div>
+          <div class="out"><div class="big">100+</div><div class="small">curated tips, checklists, and practice sets</div></div>
+        </div>
+      </div>
+    </section>
   </header>
 
   <!-- BLOG -->
   <section id="blog">
     <div class="inner">
       <h2>Blogs</h2>
-      <p class="lead">Latest posts from English Rhythm.</p>
+      <p class="lead">Latest posts from English Rhythm, plus featured guides that match the Ivy approach.</p>
+
+      <!-- Dynamic feed -->
       <div id="blog-grid" class="blog-grid" aria-live="polite"></div>
       <p id="blog-status" class="muted" style="text-align:center; margin-top:14px;"></p>
+
+      <!-- Featured blocks (closely aligned with landing content) -->
+      <div class="featured">
+        <h3>Featured Guides</h3>
+        <div class="feat-grid">
+          <div class="feat">
+            <strong>Band 7 Writing Checklist</strong>
+            <p>A concise checklist to plan, write, and review Task 2 under time pressure.</p>
+            <a href="https://english-rhythm.blogspot.com" target="_blank" rel="noopener">Open guide</a>
+          </div>
+          <div class="feat">
+            <strong>Reading Skim-Scan Routine</strong>
+            <p>Repeatable routine to locate answers faster without over-reading.</p>
+            <a href="https://english-rhythm.blogspot.com" target="_blank" rel="noopener">Open routine</a>
+          </div>
+          <div class="feat">
+            <strong>Speaking Confidence Drills</strong>
+            <p>Short daily drills to boost fluency and coherence before test day.</p>
+            <a href="https://english-rhythm.blogspot.com" target="_blank" rel="noopener">Open drills</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -364,10 +465,8 @@
       });
       const target = document.getElementById(id);
       if (target) target.classList.add("active");
-
       if (id === "home" || id === "connect") bodyEl.classList.add("no-scroll");
       else bodyEl.classList.remove("no-scroll");
-
       history.replaceState(null, "", `#${id}`);
     }
 
@@ -375,6 +474,7 @@
       const id = (location.hash || "#home").slice(1);
       showOnly(SECTION_IDS.includes(id) ? id : "home");
       loadBloggerFeed(); // blogs fetch
+      // document.getElementById('home-crawler').classList.add('show'); // optional
     });
 
     window.addEventListener('hashchange', () => {
@@ -382,6 +482,7 @@
       showOnly(SECTION_IDS.includes(id) ? id : "home");
     });
 
+    // Intercept internal anchor clicks
     document.addEventListener('click', (e) => {
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
@@ -438,7 +539,6 @@
       tmp.innerHTML = html || '';
       return tmp.textContent || tmp.innerText || '';
     }
-
     function firstImageSrc(html){
       const m = (html || '').match(/<img[^>]+src=["']([^"']+)["']/i);
       return m ? m[1] : '';
@@ -458,13 +558,15 @@
         const href = linkObj ? linkObj.href : '#';
         const content = entry.content?.$t || entry.summary?.$t || '';
         const img = firstImageSrc(content);
-        const text = stripHTML(content).trim().slice(0, 160) + (stripHTML(content).length > 160 ? '…' : '');
+        const clean = stripHTML(content).trim();
+        const text = clean.slice(0, 160) + (clean.length > 160 ? '…' : '');
 
         const card = document.createElement('article');
         card.className = 'blog-card';
 
         const imgEl = document.createElement('img');
         imgEl.alt = title;
+        imgEl.loading = 'lazy';
         imgEl.src = img || 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60';
 
         const body = document.createElement('div');
