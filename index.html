@@ -1505,6 +1505,14 @@
       // document.getElementById('home-crawler').classList.add('show');
     });
 
+    <script>
+  window.addEventListener('hashchange', () => {
+    const id = (location.hash || "#home").slice(1);
+    showOnly(SECTION_IDS.includes(id) ? id : "home");
+  });
+</script>
+
+
     /* =======================
        PANEL OPEN/CLOSE
     ======================= */
