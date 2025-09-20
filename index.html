@@ -1510,6 +1510,16 @@
     const id = (location.hash || "#home").slice(1);
     showOnly(SECTION_IDS.includes(id) ? id : "home");
   });
+    // 👇 Intercept clicks on any <a href="#something">
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = (a.getAttribute('href') || "").slice(1);
+    if (SECTION_IDS.includes(id)) {
+      e.preventDefault();
+      showOnly(id);
+    }
+  });
 </script>
 
 
