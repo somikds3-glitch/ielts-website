@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 2026 — Ultimate Fan Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;600;700&display=swap');
+:root{--gold:#C9A84C;--glight:#F0CB6A;--navy:#0A1628;--nmid:#122040;--nlight:#1A2D50;--red:#C0392B;--white:#F4F6F8;--gray:#7A8FA8;--card:rgba(16,28,52,0.95);--bdr:rgba(201,168,76,0.18);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem;overflow:hidden;}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(201,168,76,.15) 0%,transparent 65%),linear-gradient(180deg,#040d1a 0%,#0a1628 45%,#0f1f3c 100%);}
+.pitch{position:absolute;inset:0;opacity:.05;background:radial-gradient(ellipse 56% 34% at 50% 50%,transparent 58%,rgba(255,255,255,.85) 59.5%,transparent 61%),linear-gradient(to right,transparent 49.7%,rgba(255,255,255,.8) 50%,transparent 50.3%);background-size:100% 100%;}
+.stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle 3s ease-in-out infinite alternate;}
+@keyframes twinkle{from{opacity:.1}to{opacity:.8}}
+.hi{position:relative;z-index:2;max-width:900px;}
+.trophy{font-size:5rem;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 40px rgba(201,168,76,.5));}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,8rem);line-height:.92;letter-spacing:.04em;color:var(--gold);text-shadow:0 0 80px rgba(201,168,76,.35);margin-top:.5rem;}
+.hero h1 span{color:var(--white);}
+.htag{font-family:'Oswald',sans-serif;font-size:clamp(.9rem,2.2vw,1.25rem);letter-spacing:.35em;color:var(--gray);text-transform:uppercase;margin-top:.6rem;}
+.pills{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2.5rem;}
+.pill{background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:12px;padding:.9rem 1.4rem;text-align:center;backdrop-filter:blur(8px);min-width:80px;}
+.pill .n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1;}
+.pill .l{font-size:.62rem;letter-spacing:.2em;color:var(--gray);text-transform:uppercase;margin-top:.15rem;}
+.scue{position:absolute;bottom:1.5rem;color:var(--gray);font-size:.7rem;letter-spacing:.2em;display:flex;flex-direction:column;align-items:center;gap:.3rem;animation:bob 2s infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(10,22,40,.97);border-bottom:2px solid rgba(201,168,76,.25);backdrop-filter:blur(14px);display:flex;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.tab{flex-shrink:0;background:none;border:none;cursor:pointer;font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);padding:.9rem 1.1rem;border-bottom:3px solid transparent;position:relative;top:2px;transition:color .2s,border-color .2s;white-space:nowrap;}
+.tab:hover{color:var(--glight);}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold);}
+/* SECTIONS */
+.sec{display:none;padding:2.5rem 1.25rem;max-width:1380px;margin:0 auto;}
+.sec.on{display:block;}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,3rem);color:var(--gold);letter-spacing:.05em;}
+.ssub{font-size:.75rem;color:var(--gray);letter-spacing:.15em;text-transform:uppercase;margin:.3rem 0 2rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(201,168,76,.15);}
+/* COUNTDOWN */
+.cd{background:linear-gradient(90deg,rgba(201,168,76,.12),rgba(201,168,76,.04));border:1px solid var(--bdr);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.75rem;}
+.cdlbl{font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.2em;color:var(--gold);white-space:nowrap;}
+.cdclocks{display:flex;gap:.8rem;}
+.cdu{text-align:center;min-width:44px;}
+.cdv{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);line-height:1;}
+.cdl{font-size:.5rem;color:var(--gray);text-transform:uppercase;letter-spacing:.12em;}
+.cdn{font-size:.72rem;color:var(--gray);line-height:1.4;}
+/* IST note */
+.istn{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:.6rem 1rem;font-size:.75rem;color:var(--gray);margin-bottom:1.25rem;line-height:1.5;}
+.istn strong{color:var(--gold);}
+/* FILTERS */
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem;}
+.fb{background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--gray);border-radius:20px;padding:.35rem .9rem;font-size:.75rem;font-family:'Oswald',sans-serif;letter-spacing:.08em;cursor:pointer;transition:all .2s;}
+.fb:hover,.fb.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600;}
+/* SEARCH */
+.srch{display:block;width:100%;max-width:480px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:30px;padding:.65rem 1.25rem;color:var(--white);font-size:.88rem;font-family:'Inter',sans-serif;outline:none;margin-bottom:1.25rem;transition:border-color .2s;}
+.srch:focus{border-color:var(--gold);}
+.srch::placeholder{color:var(--gray);}
+/* MATCH CARD */
+.mlist{display:flex;flex-direction:column;gap:.6rem;}
+.mc{background:var(--card);border:1px solid var(--bdr);border-radius:11px;padding:.9rem 1.1rem;display:grid;grid-template-columns:100px 1fr auto 1fr 130px;align-items:center;gap:.75rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden;}
+.mc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);opacity:0;transition:opacity .2s;}
+.mc:hover{border-color:rgba(201,168,76,.4);transform:translateX(3px);}
+.mc:hover::before{opacity:1;}
+.mc.fin{border-color:rgba(201,168,76,.5);}
+.mc.fin::before{opacity:1;background:var(--glight);}
+.mmeta{display:flex;flex-direction:column;gap:.15rem;}
+.mdate{font-size:.65rem;color:var(--gold);font-weight:600;letter-spacing:.07em;text-transform:uppercase;}
+.mtime{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--white);line-height:1;}
+.mist{font-size:.6rem;color:var(--gray);}
+.mbdg{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.1em;padding:.12rem .38rem;border-radius:4px;margin-top:.15rem;background:rgba(201,168,76,.14);color:var(--gold);text-transform:uppercase;}
+.ts{display:flex;align-items:center;gap:.65rem;min-width:0;}
+.ts.r{flex-direction:row-reverse;text-align:right;}
+.tf{font-size:1.8rem;line-height:1;flex-shrink:0;}
+.ti{min-width:0;flex:1;}
+.tn{font-family:'Oswald',sans-serif;font-size:.95rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;}
+.trk{font-size:.6rem;color:var(--gray);margin-top:.1rem;}
+.vs{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);text-align:center;flex-shrink:0;display:flex;flex-direction:column;align-items:center;}
+.vss{font-size:.5rem;font-family:'Inter',sans-serif;color:var(--gray);letter-spacing:.08em;}
+.mv{font-size:.65rem;color:var(--gray);text-align:right;line-height:1.5;}
+.mv strong{display:block;color:var(--white);font-size:.72rem;font-weight:600;}
+/* GROUPS */
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.1rem;}
+.gc{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;}
+.gh{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.04));padding:.7rem 1rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--bdr);}
+.gl{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--gold);line-height:1;}
+.gm{font-size:.68rem;color:var(--gray);}
+.gt{display:flex;align-items:center;padding:.6rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);gap:.65rem;transition:background .2s;}
+.gt:hover{background:rgba(255,255,255,.03);}
+.gt:last-child{border-bottom:none;}
+.gfl{font-size:1.3rem;flex-shrink:0;}
+.gnm{flex:1;font-size:.88rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.grb{font-family:'Bebas Neue',sans-serif;font-size:.88rem;background:rgba(201,168,76,.1);color:var(--gold);padding:.08rem .38rem;border-radius:4px;border:1px solid rgba(201,168,76,.2);flex-shrink:0;}
+/* TEAMS */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.1rem;align-items:start;}
+.tcard{background:var(--card);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;transition:border-color .25s,box-shadow .25s;}
+.tcard:hover{border-color:rgba(201,168,76,.4);box-shadow:0 8px 28px rgba(0,0,0,.45);}
+.tchead{background:linear-gradient(135deg,var(--nlight),var(--nmid));padding:.9rem 1.1rem;display:flex;align-items:center;gap:.9rem;border-bottom:1px solid var(--bdr);}
+.tcfl{font-size:2.4rem;flex-shrink:0;}
+.tcinf{flex:1;min-width:0;}
+.tcnm{font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tcmt{font-size:.65rem;color:var(--gray);margin-top:.2rem;}
+.tcrk{text-align:right;flex-shrink:0;}
+.tcrn{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--gold);line-height:1;}
+.tcrl{font-size:.5rem;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;}
+.tcbody{padding:.9rem 1.1rem;}
+.kpbox{display:flex;align-items:center;gap:.5rem;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.18);border-radius:8px;padding:.5rem .7rem;margin-bottom:.75rem;}
+.kpst{font-size:1rem;}
+.kpnm{font-size:.78rem;font-weight:600;}
+.kpcl{color:var(--gray);font-weight:400;}
+.kprl{font-size:.6rem;color:var(--gray);margin-top:.1rem;}
+.slbl{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:.6rem 0 .35rem;}
+.chips{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;}
+.chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:.22rem .5rem;font-size:.68rem;color:var(--white);line-height:1.3;white-space:nowrap;}
+.chip.s{background:rgba(201,168,76,.13);border-color:rgba(201,168,76,.3);color:var(--glight);}
+/* RANKINGS */
+.rwrap{overflow-x:auto;border-radius:12px;border:1px solid var(--bdr);}
+.rtbl{width:100%;border-collapse:collapse;}
+.rtbl th{background:rgba(201,168,76,.1);color:var(--gold);font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;padding:.7rem .9rem;text-align:left;border-bottom:2px solid rgba(201,168,76,.22);white-space:nowrap;}
+.rtbl td{padding:.55rem .9rem;font-size:.83rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+.rtbl tr:hover td{background:rgba(255,255,255,.03);}
+.rpos{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);}
+.rpos.top{font-size:1.5rem;color:var(--glight);}
+.conf{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.1em;padding:.12rem .38rem;border-radius:3px;text-transform:uppercase;white-space:nowrap;}
+.UEFA{background:rgba(0,100,200,.2);color:#70B0FF;border:1px solid rgba(60,140,255,.3);}
+.CONMEBOL{background:rgba(0,150,80,.2);color:#60D090;border:1px solid rgba(60,190,100,.3);}
+.CAF{background:rgba(200,120,0,.2);color:#FFAA40;border:1px solid rgba(220,140,0,.3);}
+.AFC{background:rgba(180,0,0,.2);color:#FF7070;border:1px solid rgba(220,0,0,.3);}
+.CONCACAF{background:rgba(120,0,180,.2);color:#C884FF;border:1px solid rgba(160,0,220,.3);}
+.OFC{background:rgba(0,150,150,.2);color:#44E0D0;border:1px solid rgba(0,180,180,.3);}
+/* KNOCKOUT */
+.brgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin-bottom:2rem;}
+.brstg{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:1rem 1.1rem;}
+.brstg h3{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--gold);}
+.brstg .bd{font-size:.72rem;color:var(--white);margin:.25rem 0;}
+.brstg p{font-size:.75rem;color:var(--gray);line-height:1.4;}
+.brstg .bm{font-size:.7rem;color:var(--gold);margin-top:.35rem;}
+/* VENUES */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+.vc{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:1.1rem;transition:border-color .25s;}
+.vc:hover{border-color:rgba(201,168,76,.38);}
+.vfl{font-size:1.4rem;margin-bottom:.4rem;}
+.vnm{font-family:'Oswald',sans-serif;font-size:.98rem;font-weight:600;}
+.vci{font-size:.78rem;color:var(--gold);margin:.2rem 0 .4rem;}
+.vcap,.vmch{font-size:.72rem;color:var(--gray);}
+/* RESPONSIVE */
+@media(max-width:720px){.mc{grid-template-columns:90px 1fr auto 1fr;}.mv{display:none;}.tn{font-size:.82rem;}}
+@media(max-width:480px){.mc{grid-template-columns:1fr;}.ts.r{flex-direction:row;text-align:left;}.tgrid{grid-template-columns:1fr;}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:3px;}
+footer{text-align:center;padding:2rem;color:var(--gray);font-size:.72rem;border-top:1px solid rgba(201,168,76,.1);margin-top:3rem;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hbg"></div>
+  <div class="pitch"></div>
+  <div class="stars" id="stars"></div>
+  <div class="hi">
+    <div class="trophy">&#127942;</div>
+    <h1>FIFA<br><span>WORLD CUP</span><br>2026</h1>
+    <div class="htag">USA &middot; Canada &middot; Mexico &nbsp;|&nbsp; June 11 &ndash; July 19, 2026</div>
+    <div class="pills">
+      <div class="pill"><div class="n">48</div><div class="l">Teams</div></div>
+      <div class="pill"><div class="n">104</div><div class="l">Matches</div></div>
+      <div class="pill"><div class="n">16</div><div class="l">Stadiums</div></div>
+      <div class="pill"><div class="n">39</div><div class="l">Days</div></div>
+      <div class="pill"><div class="n">12</div><div class="l">Groups</div></div>
+    </div>
+  </div>
+  <div class="scue"><span>EXPLORE</span><span style="font-size:1.1rem">&#x2304;</span></div>
+</div>
+
+<nav>
+  <button class="tab on"  onclick="show('schedule',this)">&#9917; Schedule &amp; IST</button>
+  <button class="tab"     onclick="show('groups',this)">&#128193; Groups</button>
+  <button class="tab"     onclick="show('teams',this)">&#128085; Teams &amp; Squads</button>
+  <button class="tab"     onclick="show('rankings',this)">&#128202; FIFA Rankings</button>
+  <button class="tab"     onclick="show('knockout',this)">&#127942; Knockout</button>
+  <button class="tab"     onclick="show('venues',this)">&#127967; Venues</button>
+</nav>
+
+<div class="sec on" id="schedule">
+  <div class="stitle">Match Schedule</div>
+  <div class="ssub">All 104 matches &middot; IST (Indian Standard Time) &middot; June 11 &ndash; July 19, 2026</div>
+  <div class="cd">
+    <div class="cdlbl">&#9201; Time to the Final</div>
+    <div class="cdclocks">
+      <div class="cdu"><div class="cdv" id="cdd">--</div><div class="cdl">Days</div></div>
+      <div class="cdu"><div class="cdv" id="cdh">--</div><div class="cdl">Hrs</div></div>
+      <div class="cdu"><div class="cdv" id="cdm">--</div><div class="cdl">Min</div></div>
+      <div class="cdu"><div class="cdv" id="cds">--</div><div class="cdl">Sec</div></div>
+    </div>
+    <div class="cdn">&#127942; World Cup Final<br>Jul 20, 2026 &middot; 12:30 AM IST<br>MetLife Stadium, New Jersey</div>
+  </div>
+  <div class="istn">
+    <strong>&#127470;&#127475; IST = ET + 9 hours 30 minutes.</strong>
+    1 PM ET = 10:30 PM IST &nbsp;|&nbsp; 3 PM ET = 12:30 AM IST (+1 day) &nbsp;|&nbsp;
+    6 PM ET = 3:30 AM IST (+1 day) &nbsp;|&nbsp; 9 PM ET = 6:30 AM IST (+1 day) &nbsp;|&nbsp;
+    10 PM ET = 7:30 AM IST (+1 day)
+  </div>
+  <div class="filters" id="sf">
+    <button class="fb on" onclick="fM('all',this)">All 104</button>
+    <button class="fb" onclick="fM('group',this)">Group Stage</button>
+    <button class="fb" onclick="fM('r32',this)">Round of 32</button>
+    <button class="fb" onclick="fM('r16',this)">Round of 16</button>
+    <button class="fb" onclick="fM('qf',this)">Quarterfinals</button>
+    <button class="fb" onclick="fM('sf',this)">Semifinals</button>
+    <button class="fb" onclick="fM('final',this)">Final</button>
+  </div>
+  <input class="srch" placeholder="&#128269;  Search team, city or venue..." oninput="sM(this.value)">
+  <div class="mlist" id="mlist"></div>
+</div>
+
+<div class="sec" id="groups">
+  <div class="stitle">Groups A &ndash; L</div>
+  <div class="ssub">12 Groups &middot; Top 2 per group + 8 best 3rd-place teams advance</div>
+  <div class="gg" id="glist"></div>
+</div>
+
+<div class="sec" id="teams">
+  <div class="stitle">Teams &amp; Squads</div>
+  <div class="ssub">All 48 nations &middot; Key player &middot; Goalkeepers &middot; Defenders &middot; Midfielders &middot; Forwards</div>
+  <div class="filters" id="cf">
+    <button class="fb on" onclick="fT('all',this)">All</button>
+    <button class="fb" onclick="fT('UEFA',this)">UEFA</button>
+    <button class="fb" onclick="fT('CONMEBOL',this)">CONMEBOL</button>
+    <button class="fb" onclick="fT('CAF',this)">CAF</button>
+    <button class="fb" onclick="fT('AFC',this)">AFC</button>
+    <button class="fb" onclick="fT('CONCACAF',this)">CONCACAF</button>
+    <button class="fb" onclick="fT('OFC',this)">OFC</button>
+  </div>
+  <input class="srch" placeholder="&#128269;  Search team or player name..." oninput="sT(this.value)">
+  <div class="tgrid" id="tlist"></div>
+</div>
+
+<div class="sec" id="rankings">
+  <div class="stitle">FIFA World Rankings</div>
+  <div class="ssub">June 2026 &middot; All 48 qualified nations</div>
+  <div class="filters" id="rf">
+    <button class="fb on" onclick="fR('all',this)">All</button>
+    <button class="fb" onclick="fR('UEFA',this)">UEFA</button>
+    <button class="fb" onclick="fR('CONMEBOL',this)">CONMEBOL</button>
+    <button class="fb" onclick="fR('CAF',this)">CAF</button>
+    <button class="fb" onclick="fR('AFC',this)">AFC</button>
+    <button class="fb" onclick="fR('CONCACAF',this)">CONCACAF</button>
+    <button class="fb" onclick="fR('OFC',this)">OFC</button>
+  </div>
+  <div class="rwrap">
+    <table class="rtbl">
+      <thead><tr><th>Rank</th><th>Flag</th><th>Nation</th><th>Conf</th><th>Group</th><th>&#11088; Key Player</th></tr></thead>
+      <tbody id="rbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec" id="knockout">
+  <div class="stitle">Knockout Stage</div>
+  <div class="ssub">Round of 32 &rarr; R16 &rarr; QF &rarr; SF &rarr; Final &middot; All times IST</div>
+  <div class="brgrid" id="brstg"></div>
+  <div class="stitle" style="font-size:1.6rem;margin-bottom:.5rem">Knockout Schedule (IST)</div>
+  <div class="ssub" style="margin-bottom:1rem">Teams confirmed after group stage</div>
+  <div class="mlist" id="klist"></div>
+</div>
+
+<div class="sec" id="venues">
+  <div class="stitle">Stadiums &amp; Venues</div>
+  <div class="ssub">16 venues &middot; USA (11) &middot; Mexico (3) &middot; Canada (2)</div>
+  <div class="filters" id="vf">
+    <button class="fb on" onclick="fV('all',this)">All</button>
+    <button class="fb" onclick="fV('USA',this)">&#127482;&#127480; USA</button>
+    <button class="fb" onclick="fV('Mexico',this)">&#127474;&#127485; Mexico</button>
+    <button class="fb" onclick="fV('Canada',this)">&#127464;&#127462; Canada</button>
+  </div>
+  <div class="vgrid" id="vlist"></div>
+</div>
+
+<footer>&#9917; Fan-made resource for the 2026 FIFA World Cup&trade; &nbsp;|&nbsp; Data: FIFA.com, worldcupwiki.com, worldcuppass.com &nbsp;|&nbsp; All times IST</footer>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+// Teams: flag, rank, confederation, group, coach,
+//        gk[], def[], mid[], fwd[], keyPlayer, keyClub, keyRole
+var T = {
+"France":{"f":"\uD83C\uDDEB\uD83C\uDDF7","r":1,"c":"UEFA","g":"I","coach":"Didier Deschamps",
+  "gk":["Hugo Lloris","Mike Maignan","Alphonse Areola"],
+  "def":["William Saliba","Dayot Upamecano","Ibrahima Konate","Theo Hernandez","Jules Kounde","Benjamin Pavard"],
+  "mid":["N Golo Kante","Aurelien Tchouameni","Adrien Rabiot","Warren Zaire-Emery"],
+  "fwd":["Kylian Mbappe","Ousmane Dembele","Antoine Griezmann","Marcus Thuram","Bradley Barcola","Michael Olise"],
+  "kp":"Kylian Mbappe","kcl":"Real Madrid","kr":"Forward"},
+"Spain":{"f":"\uD83C\uDDEA\uD83C\uDDF8","r":2,"c":"UEFA","g":"H","coach":"Luis de la Fuente",
+  "gk":["David Raya","Unai Simon","Robert Sanchez"],
+  "def":["Dani Carvajal","Aymeric Laporte","Robin Le Normand","Alejandro Grimaldo","Marc Cucurella"],
+  "mid":["Pedri","Rodri","Fabian Ruiz","Gavi","Mikel Merino","Martin Zubimendi"],
+  "fwd":["Alvaro Morata","Lamine Yamal","Nico Williams","Joselu","Ferran Torres"],
+  "kp":"Lamine Yamal","kcl":"Barcelona","kr":"Winger"},
+"Argentina":{"f":"\uD83C\uDDE6\uD83C\uDDF7","r":3,"c":"CONMEBOL","g":"J","coach":"Lionel Scaloni",
+  "gk":["Emiliano Martinez","Franco Armani","Agustin Marchesin"],
+  "def":["Nahuel Molina","Cristian Romero","Lisandro Martinez","Nicolas Tagliafico","German Pezzella"],
+  "mid":["Rodrigo De Paul","Alexis Mac Allister","Enzo Fernandez","Leandro Paredes","Giovani Lo Celso"],
+  "fwd":["Lionel Messi","Lautaro Martinez","Julian Alvarez","Paulo Dybala","Nicolas Gonzalez","Valentin Castellanos"],
+  "kp":"Lionel Messi","kcl":"Inter Miami","kr":"Forward"},
+"England":{"f":"\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F","r":4,"c":"UEFA","g":"L","coach":"Thomas Tuchel",
+  "gk":["Jordan Pickford","Aaron Ramsdale","Nick Pope"],
+  "def":["Kyle Walker","Harry Maguire","John Stones","Luke Shaw","Trent Alexander-Arnold","Kieran Trippier"],
+  "mid":["Declan Rice","Jude Bellingham","Phil Foden","Conor Gallagher","Mason Mount"],
+  "fwd":["Harry Kane","Marcus Rashford","Bukayo Saka","Raheem Sterling","Jack Grealish","Ollie Watkins"],
+  "kp":"Jude Bellingham","kcl":"Real Madrid","kr":"Midfielder"},
+"Portugal":{"f":"\uD83C\uDDF5\uD83C\uDDF9","r":5,"c":"UEFA","g":"K","coach":"Roberto Martinez",
+  "gk":["Diogo Costa","Rui Patricio","Jose Sa"],
+  "def":["Ruben Dias","Pepe","Nuno Mendes","Joao Cancelo","Goncalo Inacio","Diogo Dalot"],
+  "mid":["Bernardo Silva","Bruno Fernandes","Ruben Neves","Joao Palhinha","Vitinha"],
+  "fwd":["Cristiano Ronaldo","Rafael Leao","Diogo Jota","Joao Felix","Goncalo Ramos","Bruma"],
+  "kp":"Cristiano Ronaldo","kcl":"Al Nassr","kr":"Forward"},
+"Brazil":{"f":"\uD83C\uDDE7\uD83C\uDDF7","r":6,"c":"CONMEBOL","g":"C","coach":"Carlo Ancelotti",
+  "gk":["Alisson Becker","Ederson","Weverton"],
+  "def":["Danilo","Eder Militao","Marquinhos","Guilherme Arana","Wendell"],
+  "mid":["Casemiro","Bruno Guimaraes","Lucas Paqueta","Fabinho","Andreas Pereira"],
+  "fwd":["Vinicius Jr","Rodrygo","Raphinha","Gabriel Martinelli","Endrick","Richarlison","Gabriel Jesus"],
+  "kp":"Vinicius Jr","kcl":"Real Madrid","kr":"Winger"},
+"Netherlands":{"f":"\uD83C\uDDF3\uD83C\uDDF1","r":7,"c":"UEFA","g":"F","coach":"Ronald Koeman",
+  "gk":["Bart Verbruggen","Justin Bijlow","Mark Flekken"],
+  "def":["Virgil van Dijk","Stefan de Vrij","Denzel Dumfries","Daley Blind","Nathan Ake"],
+  "mid":["Frenkie de Jong","Tijjani Reijnders","Teun Koopmeiners","Marten de Roon"],
+  "fwd":["Memphis Depay","Cody Gakpo","Donyell Malen","Steven Bergwijn","Wout Weghorst"],
+  "kp":"Virgil van Dijk","kcl":"Liverpool","kr":"Centre Back"},
+"Morocco":{"f":"\uD83C\uDDF2\uD83C\uDDE6","r":8,"c":"CAF","g":"C","coach":"Walid Regragui",
+  "gk":["Yassine Bounou","Ahmed Reda Tagnaouti","Munir"],
+  "def":["Achraf Hakimi","Romain Saiss","Nayef Aguerd","Jawad El Yamiq","Noussair Mazraoui"],
+  "mid":["Sofyan Amrabat","Azzedine Ounahi","Selim Amallah","Bilal El Khannouss"],
+  "fwd":["Hakim Ziyech","Youssef En-Nesyri","Soufiane Rahimi","Abde Ezzalzouli"],
+  "kp":"Achraf Hakimi","kcl":"PSG","kr":"Right Back"},
+"Belgium":{"f":"\uD83C\uDDE7\uD83C\uDDEA","r":9,"c":"UEFA","g":"G","coach":"Domenico Tedesco",
+  "gk":["Koen Casteels","Simon Mignolet","Matz Sels"],
+  "def":["Toby Alderweireld","Jan Vertonghen","Timothy Castagne","Leander Dendoncker","Arthur Theate"],
+  "mid":["Kevin De Bruyne","Youri Tielemans","Axel Witsel","Amadou Onana"],
+  "fwd":["Romelu Lukaku","Jeremy Doku","Leandro Trossard","Lois Openda","Johan Bakayoko"],
+  "kp":"Kevin De Bruyne","kcl":"Man City","kr":"Midfielder"},
+"Germany":{"f":"\uD83C\uDDE9\uD83C\uDDEA","r":10,"c":"UEFA","g":"E","coach":"Julian Nagelsmann",
+  "gk":["Manuel Neuer","Marc-Andre ter Stegen","Oliver Baumann"],
+  "def":["Joshua Kimmich","Jonathan Tah","Nico Schlotterbeck","David Raum","Benjamin Henrichs"],
+  "mid":["Ilkay Gundogan","Toni Kroos","Robert Andrich","Florian Wirtz"],
+  "fwd":["Kai Havertz","Leroy Sane","Serge Gnabry","Thomas Muller","Niclas Fullkrug","Deniz Undav"],
+  "kp":"Florian Wirtz","kcl":"Bayer Leverkusen","kr":"Attacking Mid"},
+"Croatia":{"f":"\uD83C\uDDED\uD83C\uDDF7","r":11,"c":"UEFA","g":"L","coach":"Zlatko Dalic",
+  "gk":["Dominik Livakovic","Ivo Grbic","Ivica Ivusic"],
+  "def":["Josip Juranovic","Dejan Lovren","Josko Gvardiol","Borna Sosa","Duje Caleta-Car"],
+  "mid":["Luka Modric","Marcelo Brozovic","Mateo Kovacic","Mario Pasalic"],
+  "fwd":["Ivan Perisic","Ante Budimir","Andrej Kramaric","Nikola Vlasic","Bruno Petkovic"],
+  "kp":"Luka Modric","kcl":"Real Madrid","kr":"Midfielder"},
+"Colombia":{"f":"\uD83C\uDDE8\uD83C\uDDF4","r":13,"c":"CONMEBOL","g":"K","coach":"Nestor Lorenzo",
+  "gk":["Camilo Vargas","David Ospina","Alvaro Montero"],
+  "def":["Davinson Sanchez","Yerry Mina","Johan Mojica","Daniel Munoz","Carlos Cuesta"],
+  "mid":["James Rodriguez","Wilmar Barrios","Matheus Uribe","Richard Rios"],
+  "fwd":["Luis Diaz","Jhon Duran","Rafael Santos Borre","Cucho Hernandez","Jhon Cordoba"],
+  "kp":"Luis Diaz","kcl":"Liverpool","kr":"Winger"},
+"Senegal":{"f":"\uD83C\uDDF8\uD83C\uDDF3","r":14,"c":"CAF","g":"I","coach":"Aliou Cisse",
+  "gk":["Edouard Mendy","Alfred Gomis","Seny Dieng"],
+  "def":["Kalidou Koulibaly","Abdou Diallo","Youssouf Sabaly","Formose Mendy","Pape Abou Cisse"],
+  "mid":["Idrissa Gana Gueye","Cheikhou Kouyate","Nampalys Mendy","Pape Gueye"],
+  "fwd":["Sadio Mane","Ismaila Sarr","Boulaye Dia","Nicolas Jackson","Iliman Ndiaye"],
+  "kp":"Sadio Mane","kcl":"Al Nassr","kr":"Forward"},
+"Mexico":{"f":"\uD83C\uDDF2\uD83C\uDDFD","r":15,"c":"CONCACAF","g":"A","coach":"Javier Aguirre",
+  "gk":["Guillermo Ochoa","Carlos Acevedo","Rodolfo Cota"],
+  "def":["Jorge Sanchez","Nestor Araujo","Cesar Montes","Jesus Gallardo","Johan Vasquez"],
+  "mid":["Edson Alvarez","Carlos Rodriguez","Hector Herrera","Luis Romo","Orbelin Pineda"],
+  "fwd":["Santiago Gimenez","Hirving Lozano","Alexis Vega","Rogelio Funes Mori","Roberto Alvarado"],
+  "kp":"Santiago Gimenez","kcl":"Feyenoord","kr":"Striker"},
+"USA":{"f":"\uD83C\uDDFA\uD83C\uDDF8","r":16,"c":"CONCACAF","g":"D","coach":"Mauricio Pochettino",
+  "gk":["Matt Turner","Ethan Horvath","Patrick Schulte"],
+  "def":["Sergino Dest","Walker Zimmerman","Chris Richards","Antonee Robinson","Joe Scally"],
+  "mid":["Weston McKennie","Tyler Adams","Luca de la Torre","Yunus Musah"],
+  "fwd":["Christian Pulisic","Tim Weah","Folarin Balogun","Ricardo Pepi","Gio Reyna","Josh Sargent"],
+  "kp":"Christian Pulisic","kcl":"AC Milan","kr":"Forward"},
+"Uruguay":{"f":"\uD83C\uDDFA\uD83C\uDDFE","r":17,"c":"CONMEBOL","g":"H","coach":"Marcelo Bielsa",
+  "gk":["Fernando Muslera","Sergio Rochet","Sebastian Sosa"],
+  "def":["Diego Godin","Ronald Araujo","Jose Maria Gimenez","Mathias Olivera","Giovanni Gonzalez"],
+  "mid":["Rodrigo Bentancur","Federico Valverde","Nicolas De la Cruz","Manuel Ugarte"],
+  "fwd":["Luis Suarez","Darwin Nunez","Facundo Pellistri","Brian Rodriguez","Edinson Cavani"],
+  "kp":"Federico Valverde","kcl":"Real Madrid","kr":"Midfielder"},
+"Japan":{"f":"\uD83C\uDDEF\uD83C\uDDF5","r":18,"c":"AFC","g":"F","coach":"Hajime Moriyasu",
+  "gk":["Shuichi Gonda","Zion Suzuki","Kosei Tani"],
+  "def":["Hiroki Sakai","Takehiro Tomiyasu","Shogo Taniguchi","Maya Yoshida","Yuta Nakayama"],
+  "mid":["Wataru Endo","Hidemasa Morita","Ritsu Doan","Daichi Kamada"],
+  "fwd":["Junya Ito","Kaoru Mitoma","Ayase Ueda","Takumi Minamino","Daizen Maeda"],
+  "kp":"Kaoru Mitoma","kcl":"Brighton","kr":"Winger"},
+"Switzerland":{"f":"\uD83C\uDDE8\uD83C\uDDED","r":19,"c":"UEFA","g":"B","coach":"Murat Yakin",
+  "gk":["Yann Sommer","Gregor Kobel","Philipp Kohn"],
+  "def":["Manuel Akanji","Nico Elvedi","Fabian Schar","Ricardo Rodriguez","Silvan Widmer"],
+  "mid":["Granit Xhaka","Remo Freuler","Denis Zakaria","Fabian Rieder"],
+  "fwd":["Breel Embolo","Xherdan Shaqiri","Noah Okafor","Ruben Vargas","Renato Steffen"],
+  "kp":"Granit Xhaka","kcl":"Bayer Leverkusen","kr":"Midfielder"},
+"Iran":{"f":"\uD83C\uDDEE\uD83C\uDDF7","r":21,"c":"AFC","g":"G","coach":"Amir Ghalenoei",
+  "gk":["Alireza Beiranvand","Payam Niazmand","Hossein Hosseini"],
+  "def":["Ehsan Hajsafi","Morteza Pouraliganji","Shoja Khalilzadeh","Sadegh Moharrami","Ramin Rezaeian"],
+  "mid":["Saeid Ezatolahi","Mehdi Torabi","Ali Gholizadeh","Milad Sarlak"],
+  "fwd":["Sardar Azmoun","Mehdi Taremi","Saman Ghoddos","Karim Ansarifard"],
+  "kp":"Mehdi Taremi","kcl":"Inter Milan","kr":"Striker"},
+"Turkiye":{"f":"\uD83C\uDDF9\uD83C\uDDF7","r":22,"c":"UEFA","g":"D","coach":"Vincenzo Montella",
+  "gk":["Altay Bayindir","Ugurcan Cakir","Mert Gunok"],
+  "def":["Zeki Celik","Samet Akaydin","Kaan Ayhan","Ferdi Kadioglu","Abdulkerim Bardakci"],
+  "mid":["Hakan Calhanoglu","Salih Ozcan","Orkun Kokcu","Kerem Akturkoglu"],
+  "fwd":["Arda Guler","Cengiz Under","Yunus Akgun","Berk Yildiz","Efecan Karaca"],
+  "kp":"Hakan Calhanoglu","kcl":"Inter Milan","kr":"Midfielder"},
+"Ecuador":{"f":"\uD83C\uDDEA\uD83C\uDDE8","r":23,"c":"CONMEBOL","g":"E","coach":"Felix Sanchez",
+  "gk":["Hernan Galindez","Alexander Dominguez","Wellington Ramirez"],
+  "def":["Piero Hincapie","Xavier Arreaga","Robert Arboleda","Pervis Estupinan","Diego Palacios"],
+  "mid":["Moises Caicedo","Carlos Gruezo","Angel Mena","Jhegson Mendez"],
+  "fwd":["Enner Valencia","Michael Estrada","Gonzalo Plata","Jeremy Sarmiento","Kevin Rodriguez"],
+  "kp":"Moises Caicedo","kcl":"Chelsea","kr":"Midfielder"},
+"Austria":{"f":"\uD83C\uDDE6\uD83C\uDDF9","r":24,"c":"UEFA","g":"J","coach":"Ralf Rangnick",
+  "gk":["Patrick Pentz","Alexander Schlager","Heinz Lindner"],
+  "def":["David Alaba","Philipp Lienhart","Stefan Posch","Maximilian Wober","Philipp Mwene"],
+  "mid":["Marcel Sabitzer","Konrad Laimer","Nicolas Seiwald","Florian Grillitsch"],
+  "fwd":["Christoph Baumgartner","Michael Gregoritsch","Marko Arnautovic","Patrick Wimmer"],
+  "kp":"David Alaba","kcl":"Real Madrid","kr":"Defender"},
+"South Korea":{"f":"\uD83C\uDDF0\uD83C\uDDF7","r":25,"c":"AFC","g":"A","coach":"Hong Myung-bo",
+  "gk":["Kim Seung-gyu","Jo Hyeon-woo","Song Bum-keun"],
+  "def":["Kim Min-jae","Lee Yong","Kim Young-gwon","Kim Jin-su","Hong Chul"],
+  "mid":["Jung Woo-young","Lee Jae-sung","Kwon Chang-hoon","Hwang In-beom","Lee Kang-in"],
+  "fwd":["Son Heung-min","Hwang Hee-chan","Cho Gue-sung","Oh Hyeon-gyu","Na Sang-ho"],
+  "kp":"Son Heung-min","kcl":"Tottenham","kr":"Forward"},
+"Australia":{"f":"\uD83C\uDDE6\uD83C\uDDFA","r":27,"c":"AFC","g":"D","coach":"Tony Popovic",
+  "gk":["Mat Ryan","Danny Vukovic","Thomas Glover"],
+  "def":["Milos Degenek","Harry Souttar","Aziz Behich","Joel King","Nathaniel Atkinson"],
+  "mid":["Jackson Irvine","Riley McGree","Martin Boyle","Aaron Mooy"],
+  "fwd":["Mitchell Duke","Mathew Leckie","Craig Goodwin","Awer Mabil","Garang Kuol"],
+  "kp":"Mathew Leckie","kcl":"Melbourne City","kr":"Winger"},
+"Algeria":{"f":"\uD83C\uDDE9\uD83C\uDDFF","r":28,"c":"CAF","g":"J","coach":"Vladimir Petkovic",
+  "gk":["Rais M Bolhi","Alexandre Oukidja","Hakim Brahimi"],
+  "def":["Ramy Bensebaini","Djamel Benlamri","Aissa Mandi","Hossam Abid"],
+  "mid":["Sofiane Feghouli","Haris Belkebla","Sami Kheddira","Nabil Bentaleb"],
+  "fwd":["Riyad Mahrez","Islam Slimani","Amine Gouiri","Baghdad Bounedjah","Youcef Belaili"],
+  "kp":"Riyad Mahrez","kcl":"Al Ahli Saudi FC","kr":"Winger"},
+"Egypt":{"f":"\uD83C\uDDEA\uD83C\uDDEC","r":29,"c":"CAF","g":"G","coach":"Rui Vitoria",
+  "gk":["Mohamed El Shenawy","Mohamed Sobhy","Ahmed El Shenawy"],
+  "def":["Ahmed Hegazy","Omar Kamal","Ayman Ashraf","Akram Tawfik","Ahmed Fatouh"],
+  "mid":["Tarek Hamed","Amr El Sulaya","Emam Ashour","Omar Marmoush"],
+  "fwd":["Mohamed Salah","Mostafa Mohamed","Trezeguet","Mahmoud Hamdy","Zizo"],
+  "kp":"Mohamed Salah","kcl":"Liverpool","kr":"Forward"},
+"Canada":{"f":"\uD83C\uDDE8\uD83C\uDDE6","r":30,"c":"CONCACAF","g":"B","coach":"Jesse Marsch",
+  "gk":["Maxime Crepeau","Milan Borjan","James Pantemis"],
+  "def":["Alphonso Davies","Alistair Johnston","Derek Cornelius","Kamal Miller","Richie Laryea"],
+  "mid":["Jonathan Osorio","Stephen Eustaquio","Atiba Hutchinson","Mark-Anthony Kaye"],
+  "fwd":["Jonathan David","Cyle Larin","Tajon Buchanan","Junior Hoilett","Lucas Cavallini"],
+  "kp":"Alphonso Davies","kcl":"Bayern Munich","kr":"Left Back"},
+"Norway":{"f":"\uD83C\uDDF3\uD83C\uDDF4","r":31,"c":"UEFA","g":"I","coach":"Stale Solbakken",
+  "gk":["Orjan Nyland","Rune Jarstein","Jorgen Strand Larsen"],
+  "def":["Stefan Strandberg","Leo Ostigard","Kristoffer Ajer","Birger Meling","Fredrik Bjorkan"],
+  "mid":["Martin Odegaard","Sander Berge","Mathias Normann","Fredrik Aursnes"],
+  "fwd":["Erling Haaland","Alexander Sorloth","Mohamed Elyounoussi","Patrick Berg"],
+  "kp":"Erling Haaland","kcl":"Man City","kr":"Striker"},
+"Panama":{"f":"\uD83C\uDDF5\uD83C\uDDE6","r":33,"c":"CONCACAF","g":"L","coach":"Thomas Christiansen",
+  "gk":["Luis Mejia","Orlando Mosquera","Oscar Janson"],
+  "def":["Eric Davis","Fidel Escobar","Harold Cummings","Roderick Miller","Cesar Yanis"],
+  "mid":["Adalberto Carrasquilla","Anibal Godoy","Alberto Quintero","Edgardo Farina"],
+  "fwd":["Rolando Blackburn","Gabriel Torres","Cecilio Waterman","Abdiel Ayarza"],
+  "kp":"Adalberto Carrasquilla","kcl":"Herediano","kr":"Midfielder"},
+"Ivory Coast":{"f":"\uD83C\uDDE8\uD83C\uDDEE","r":34,"c":"CAF","g":"E","coach":"Emerse Fae",
+  "gk":["Yahia Fofana","Badra Ali Sangare","Eliezer Zogbonou"],
+  "def":["Serge Aurier","Simon Deli","Eric Bailly","Ghislain Konan","Odilon Kossounou"],
+  "mid":["Jean Michael Seri","Ibrahim Sangare","Franck Kessie","Amadou Diallo"],
+  "fwd":["Nicolas Pepe","Wilfried Zaha","Sebastien Haller","Jonathan Kodjia","Kader Bamba"],
+  "kp":"Sebastien Haller","kcl":"Borussia Dortmund","kr":"Striker"},
+"Sweden":{"f":"\uD83C\uDDF8\uD83C\uDDEA","r":38,"c":"UEFA","g":"F","coach":"Jon Dahl Tomasson",
+  "gk":["Robin Olsen","Kristoffer Nordfeldt","Karl-Johan Johnsson"],
+  "def":["Victor Lindelof","Isak Hien","Emil Krafth","Ludwig Augustinsson","Filip Helander"],
+  "mid":["Dejan Kulusevski","Albin Ekdal","Viktor Claesson","Pontus Jansson"],
+  "fwd":["Alexander Isak","Anthony Elanga","Jesper Karlsson","Mattias Svanberg"],
+  "kp":"Alexander Isak","kcl":"Newcastle Utd","kr":"Striker"},
+"Paraguay":{"f":"\uD83C\uDDF5\uD83C\uDDFE","r":40,"c":"CONMEBOL","g":"D","coach":"Daniel Garnero",
+  "gk":["Antony Silva","Rodrigo Morinigo","Alfredo Aguilar"],
+  "def":["Gustavo Gomez","Omar Alderete","Fabian Balbuena","Oscar Romero","Junior Alonso"],
+  "mid":["Miguel Almiron","Mathias Villasanti","Andres Cubas","Braian Ojeda"],
+  "fwd":["Antonio Sanabria","Roberto Fernandez","Julio Enciso","Axel Veron"],
+  "kp":"Miguel Almiron","kcl":"Newcastle Utd","kr":"Midfielder"},
+"Czechia":{"f":"\uD83C\uDDE8\uD83C\uDDFF","r":41,"c":"UEFA","g":"A","coach":"Ivan Hasek",
+  "gk":["Jindrich Stanek","Matej Kovar","Ales Mandous"],
+  "def":["Vladimir Coufal","David Jurasek","Tomas Holes","Robin Hranac","Jakub Brabec"],
+  "mid":["Tomas Soucek","Lukas Provod","Ladislav Krejci","Matej Juranek"],
+  "fwd":["Patrik Schick","Adam Hlozek","Ondrej Lingr","Vaclav Cerny"],
+  "kp":"Patrik Schick","kcl":"Bayer Leverkusen","kr":"Striker"},
+"Scotland":{"f":"\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F","r":43,"c":"UEFA","g":"C","coach":"Steve Clarke",
+  "gk":["Angus Gunn","Craig Gordon","Zander Clark"],
+  "def":["Andy Robertson","Grant Hanley","Scott McKenna","Aaron Hickey","Jack Hendry"],
+  "mid":["Callum McGregor","John McGinn","Billy Gilmour","Kenny McLean"],
+  "fwd":["Che Adams","Lyndon Dykes","Ryan Christie","Ross Stewart","Stuart Armstrong"],
+  "kp":"Andy Robertson","kcl":"Liverpool","kr":"Left Back"},
+"Tunisia":{"f":"\uD83C\uDDF9\uD83C\uDDF3","r":44,"c":"CAF","g":"F","coach":"Jalel Kadri",
+  "gk":["Aymen Dahmen","Moez Ben Cherifia","Bechir Ben Said"],
+  "def":["Dylan Bronn","Montassar Talbi","Bilel Ifa","Nader Ghandri","Mohamed Draeger"],
+  "mid":["Ellyes Skhiri","Hannibal Mejbri","Aissa Laidouni","Hamza Mathlouthi"],
+  "fwd":["Youssef Msakni","Naim Sliti","Seifeddine Jaziri","Taha Yassine Khenissi"],
+  "kp":"Hannibal Mejbri","kcl":"Birmingham City","kr":"Midfielder"},
+"DR Congo":{"f":"\uD83C\uDDE8\uD83C\uDDE9","r":46,"c":"CAF","g":"K","coach":"Sebastien Desabre",
+  "gk":["Joel Kiassumbua","Thierry Silk","Dieu Merci Pascal"],
+  "def":["Chancel Mbemba","Arthur Masuaku","Samuel Moutoussamy","Heritier Luvumbo"],
+  "mid":["Yoane Wissa","Paul-Jose Mpoku","Cedric Bakambu","Meschack Elia"],
+  "fwd":["Jonathan David","Theo Bongonda","Sikou Niakhate","Fiston Mayele"],
+  "kp":"Yoane Wissa","kcl":"Brentford","kr":"Forward"},
+"Uzbekistan":{"f":"\uD83C\uDDFA\uD83C\uDDFF","r":50,"c":"AFC","g":"K","coach":"Srecko Katanec",
+  "gk":["Utkir Yusupov","Botir Ergashev","Dostonbek Tursunov"],
+  "def":["Sardor Rashidov","Jasurbek Yakhshiboev","Anzur Ismailov","Sherzod Qodirov"],
+  "mid":["Abbosbek Fayzullayev","Khojimat Erzin","Otabek Shamsiyev","Oston Urunov"],
+  "fwd":["Eldor Shomurodov","Aziz Soliev","Jakhongir Sidikov","Umid Eshmurodov"],
+  "kp":"Eldor Shomurodov","kcl":"AS Roma","kr":"Striker"},
+"Qatar":{"f":"\uD83C\uDDF6\uD83C\uDDE6","r":55,"c":"AFC","g":"B","coach":"Tintin Marquez",
+  "gk":["Meshaal Barsham","Yousef Hassan","Abdulaziz Hatem"],
+  "def":["Pedro Miguel","Tarek Salman","Bassam Al-Rawi","Abdelkarim Hassan"],
+  "mid":["Karim Boudiaf","Ali Asad","Assim Madibo","Salem Al-Hajri"],
+  "fwd":["Akram Afif","Almoez Ali","Hasan Al Haydos","Ahmed Alaaeldin"],
+  "kp":"Akram Afif","kcl":"Al Sadd","kr":"Forward"},
+"Iraq":{"f":"\uD83C\uDDEE\uD83C\uDDF6","r":57,"c":"AFC","g":"I","coach":"Jesus Casas",
+  "gk":["Jalal Hassan","Fahad Talib","Dhurgham Ismail"],
+  "def":["Ali Adnan","Rebin Sulaka","Hussain Ali","Amjad Attwan"],
+  "mid":["Bashar Resan","Saad Abdul Amir","Osama Rashid","Ibrahim Bayesh"],
+  "fwd":["Ayman Hussein","Mohanad Ali","Ahmad Yasin","Karrar Mohammed"],
+  "kp":"Ayman Hussein","kcl":"Erbil SC","kr":"Striker"},
+"South Africa":{"f":"\uD83C\uDDFF\uD83C\uDDE6","r":60,"c":"CAF","g":"A","coach":"Hugo Broos",
+  "gk":["Ronwen Williams","Bruce Bvuma","Veli Mothwa"],
+  "def":["Sifiso Hlanti","Rushine De Reuck","Bongani Zungu","Terrence Mashego","Mothobi Mvala"],
+  "mid":["Ethan Ntshumayelo","Teboho Mokoena","Lyle Foster","Pule Mmodi"],
+  "fwd":["Percy Tau","Themba Zwane","Bongokuhle Hlongwane","Evidence Makgopa","Lyle Lakay"],
+  "kp":"Percy Tau","kcl":"Al Ahly","kr":"Winger"},
+"Saudi Arabia":{"f":"\uD83C\uDDF8\uD83C\uDDE6","r":61,"c":"AFC","g":"H","coach":"Herve Renard",
+  "gk":["Mohammed Al-Owais","Abdulrahman Al-Aqidi","Nawaf Al-Aqidi"],
+  "def":["Hassan Tambakti","Sultan Al-Ghannam","Saud Abdulhamid","Ali Al-Bulayhi","Abdulelah Al-Amri"],
+  "mid":["Sami Al-Najei","Nasser Al-Dawsari","Mohammed Kanno","Riyadh Sharahili"],
+  "fwd":["Salem Al-Dawsari","Firas Al-Buraikan","Abdullah Al-Hamdan","Hattan Bahebri"],
+  "kp":"Salem Al-Dawsari","kcl":"Al Hilal","kr":"Winger"},
+"Jordan":{"f":"\uD83C\uDDEF\uD83C\uDDF4","r":63,"c":"AFC","g":"J","coach":"Hossam Hassan",
+  "gk":["Amer Shafi","Yazan Al-Arab","Mohammad Rashid"],
+  "def":["Yazan Al-Naimat","Mohammad Haitham","Baha Faisal","Khaled Al-Raqad"],
+  "mid":["Ibrahim Saad","Nour Al-Rawabdeh","Ahmad Saleh"],
+  "fwd":["Mousa Al-Tamari","Hamza Al-Dardour","Zaid Al-Zreiqat","Ali Olwan"],
+  "kp":"Mousa Al-Tamari","kcl":"Club Brugge","kr":"Winger"},
+"Bosnia":{"f":"\uD83C\uDDE7\uD83C\uDDE6","r":65,"c":"UEFA","g":"B","coach":"Sergej Barbarez",
+  "gk":["Nikola Vasilj","Ibrahim Sehic","Amer Spicek"],
+  "def":["Sead Kolasinac","Ermin Bicakcic","Stefan Savic","Anel Ahmedhodzic"],
+  "mid":["Miralem Pjanic","Josip Stanisic","Haris Tabak","Amar Dedic"],
+  "fwd":["Edin Dzeko","Rijad Bogdanovic","Ermedin Demirovic","Armin Hodzic"],
+  "kp":"Edin Dzeko","kcl":"Schalke 04","kr":"Striker"},
+"Cape Verde":{"f":"\uD83C\uDDE8\uD83C\uDDFB","r":69,"c":"CAF","g":"H","coach":"Pedro Leitao",
+  "gk":["Vozinha","Miti","Keltom"],
+  "def":["Stopira","Lisandro Semedo","Dylan Tavares","Diney"],
+  "mid":["Jamiro Monteiro","Nanu","Kenny Rocha","Julio Tavares"],
+  "fwd":["Ryan Mendes","Garry Rodrigues","Bebe","Gilson Tavares"],
+  "kp":"Garry Rodrigues","kcl":"Galatasaray","kr":"Winger"},
+"Ghana":{"f":"\uD83C\uDDEC\uD83C\uDDED","r":74,"c":"CAF","g":"L","coach":"Chris Hughton",
+  "gk":["Lawrence Ati Zigi","Joseph Wollacott","Abdul Manaf Nurudeen"],
+  "def":["Tariq Lamptey","Daniel Amartey","Alexander Djiku","Baba Rahman","Gideon Mensah"],
+  "mid":["Thomas Partey","Mohammed Kudus","Daniel-Kofi Kyereh","Salis Abdul Samed"],
+  "fwd":["Inaki Williams","Jordan Ayew","Antoine Semenyo","Osman Bukari"],
+  "kp":"Mohammed Kudus","kcl":"West Ham","kr":"Midfielder"},
+"Curacao":{"f":"\uD83C\uDDE8\uD83C\uDDFC","r":82,"c":"CONCACAF","g":"E","coach":"Patrick Kluivert",
+  "gk":["Eloy Room","Timo Wellenreuther","John Smit"],
+  "def":["Cuco Martina","Jurien Timber","Ethan Kos","Leandro Bacuna"],
+  "mid":["Giliano Wijnaldum","Brandley Kuwas","Jurien Maduro"],
+  "fwd":["Myron Boadu","Romario Benzar","Kluivert Jr"],
+  "kp":"Myron Boadu","kcl":"AS Monaco","kr":"Striker"},
+"Haiti":{"f":"\uD83C\uDDED\uD83C\uDDF9","r":83,"c":"CONCACAF","g":"C","coach":"Marc Collat",
+  "gk":["Johny Placide","Josue Duverger","Carlens Arcus"],
+  "def":["Mechak Jerome","Frantzdy Pierrot","Andrew Jean-Baptiste","Jaderson Manigat"],
+  "mid":["Wilde-Donald Guerrier","Francel Mulamba","Kevin Lafrance"],
+  "fwd":["Duckens Nazon","Derrick Etienne","Ronaldo Damus","Carnejy Antoine"],
+  "kp":"Duckens Nazon","kcl":"Standard Liege","kr":"Striker"},
+"New Zealand":{"f":"\uD83C\uDDF3\uD83C\uDDFF","r":85,"c":"OFC","g":"G","coach":"Darren Bazeley",
+  "gk":["Stefan Marinovic","Michael Woud","Oliver Sail"],
+  "def":["Tommy Smith","Nando Pijnaker","Michael Boxall","Liberato Cacace","Logan Rogerson"],
+  "mid":["Clayton Lewis","Marco Rojas","Gianni Stensness","Joe Bell"],
+  "fwd":["Chris Wood","Matthew Garbett","Elijah Just","Kosta Barbarouses"],
+  "kp":"Chris Wood","kcl":"Nottm Forest","kr":"Striker"}
+};
+
+// Groups
+var GRP = {
+  A:["Mexico","South Korea","South Africa","Czechia"],
+  B:["Canada","Switzerland","Qatar","Bosnia"],
+  C:["Brazil","Morocco","Scotland","Haiti"],
+  D:["USA","Australia","Paraguay","Turkiye"],
+  E:["Germany","Ecuador","Ivory Coast","Curacao"],
+  F:["Netherlands","Japan","Sweden","Tunisia"],
+  G:["Belgium","Egypt","Iran","New Zealand"],
+  H:["Spain","Saudi Arabia","Uruguay","Cape Verde"],
+  I:["France","Senegal","Norway","Iraq"],
+  J:["Argentina","Algeria","Austria","Jordan"],
+  K:["Portugal","Colombia","Uzbekistan","DR Congo"],
+  L:["England","Croatia","Ghana","Panama"]
+};
+
+// Rankings
+var RNK = [
+  {r:1,n:"France",f:"\uD83C\uDDEB\uD83C\uDDF7",c:"UEFA",g:"I",kp:"Kylian Mbappe"},
+  {r:2,n:"Spain",f:"\uD83C\uDDEA\uD83C\uDDF8",c:"UEFA",g:"H",kp:"Lamine Yamal"},
+  {r:3,n:"Argentina",f:"\uD83C\uDDE6\uD83C\uDDF7",c:"CONMEBOL",g:"J",kp:"Lionel Messi"},
+  {r:4,n:"England",f:"\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F",c:"UEFA",g:"L",kp:"Jude Bellingham"},
+  {r:5,n:"Portugal",f:"\uD83C\uDDF5\uD83C\uDDF9",c:"UEFA",g:"K",kp:"Cristiano Ronaldo"},
+  {r:6,n:"Brazil",f:"\uD83C\uDDE7\uD83C\uDDF7",c:"CONMEBOL",g:"C",kp:"Vinicius Jr"},
+  {r:7,n:"Netherlands",f:"\uD83C\uDDF3\uD83C\uDDF1",c:"UEFA",g:"F",kp:"Virgil van Dijk"},
+  {r:8,n:"Morocco",f:"\uD83C\uDDF2\uD83C\uDDE6",c:"CAF",g:"C",kp:"Achraf Hakimi"},
+  {r:9,n:"Belgium",f:"\uD83C\uDDE7\uD83C\uDDEA",c:"UEFA",g:"G",kp:"Kevin De Bruyne"},
+  {r:10,n:"Germany",f:"\uD83C\uDDE9\uD83C\uDDEA",c:"UEFA",g:"E",kp:"Florian Wirtz"},
+  {r:11,n:"Croatia",f:"\uD83C\uDDED\uD83C\uDDF7",c:"UEFA",g:"L",kp:"Luka Modric"},
+  {r:13,n:"Colombia",f:"\uD83C\uDDE8\uD83C\uDDF4",c:"CONMEBOL",g:"K",kp:"Luis Diaz"},
+  {r:14,n:"Senegal",f:"\uD83C\uDDF8\uD83C\uDDF3",c:"CAF",g:"I",kp:"Sadio Mane"},
+  {r:15,n:"Mexico",f:"\uD83C\uDDF2\uD83C\uDDFD",c:"CONCACAF",g:"A",kp:"Santiago Gimenez"},
+  {r:16,n:"USA",f:"\uD83C\uDDFA\uD83C\uDDF8",c:"CONCACAF",g:"D",kp:"Christian Pulisic"},
+  {r:17,n:"Uruguay",f:"\uD83C\uDDFA\uD83C\uDDFE",c:"CONMEBOL",g:"H",kp:"Federico Valverde"},
+  {r:18,n:"Japan",f:"\uD83C\uDDEF\uD83C\uDDF5",c:"AFC",g:"F",kp:"Kaoru Mitoma"},
+  {r:19,n:"Switzerland",f:"\uD83C\uDDE8\uD83C\uDDED",c:"UEFA",g:"B",kp:"Granit Xhaka"},
+  {r:21,n:"Iran",f:"\uD83C\uDDEE\uD83C\uDDF7",c:"AFC",g:"G",kp:"Mehdi Taremi"},
+  {r:22,n:"Turkiye",f:"\uD83C\uDDF9\uD83C\uDDF7",c:"UEFA",g:"D",kp:"Hakan Calhanoglu"},
+  {r:23,n:"Ecuador",f:"\uD83C\uDDEA\uD83C\uDDE8",c:"CONMEBOL",g:"E",kp:"Moises Caicedo"},
+  {r:24,n:"Austria",f:"\uD83C\uDDE6\uD83C\uDDF9",c:"UEFA",g:"J",kp:"David Alaba"},
+  {r:25,n:"South Korea",f:"\uD83C\uDDF0\uD83C\uDDF7",c:"AFC",g:"A",kp:"Son Heung-min"},
+  {r:27,n:"Australia",f:"\uD83C\uDDE6\uD83C\uDDFA",c:"AFC",g:"D",kp:"Mathew Leckie"},
+  {r:28,n:"Algeria",f:"\uD83C\uDDE9\uD83C\uDDFF",c:"CAF",g:"J",kp:"Riyad Mahrez"},
+  {r:29,n:"Egypt",f:"\uD83C\uDDEA\uD83C\uDDEC",c:"CAF",g:"G",kp:"Mohamed Salah"},
+  {r:30,n:"Canada",f:"\uD83C\uDDE8\uD83C\uDDE6",c:"CONCACAF",g:"B",kp:"Alphonso Davies"},
+  {r:31,n:"Norway",f:"\uD83C\uDDF3\uD83C\uDDF4",c:"UEFA",g:"I",kp:"Erling Haaland"},
+  {r:33,n:"Panama",f:"\uD83C\uDDF5\uD83C\uDDE6",c:"CONCACAF",g:"L",kp:"A. Carrasquilla"},
+  {r:34,n:"Ivory Coast",f:"\uD83C\uDDE8\uD83C\uDDEE",c:"CAF",g:"E",kp:"Sebastien Haller"},
+  {r:38,n:"Sweden",f:"\uD83C\uDDF8\uD83C\uDDEA",c:"UEFA",g:"F",kp:"Alexander Isak"},
+  {r:40,n:"Paraguay",f:"\uD83C\uDDF5\uD83C\uDDFE",c:"CONMEBOL",g:"D",kp:"Miguel Almiron"},
+  {r:41,n:"Czechia",f:"\uD83C\uDDE8\uD83C\uDDFF",c:"UEFA",g:"A",kp:"Patrik Schick"},
+  {r:43,n:"Scotland",f:"\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F",c:"UEFA",g:"C",kp:"Andy Robertson"},
+  {r:44,n:"Tunisia",f:"\uD83C\uDDF9\uD83C\uDDF3",c:"CAF",g:"F",kp:"Hannibal Mejbri"},
+  {r:46,n:"DR Congo",f:"\uD83C\uDDE8\uD83C\uDDE9",c:"CAF",g:"K",kp:"Yoane Wissa"},
+  {r:50,n:"Uzbekistan",f:"\uD83C\uDDFA\uD83C\uDDFF",c:"AFC",g:"K",kp:"Eldor Shomurodov"},
+  {r:55,n:"Qatar",f:"\uD83C\uDDF6\uD83C\uDDE6",c:"AFC",g:"B",kp:"Akram Afif"},
+  {r:57,n:"Iraq",f:"\uD83C\uDDEE\uD83C\uDDF6",c:"AFC",g:"I",kp:"Ayman Hussein"},
+  {r:60,n:"South Africa",f:"\uD83C\uDDFF\uD83C\uDDE6",c:"CAF",g:"A",kp:"Percy Tau"},
+  {r:61,n:"Saudi Arabia",f:"\uD83C\uDDF8\uD83C\uDDE6",c:"AFC",g:"H",kp:"Salem Al-Dawsari"},
+  {r:63,n:"Jordan",f:"\uD83C\uDDEF\uD83C\uDDF4",c:"AFC",g:"J",kp:"Mousa Al-Tamari"},
+  {r:65,n:"Bosnia",f:"\uD83C\uDDE7\uD83C\uDDE6",c:"UEFA",g:"B",kp:"Edin Dzeko"},
+  {r:69,n:"Cape Verde",f:"\uD83C\uDDE8\uD83C\uDDFB",c:"CAF",g:"H",kp:"Garry Rodrigues"},
+  {r:74,n:"Ghana",f:"\uD83C\uDDEC\uD83C\uDDED",c:"CAF",g:"L",kp:"Mohammed Kudus"},
+  {r:82,n:"Curacao",f:"\uD83C\uDDE8\uD83C\uDDFC",c:"CONCACAF",g:"E",kp:"Myron Boadu"},
+  {r:83,n:"Haiti",f:"\uD83C\uDDED\uD83C\uDDF9",c:"CONCACAF",g:"C",kp:"Duckens Nazon"},
+  {r:85,n:"New Zealand",f:"\uD83C\uDDF3\uD83C\uDDFF",c:"OFC",g:"G",kp:"Chris Wood"}
+];
+
+// Matches: [istDate, istTime, team1, team2, venue, city, stage, grpOrLabel]
+// IST dates/times are pre-calculated (ET + 9h30m)
+var M = [
+  // GROUP A
+  ["Thu Jun 12","12:30 AM","Mexico","South Africa","Estadio Azteca","Mexico City","group","A"],
+  ["Fri Jun 13","7:30 AM","South Korea","Czechia","Estadio Akron","Guadalajara","group","A"],
+  ["Fri Jun 19","9:30 PM","Czechia","South Africa","Mercedes-Benz Stadium","Atlanta","group","A"],
+  ["Sat Jun 20","6:30 AM","Mexico","South Korea","Estadio Akron","Guadalajara","group","A"],
+  ["Wed Jun 25","6:30 AM","Czechia","Mexico","Estadio Azteca","Mexico City","group","A"],
+  ["Wed Jun 25","6:30 AM","South Africa","South Korea","Estadio BBVA","Monterrey","group","A"],
+  // GROUP B
+  ["Fri Jun 13","12:30 AM","Canada","Bosnia","BMO Field","Toronto","group","B"],
+  ["Sat Jun 14","12:30 AM","Qatar","Switzerland","Levi's Stadium","San Francisco","group","B"],
+  ["Fri Jun 20","12:30 AM","Switzerland","Bosnia","SoFi Stadium","Los Angeles","group","B"],
+  ["Fri Jun 20","3:30 AM","Canada","Qatar","BC Place","Vancouver","group","B"],
+  ["Wed Jun 25","12:30 AM","Switzerland","Canada","BC Place","Vancouver","group","B"],
+  ["Wed Jun 25","12:30 AM","Bosnia","Qatar","Lumen Field","Seattle","group","B"],
+  // GROUP C
+  ["Sat Jun 14","3:30 AM","Brazil","Morocco","MetLife Stadium","New York/NJ","group","C"],
+  ["Sat Jun 14","6:30 AM","Haiti","Scotland","Gillette Stadium","Boston","group","C"],
+  ["Fri Jun 20","3:30 AM","Scotland","Morocco","Gillette Stadium","Boston","group","C"],
+  ["Fri Jun 20","6:00 AM","Brazil","Haiti","Lincoln Financial Field","Philadelphia","group","C"],
+  ["Wed Jun 25","3:30 AM","Scotland","Brazil","Hard Rock Stadium","Miami","group","C"],
+  ["Wed Jun 25","3:30 AM","Morocco","Haiti","Mercedes-Benz Stadium","Atlanta","group","C"],
+  // GROUP D
+  ["Fri Jun 13","6:30 AM","USA","Paraguay","SoFi Stadium","Los Angeles","group","D"],
+  ["Sun Jun 15","9:30 AM","Australia","Turkiye","BC Place","Vancouver","group","D"],
+  ["Fri Jun 20","12:30 AM","USA","Australia","Lumen Field","Seattle","group","D"],
+  ["Fri Jun 20","8:30 AM","Turkiye","Paraguay","Levi's Stadium","San Francisco","group","D"],
+  ["Thu Jun 26","7:30 AM","Turkiye","USA","SoFi Stadium","Los Angeles","group","D"],
+  ["Thu Jun 26","7:30 AM","Paraguay","Australia","Levi's Stadium","San Francisco","group","D"],
+  // GROUP E
+  ["Sun Jun 15","10:30 PM","Germany","Curacao","NRG Stadium","Houston","group","E"],
+  ["Mon Jun 16","4:30 AM","Ivory Coast","Ecuador","Lincoln Financial Field","Philadelphia","group","E"],
+  ["Sun Jun 22","1:30 AM","Germany","Ivory Coast","BMO Field","Toronto","group","E"],
+  ["Sun Jun 22","5:30 AM","Ecuador","Curacao","Arrowhead Stadium","Kansas City","group","E"],
+  ["Thu Jun 26","7:30 AM","Ecuador","Germany","MetLife Stadium","New York/NJ","group","E"],
+  ["Thu Jun 26","7:30 AM","Curacao","Ivory Coast","Lincoln Financial Field","Philadelphia","group","E"],
+  // GROUP F
+  ["Mon Jun 16","1:30 AM","Netherlands","Japan","AT&T Stadium","Dallas","group","F"],
+  ["Mon Jun 16","7:30 AM","Sweden","Tunisia","Estadio BBVA","Monterrey","group","F"],
+  ["Sun Jun 22","9:30 AM","Tunisia","Japan","Estadio BBVA","Monterrey","group","F"],
+  ["Sat Jun 21","10:30 PM","Netherlands","Sweden","NRG Stadium","Houston","group","F"],
+  ["Thu Jun 26","4:30 AM","Japan","Sweden","AT&T Stadium","Dallas","group","F"],
+  ["Thu Jun 26","4:30 AM","Tunisia","Netherlands","Arrowhead Stadium","Kansas City","group","F"],
+  // GROUP G
+  ["Tue Jun 17","12:30 AM","Belgium","Egypt","Lumen Field","Seattle","group","G"],
+  ["Tue Jun 17","6:30 AM","Iran","New Zealand","SoFi Stadium","Los Angeles","group","G"],
+  ["Mon Jun 23","12:30 AM","Belgium","Iran","SoFi Stadium","Los Angeles","group","G"],
+  ["Mon Jun 23","6:30 AM","New Zealand","Egypt","BC Place","Vancouver","group","G"],
+  ["Fri Jun 27","9:00 AM","Egypt","Iran","Lumen Field","Seattle","group","G"],
+  ["Fri Jun 27","9:00 AM","New Zealand","Belgium","BC Place","Vancouver","group","G"],
+  // GROUP H
+  ["Mon Jun 16","9:30 PM","Spain","Cape Verde","Mercedes-Benz Stadium","Atlanta","group","H"],
+  ["Tue Jun 17","3:30 AM","Saudi Arabia","Uruguay","Hard Rock Stadium","Miami","group","H"],
+  ["Sun Jun 22","9:30 PM","Spain","Saudi Arabia","Mercedes-Benz Stadium","Atlanta","group","H"],
+  ["Mon Jun 23","3:30 AM","Uruguay","Cape Verde","Hard Rock Stadium","Miami","group","H"],
+  ["Fri Jun 27","5:30 AM","Cape Verde","Saudi Arabia","NRG Stadium","Houston","group","H"],
+  ["Fri Jun 27","5:30 AM","Uruguay","Spain","Estadio Akron","Guadalajara","group","H"],
+  // GROUP I
+  ["Tue Jun 17","12:30 AM","France","Senegal","MetLife Stadium","New York/NJ","group","I"],
+  ["Wed Jun 18","12:30 AM","Iraq","Norway","Gillette Stadium","Boston","group","I"],
+  ["Tue Jun 24","2:30 AM","France","Iraq","Lincoln Financial Field","Philadelphia","group","I"],
+  ["Tue Jun 24","5:30 AM","Norway","Senegal","MetLife Stadium","New York/NJ","group","I"],
+  ["Fri Jun 27","12:30 AM","Norway","France","Gillette Stadium","Boston","group","I"],
+  ["Fri Jun 27","12:30 AM","Senegal","Iraq","BMO Field","Toronto","group","I"],
+  // GROUP J
+  ["Wed Jun 18","3:30 AM","Argentina","Algeria","Arrowhead Stadium","Kansas City","group","J"],
+  ["Wed Jun 18","9:30 AM","Austria","Jordan","Levi's Stadium","San Francisco","group","J"],
+  ["Mon Jun 23","10:30 PM","Argentina","Austria","AT&T Stadium","Dallas","group","J"],
+  ["Tue Jun 24","8:30 AM","Jordan","Algeria","Levi's Stadium","San Francisco","group","J"],
+  ["Sat Jun 28","7:30 AM","Algeria","Austria","Arrowhead Stadium","Kansas City","group","J"],
+  ["Sat Jun 28","7:30 AM","Jordan","Argentina","AT&T Stadium","Dallas","group","J"],
+  // GROUP K
+  ["Wed Jun 18","10:30 PM","Portugal","DR Congo","NRG Stadium","Houston","group","K"],
+  ["Thu Jun 19","7:30 AM","Uzbekistan","Colombia","Estadio Azteca","Mexico City","group","K"],
+  ["Tue Jun 24","10:30 PM","Portugal","Uzbekistan","NRG Stadium","Houston","group","K"],
+  ["Wed Jun 25","7:30 AM","Colombia","DR Congo","Estadio Akron","Guadalajara","group","K"],
+  ["Sat Jun 28","5:00 AM","Colombia","Portugal","Hard Rock Stadium","Miami","group","K"],
+  ["Sat Jun 28","5:00 AM","DR Congo","Uzbekistan","Mercedes-Benz Stadium","Atlanta","group","K"],
+  // GROUP L
+  ["Thu Jun 19","1:30 AM","England","Croatia","AT&T Stadium","Dallas","group","L"],
+  ["Thu Jun 19","4:30 AM","Ghana","Panama","BMO Field","Toronto","group","L"],
+  ["Wed Jun 25","1:30 AM","England","Ghana","Gillette Stadium","Boston","group","L"],
+  ["Wed Jun 25","4:30 AM","Panama","Croatia","SoFi Stadium","Los Angeles","group","L"],
+  ["Sat Jun 28","1:30 AM","England","Panama","MetLife Stadium","New York/NJ","group","L"],
+  ["Sat Jun 28","1:30 AM","Croatia","Ghana","Lincoln Financial Field","Philadelphia","group","L"],
+  // ROUND OF 32
+  ["Sun Jun 29","12:30 AM","W Group A","3rd B/C/D","MetLife Stadium","New York/NJ","r32","R32"],
+  ["Sun Jun 29","4:30 AM","W Group B","3rd A/C/E","AT&T Stadium","Dallas","r32","R32"],
+  ["Mon Jun 30","12:30 AM","W Group C","3rd D/F/G","NRG Stadium","Houston","r32","R32"],
+  ["Mon Jun 30","4:30 AM","W Group D","3rd E/H/I","Lumen Field","Seattle","r32","R32"],
+  ["Tue Jul 1","12:30 AM","W Group E","3rd F/J/K","Hard Rock Stadium","Miami","r32","R32"],
+  ["Tue Jul 1","4:30 AM","W Group F","3rd G/L/A","Mercedes-Benz Stadium","Atlanta","r32","R32"],
+  ["Wed Jul 2","12:30 AM","W Group G","3rd H/B/C","SoFi Stadium","Los Angeles","r32","R32"],
+  ["Wed Jul 2","4:30 AM","W Group H","3rd I/D/E","Gillette Stadium","Boston","r32","R32"],
+  ["Thu Jul 3","12:30 AM","W Group I","3rd J/K/L","Levi's Stadium","San Francisco","r32","R32"],
+  ["Thu Jul 3","4:30 AM","W Group J","3rd B/F/H","BC Place","Vancouver","r32","R32"],
+  ["Fri Jul 4","12:30 AM","W Group K","3rd C/G/I","Arrowhead Stadium","Kansas City","r32","R32"],
+  ["Fri Jul 4","4:30 AM","W Group L","3rd A/D/J","BMO Field","Toronto","r32","R32"],
+  // ROUND OF 16
+  ["Sat Jul 5","12:30 AM","R32 W1","R32 W2","MetLife Stadium","New York/NJ","r16","R16"],
+  ["Sat Jul 5","4:30 AM","R32 W3","R32 W4","AT&T Stadium","Dallas","r16","R16"],
+  ["Sun Jul 6","12:30 AM","R32 W5","R32 W6","NRG Stadium","Houston","r16","R16"],
+  ["Sun Jul 6","4:30 AM","R32 W7","R32 W8","Lumen Field","Seattle","r16","R16"],
+  ["Mon Jul 7","12:30 AM","R32 W9","R32 W10","SoFi Stadium","Los Angeles","r16","R16"],
+  ["Mon Jul 7","4:30 AM","R32 W11","R32 W12","Mercedes-Benz Stadium","Atlanta","r16","R16"],
+  ["Tue Jul 8","12:30 AM","R32 W13","R32 W14","Hard Rock Stadium","Miami","r16","R16"],
+  ["Tue Jul 8","4:30 AM","R32 W15","R32 W16","Gillette Stadium","Boston","r16","R16"],
+  // QUARTERFINALS
+  ["Thu Jul 10","12:30 AM","QF1 Team A","QF1 Team B","MetLife Stadium","New York/NJ","qf","QF"],
+  ["Thu Jul 10","4:30 AM","QF2 Team A","QF2 Team B","AT&T Stadium","Dallas","qf","QF"],
+  ["Fri Jul 11","12:30 AM","QF3 Team A","QF3 Team B","SoFi Stadium","Los Angeles","qf","QF"],
+  ["Fri Jul 11","4:30 AM","QF4 Team A","QF4 Team B","NRG Stadium","Houston","qf","QF"],
+  // SEMIFINALS
+  ["Tue Jul 15","12:30 AM","SF1 Winner","SF1 Runner","MetLife Stadium","New York/NJ","sf","SF"],
+  ["Wed Jul 16","12:30 AM","SF2 Winner","SF2 Runner","AT&T Stadium","Dallas","sf","SF"],
+  // 3RD PLACE
+  ["Sat Jul 19","12:30 AM","SF1 Loser","SF2 Loser","Hard Rock Stadium","Miami","sf","3rd Place"],
+  // FINAL
+  ["Sun Jul 20","12:30 AM","\uD83C\uDFC6 Champion","Runner-Up","MetLife Stadium","New Jersey","final","FINAL"]
+];
+
+var BKT = [
+  {t:"Group Stage",d:"Jun 11 \u2013 Jun 27",m:"72 matches",p:"12 groups of 4; top 2 per group + 8 best 3rd-place = 32 advance"},
+  {t:"Round of 32",d:"Jun 28 \u2013 Jul 3",m:"16 matches",p:"Brand-new round unique to the 2026 expanded 48-team format"},
+  {t:"Round of 16",d:"Jul 4 \u2013 Jul 7",m:"8 matches",p:"16 winners progress to the quarterfinals"},
+  {t:"Quarterfinals",d:"Jul 9 \u2013 Jul 11",m:"4 matches",p:"8 teams remain, single-elimination knockout"},
+  {t:"Semifinals",d:"Jul 14 \u2013 Jul 15",m:"2 matches",p:"4 teams battle for a place in the Final"},
+  {t:"3rd Place Match",d:"Jul 18",m:"1 match",p:"Hard Rock Stadium, Miami \u2013 bronze medal playoff"},
+  {t:"\uD83C\uDFC6 The Final",d:"Jul 19 \u00B7 3 PM ET",m:"1 match",p:"MetLife Stadium, NJ \u00B7 12:30 AM IST Jul 20, 2026"}
+];
+
+var VEN = [
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"MetLife Stadium",ci:"East Rutherford, NJ",cap:"82,500",co:"USA",m:"8 incl. Final"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"AT&T Stadium",ci:"Arlington, TX",cap:"80,000",co:"USA",m:"8 incl. SF"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"SoFi Stadium",ci:"Inglewood, CA",cap:"70,240",co:"USA",m:"8"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Hard Rock Stadium",ci:"Miami Gardens, FL",cap:"64,767",co:"USA",m:"8"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"NRG Stadium",ci:"Houston, TX",cap:"72,220",co:"USA",m:"8"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Levi's Stadium",ci:"Santa Clara, CA",cap:"68,500",co:"USA",m:"7"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Lumen Field",ci:"Seattle, WA",cap:"69,000",co:"USA",m:"7"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Arrowhead Stadium",ci:"Kansas City, MO",cap:"76,416",co:"USA",m:"7"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Lincoln Financial Field",ci:"Philadelphia, PA",cap:"69,328",co:"USA",m:"7"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Mercedes-Benz Stadium",ci:"Atlanta, GA",cap:"71,000",co:"USA",m:"7"},
+  {fl:"\uD83C\uDDFA\uD83C\uDDF8",n:"Gillette Stadium",ci:"Foxborough, MA",cap:"65,878",co:"USA",m:"7"},
+  {fl:"\uD83C\uDDF2\uD83C\uDDFD",n:"Estadio Azteca",ci:"Mexico City",cap:"87,523",co:"Mexico",m:"5 incl. Opening"},
+  {fl:"\uD83C\uDDF2\uD83C\uDDFD",n:"Estadio Akron",ci:"Guadalajara",cap:"49,850",co:"Mexico",m:"4 (Group only)"},
+  {fl:"\uD83C\uDDF2\uD83C\uDDFD",n:"Estadio BBVA",ci:"Monterrey",cap:"51,348",co:"Mexico",m:"4"},
+  {fl:"\uD83C\uDDE8\uD83C\uDDE6",n:"BC Place",ci:"Vancouver",cap:"54,500",co:"Canada",m:"7"},
+  {fl:"\uD83C\uDDE8\uD83C\uDDE6",n:"BMO Field",ci:"Toronto",cap:"30,000",co:"Canada",m:"6"}
+];
+
+// ============================================================
+// HELPERS
+// ============================================================
+function ti(nm) { return T[nm] || {f:"\uD83C\uDFF3\uFE0F",r:"",c:""}; }
+
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function mc(row) {
+  var d=row[0],tm=row[1],t1=row[2],t2=row[3],vn=row[4],ci=row[5],st=row[6],lb=row[7];
+  var i1=ti(t1), i2=ti(t2);
+  var bdg = st==="group" ? "Group "+lb : lb;
+  var cls = "mc"+(st==="final"?" fin":"");
+  var r1 = i1.r ? "FIFA #"+i1.r : "";
+  var r2 = i2.r ? "FIFA #"+i2.r : "";
+  var sub = st==="group" ? "GRP "+lb : st.toUpperCase();
+  var key = (t1+" "+t2+" "+vn+" "+ci).toLowerCase();
+  return '<div class="'+cls+'" data-st="'+st+'" data-k="'+esc(key)+'">'
+    +'<div class="mmeta"><div class="mdate">'+esc(d)+'</div>'
+    +'<div class="mtime">'+esc(tm)+'</div>'
+    +'<div class="mist">\uD83C\uDDEE\uD83C\uDDF3 IST</div>'
+    +'<span class="mbdg">'+esc(bdg)+'</span></div>'
+    +'<div class="ts"><span class="tf">'+i1.f+'</span>'
+    +'<div class="ti"><div class="tn">'+esc(t1)+'</div><div class="trk">'+esc(r1)+'</div></div></div>'
+    +'<div class="vs">VS<div class="vss">'+esc(sub)+'</div></div>'
+    +'<div class="ts r"><span class="tf">'+i2.f+'</span>'
+    +'<div class="ti"><div class="tn">'+esc(t2)+'</div><div class="trk">'+esc(r2)+'</div></div></div>'
+    +'<div class="mv"><strong>'+esc(vn)+'</strong>'+esc(ci)+'</div>'
+    +'</div>';
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderMatches() {
+  document.getElementById("mlist").innerHTML = M.map(mc).join("");
+}
+
+function renderGroups() {
+  var h = "";
+  var letters = Object.keys(GRP);
+  for (var i=0; i<letters.length; i++) {
+    var lt = letters[i];
+    var teams = GRP[lt];
+    var rows = "";
+    for (var j=0; j<teams.length; j++) {
+      var nm = teams[j];
+      var t = ti(nm);
+      rows += '<div class="gt"><span class="gfl">'+t.f+'</span>'
+        +'<span class="gnm">'+esc(nm)+'</span>'
+        +'<span class="grb">#'+t.r+'</span></div>';
+    }
+    h += '<div class="gc"><div class="gh">'
+      +'<div class="gl">'+lt+'</div>'
+      +'<div class="gm">Group '+lt+'<br>'+teams.length+' teams</div>'
+      +'</div>'+rows+'</div>';
+  }
+  document.getElementById("glist").innerHTML = h;
+}
+
+function renderTeams() {
+  var h = "";
+  var names = Object.keys(T);
+  for (var i=0; i<names.length; i++) {
+    var nm = names[i];
+    var t = T[nm];
+    var allP = (t.gk||[]).concat(t.def||[]).concat(t.mid||[]).concat(t.fwd||[]);
+    var q = (nm+" "+allP.join(" ")).toLowerCase();
+
+    function chips(arr, starCount) {
+      var s = "";
+      for (var x=0; x<arr.length; x++) {
+        s += '<span class="chip'+(x<starCount?" s":"")+'">'+esc(arr[x])+'</span>';
+      }
+      return s;
+    }
+
+    h += '<div class="tcard" data-c="'+t.c+'" data-q="'+esc(q)+'">'
+      +'<div class="tchead">'
+      +'<span class="tcfl">'+t.f+'</span>'
+      +'<div class="tcinf"><div class="tcnm">'+esc(nm)+'</div>'
+      +'<div class="tcmt">Group '+t.g+' &middot; '+t.c+' &middot; Coach: '+esc(t.coach)+'</div></div>'
+      +'<div class="tcrk"><div class="tcrn">'+t.r+'</div><div class="tcrl">FIFA Rank</div></div>'
+      +'</div>'
+      +'<div class="tcbody">'
+      +'<div class="kpbox"><span class="kpst">&#11088;</span>'
+      +'<div><div class="kpnm">'+esc(t.kp)+' <span class="kpcl">&mdash; '+esc(t.kcl)+'</span></div>'
+      +'<div class="kprl">'+esc(t.kr)+'</div></div></div>'
+      +'<div class="slbl">&#129380; Goalkeepers</div><div class="chips">'+chips(t.gk||[],1)+'</div>'
+      +'<div class="slbl">&#128737; Defenders</div><div class="chips">'+chips(t.def||[],5)+'</div>'
+      +'<div class="slbl">&#9881;&#65039; Midfielders</div><div class="chips">'+chips(t.mid||[],4)+'</div>'
+      +'<div class="slbl">&#9889; Forwards</div><div class="chips">'+chips(t.fwd||[],3)+'</div>'
+      +'</div></div>';
+  }
+  document.getElementById("tlist").innerHTML = h;
+}
+
+function renderRankings() {
+  var h = "";
+  for (var i=0; i<RNK.length; i++) {
+    var r = RNK[i];
+    h += '<tr data-c="'+r.c+'">'
+      +'<td><span class="rpos'+(r.r<=3?" top":"")+'">'+r.r+'</span></td>'
+      +'<td style="font-size:1.4rem">'+r.f+'</td>'
+      +'<td style="font-weight:500">'+esc(r.n)+'</td>'
+      +'<td><span class="conf '+r.c+'">'+r.c+'</span></td>'
+      +'<td><span class="mbdg">Group '+r.g+'</span></td>'
+      +'<td style="font-size:.8rem;color:var(--glight)">&#11088; '+esc(r.kp)+'</td>'
+      +'</tr>';
+  }
+  document.getElementById("rbody").innerHTML = h;
+}
+
+function renderKnockout() {
+  var h = "";
+  for (var i=0; i<BKT.length; i++) {
+    var s = BKT[i];
+    h += '<div class="brstg"><h3>'+esc(s.t)+'</h3>'
+      +'<div class="bd">&#128197; '+esc(s.d)+'</div>'
+      +'<div class="bm">'+esc(s.m)+'</div>'
+      +'<p>'+esc(s.p)+'</p></div>';
+  }
+  document.getElementById("brstg").innerHTML = h;
+  document.getElementById("klist").innerHTML = M.filter(function(r){return r[6]!=="group";}).map(mc).join("");
+}
+
+function renderVenues() {
+  var h = "";
+  for (var i=0; i<VEN.length; i++) {
+    var v = VEN[i];
+    h += '<div class="vc" data-co="'+v.co+'">'
+      +'<div class="vfl">'+v.fl+'</div>'
+      +'<div class="vnm">'+esc(v.n)+'</div>'
+      +'<div class="vci">&#128205; '+esc(v.ci)+'</div>'
+      +'<div class="vcap">Capacity: '+esc(v.cap)+'</div>'
+      +'<div class="vmch">Matches: '+esc(v.m)+'</div>'
+      +'</div>';
+  }
+  document.getElementById("vlist").innerHTML = h;
+}
+
+// ============================================================
+// FILTERS
+// ============================================================
+function act(cid, btn) {
+  document.querySelectorAll("#"+cid+" .fb").forEach(function(b){b.classList.remove("on");});
+  btn.classList.add("on");
+}
+
+function fM(st,btn){
+  act("sf",btn);
+  document.querySelectorAll("#mlist .mc").forEach(function(el){
+    el.style.display=(st==="all"||el.dataset.st===st)?"":"none";
+  });
+}
+function sM(q){
+  q=q.toLowerCase();
+  document.querySelectorAll("#mlist .mc").forEach(function(el){
+    el.style.display=el.dataset.k.includes(q)?"":"none";
+  });
+}
+function fT(c,btn){
+  act("cf",btn);
+  document.querySelectorAll("#tlist .tcard").forEach(function(el){
+    el.style.display=(c==="all"||el.dataset.c===c)?"":"none";
+  });
+}
+function sT(q){
+  q=q.toLowerCase();
+  document.querySelectorAll("#tlist .tcard").forEach(function(el){
+    el.style.display=el.dataset.q.includes(q)?"":"none";
+  });
+}
+function fR(c,btn){
+  act("rf",btn);
+  document.querySelectorAll("#rbody tr").forEach(function(el){
+    el.style.display=(c==="all"||el.dataset.c===c)?"":"none";
+  });
+}
+function fV(c,btn){
+  act("vf",btn);
+  document.querySelectorAll("#vlist .vc").forEach(function(el){
+    el.style.display=(c==="all"||el.dataset.co===c)?"":"none";
+  });
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function show(id,btn){
+  document.querySelectorAll(".sec").forEach(function(s){s.classList.remove("on");});
+  document.querySelectorAll(".tab").forEach(function(b){b.classList.remove("on");});
+  document.getElementById(id).classList.add("on");
+  btn.classList.add("on");
+  window.scrollTo({top:document.querySelector("nav").offsetTop-2,behavior:"smooth"});
+}
+
+// ============================================================
+// COUNTDOWN — Final: Jul 19 2026 19:00 UTC (3 PM ET = 12:30 AM IST Jul 20)
+// ============================================================
+function tick(){
+  var fin=new Date("2026-07-19T19:00:00Z").getTime();
+  var now=Date.now();
+  var diff=fin-now;
+  if(diff<=0){["cdd","cdh","cdm","cds"].forEach(function(id){document.getElementById(id).textContent="00";});return;}
+  var dd=Math.floor(diff/86400000);
+  var hh=Math.floor((diff%86400000)/3600000);
+  var mm=Math.floor((diff%3600000)/60000);
+  var ss=Math.floor((diff%60000)/1000);
+  document.getElementById("cdd").textContent=String(dd).padStart(2,"0");
+  document.getElementById("cdh").textContent=String(hh).padStart(2,"0");
+  document.getElementById("cdm").textContent=String(mm).padStart(2,"0");
+  document.getElementById("cds").textContent=String(ss).padStart(2,"0");
+}
+
+// ============================================================
+// STARS
+// ============================================================
+function makeStars(){
+  var w=document.getElementById("stars");
+  for(var i=0;i<70;i++){
+    var s=document.createElement("div");
+    s.className="star";
+    var sz=(1+Math.random()*2).toFixed(1);
+    s.style.cssText="width:"+sz+"px;height:"+sz+"px;left:"+(Math.random()*100).toFixed(1)+"%;top:"+(Math.random()*100).toFixed(1)+"%;animation-delay:"+(Math.random()*4).toFixed(1)+"s;animation-duration:"+(2+Math.random()*3).toFixed(1)+"s";
+    w.appendChild(s);
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+makeStars();
+renderMatches();
+renderGroups();
+renderTeams();
+renderRankings();
+renderKnockout();
+renderVenues();
+tick();
+setInterval(tick,1000);
+</script>
+</body>
+</html>
